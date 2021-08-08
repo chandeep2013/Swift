@@ -1,0 +1,69 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<VBox class="HBoxPanelContet_Class">
+		<f:SimpleForm editable="false" layout="ResponsiveGridLayout"
+			labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+			emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2">
+			<f:content>
+				<core:Title text="" />
+				<Label text="Associate Name" design="Bold" />
+				<Text text="{profile>/employeeDetail/ZZ_DEP_NAME}"
+					wrapping="true" />
+				<Label text="Employee No" design="Bold" />
+				<Text text="{profile>/employeeDetail/ZZ_DEP_PERNR}" />
+				<Label text="Passport No" design="Bold" />
+				<Text text="{profile>/passportDetail/ZZ_PASSPORT_NO}" />
+				<core:Title text="" />
+				<Label text="Department" design="Bold" />
+				<Text text="{depData>/ZZ_FSTL}" />
+				<Label text="Country" design="Bold" />
+				<Text text="{depData>/ZZ_DEP_TOCNTRY_TXT}" />
+				<Label text="Assignment Model" design="Bold" />
+				<Text text="{depData>/ZZ_ASG_TYP}" />
+				<Label text="Work Permit initiated date" design="Bold" />
+				<Text text="{path:'depData>/ZZ_DEP_STDATE',formatter:'sap.ui.project.e2etm.util.Formatter.newDateFormatforDate'}"  />
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+	<Label text="If your answer option is Poor or Not Satisfied in any of the points below, please suggest us the areas where there is scope for improvement." class="canreq_red_font"></Label>
+
+	<Panel>
+		<Table items="{QAModel>/results}">
+			<columns>
+				<Column width="20em">
+					<Text text="Questions" />
+				</Column>
+				<Column width="15em" demandPopin="true">
+					<Text text="Rating(Poor to Excellent)" />
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Suggestions" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier
+						title="{QAModel>Question}"
+						text="{QAModel>Description}"/>
+						<VBox>
+						<RatingIndicator maxValue="5" change="onRatingChange"  editable="{ parts: [ {path: 'QAModel>Role'},{path: 'QAModel>/editable'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.desableCheckBox' }"
+							class="sapUiSmallMarginBottom" value="{QAModel>Answer}" iconSize="22px" />
+						<Label text="{ parts: [ {path: 'QAModel>Answer'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr' }"></Label>
+						</VBox>
+						<Input value="{QAModel>Suggestions}" valueState="{QAModel>Suggestions_ERROR}" editable="{ parts: [ {path: 'QAModel>Role'},{path: 'QAModel>/editable'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.desableCheckBox' }"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<VBox>
+			<Text text="Name of the Deputation team member supported you (optional)"></Text>
+			<TextArea value="{QAModel>/results/0/RequestHandledby}" width="99%" placeholder="Request Handledby" editable="{ parts: [ {path: 'QAModel>/results/0/Role'},{path: 'QAModel>/editable'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.desableCheckBox' }"></TextArea>
+			<Text text="Additional feedback that you may want to share"></Text>
+			<TextArea value="{QAModel>/results/0/AdditionalFeedback}" width="99%" placeholder="Additional Feedback" editable="{ parts: [ {path: 'QAModel>/results/0/Role'},{path: 'QAModel>/editable'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.desableCheckBox' }"></TextArea>
+		</VBox>
+	</Panel>
+
+
+</core:FragmentDefinition>

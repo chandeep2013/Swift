@@ -1,0 +1,31 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.HRBPDashboard" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:view="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Page class="sapUiSizeCompact resMainPage" showHeader="false">
+            <content>
+            <view:XMLView viewName="sap.ui.project.e2etm.view.Menu" />
+           
+                        <IconTabBar id="idHrBpIconTab" select="onSelectIconTabBar">
+                            <items>
+                                <IconTabFilter tooltip="New" key="New" text="New">
+                                    <!-- ############# Repatriation Fragment ################-->
+                                    <core:Fragment fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repatriation" type="XML" />
+                                </IconTabFilter>
+                               <!--  <IconTabFilter tooltip="Sendback" key="Sendback" text="Sendback"> -->
+                                    <!-- ############# Repatriation Fragment ################-->
+                                  <!--   <core:Fragment fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repatriation" type="XML" /> -->
+                                <!-- </IconTabFilter> -->
+                                <IconTabFilter tooltip="Closed" key="Closed" text="All Requests">
+                                    <!-- ############# Repatriation Fragment ################-->
+                                    <core:Fragment fragmentName="sap.ui.project.e2etm.fragment.Repatriation.RepatriationClosed" type="XML" />
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+        </content>
+         <footer>
+            <OverflowToolbar>
+            	<Button id="idHrBpRefresh" text="Refresh" icon="sap-icon://refresh" press="onPressRefresh"/>
+                <ToolbarSpacer />
+                <Button type="Accept" text="Approve" press="onPressApprove" visible="false"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</core:View>

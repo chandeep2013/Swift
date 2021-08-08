@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns="sap.m"
+	xmlns:commons="sap.ui.commons" xmlns:l="sap.ui.layout" xmlns:view="sap.ui.core.mvc"
+	xmlns:table="sap.ui.table" controllerName="sap.ui.project.e2etm.controller.InlandMISReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page height="100%" class="sapUiSizeCompact resMainPage " title="Inland MIS REPORT">
+
+		<content>
+			<VBox class="HBoxPanelContet_Class">
+				<HBox fitContainer="true">
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+						<f:content>
+							<RadioButtonGroup id="idMisRadioGroup" columns="3" select=".OnchangeRbtn">
+								<RadioButton id="idMisrprb1" groupName="GroupA"
+									text="Payroll Data" selected="true" width="100px" />
+								<RadioButton id="idMisrprb2" groupName="GroupA"
+									text="All Data" />
+							</RadioButtonGroup>
+							<Label text="Active cases" design="Bold" class="sapUiSmallMarginRight" />
+							<CheckBox id="idMinrpCheckBox" select="onCheckboxSelect" enabled="false" />
+						</f:content> 
+					</f:SimpleForm>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+						<f:content>
+							<Label text="Start Date" design="Bold" class="sapUiSmallMarginRight" />
+							<DatePicker placeholder="Start Date" id="idMisrpSdate"
+								displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" />
+						</f:content>
+					</f:SimpleForm>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+						<f:content>
+							<Label text="End Date" design="Bold" class="sapUiSmallMarginRight" />
+							<DatePicker placeholder="End Date" id="idMisrpEdate"
+								displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" />
+						</f:content>
+					</f:SimpleForm>
+				</HBox>
+				<Toolbar class="toolbarClass">
+					<ToolbarSpacer />
+					<Button text="Clear" width="100px" type="Emphasized"
+						press="handleClearSearchFilters" />
+					<Button text="Search" width="100px" type="Accept" 
+						press="handleSearchButtonPress" />
+				</Toolbar>
+				<Toolbar class="toolbarClass">
+					<ToolbarSpacer />
+					<Button icon="sap-icon://download" text="Download" press="excelDownload"
+						tooltip="Click to download as elxs" />
+					<Button width="100px" icon="sap-icon://action-settings"
+						press="handleSettignsPress" />
+				</Toolbar>
+				<ScrollContainer horizontal="true" vertical="true"
+					height="500px" focusable="true">
+					<Table inset="false" class="table_ticket_admin tableclass sapUiSizeCompact"
+						id="idMISReportTable" items="{Reports>/results}" sticky="ColumnHeaders">
+						<columns>
+							<Column width="5rem" id="idMISLNo">
+								<Text text="SL.No" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISENo">
+								<Text text="E.No." class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISGuid">
+								<Text text="GID" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMISDEPNo">
+								<Text text="Depu Request No" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISTPNo">
+								<Text text="TP No" class="button_header" />
+							</Column>
+							<Column width="8rem" id="idMISasg">
+								<Text text="Assignment Model" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISStatus">
+								<Text text="Status" class="button_header" />
+							</Column>
+							<Column width="9rem" id="idMISName">
+								<Text text="Name " class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISLevel">
+								<Text text="Level" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISGender">
+								<Text text="Gender" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISDOB">
+								<Text text="DOB" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISDOJ">
+								<Text text="DOJ" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMISWorkLoc">
+								<Text text="Work Loc" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISFLoc">
+								<Text text="From Loc" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISToLoc">
+								<Text text="To Loc" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMISCmpny">
+								<Text text="Name of the company" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISStDate">
+								<Text text="Start Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMISEndDate">
+								<Text text="End Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMISDays">
+								<Text text="Days" class="button_header" />
+							</Column>
+							<Column width="8rem" id="idMISGenDate">
+								<Text text="Cl accepted date / TP approved date" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISDept">
+								<Text text="Dept." class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISBU">
+								<Text text="BU" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISGroup">
+								<Text text="Group" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISSection">
+								<Text text="Section" class="button_header" />
+							</Column>
+							<Column width="8rem" id="idMISApprover">
+								<Text text="Approver" class="button_header" />
+							</Column>
+<!-- 							<Column width="6rem" id="idMISBoschOrThird">
+								<Text text="Deputation To" class="button_header" />
+							</Column> -->
+							<Column width="6rem" id="idMISRFC">
+								<Text text="Reason For Change" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISDailyAll">
+								<Text text="Daily Allowance" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMISDurationAll">
+								<Text text="Deputation Allowance" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISLodgingAll">
+								<Text text="Lodging Allowance" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMISOnetimeAll">
+								<Text text="Onetime Allowance" class="button_header" />
+							</Column>
+
+						</columns>
+						<items>
+							<ColumnListItem height="10px">
+								<cells>
+									<Text text="{Reports>zz_slno}" />
+									<Text text="{Reports>zz_pernr}" />
+									<Text text="{Reports>zz_gid}" />
+									<Text text="{Reports>zz_depu_req}" />
+									<Text text="{Reports>zz_tp_no}" />
+									<Text 
+									text="{path:'Reports>zz_asg_typ', formatter: 'sap.ui.project.e2etm.util.Formatter.asgType'}"/>
+									<Text text="{Reports>zz_status}" />
+									<Text text="{Reports>zz_ename}" />
+									<Text text="{Reports>zz_level}" />
+									<Text text="{Reports>zz_gender}" />
+									<Text
+										text="{path:'Reports>zz_dob', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text
+										text="{path:'Reports>zz_doj', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{Reports>zz_work_loc}" />
+									<Text text="{Reports>ZZ_DEP_FRMLOC}" />
+									<Text text="{Reports>zz_to_loc}" />
+									<Text text="{Reports>zz_cname}" />
+									<Text
+										text="{path:'Reports>zz_sdate', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text
+										text="{path:'Reports>zz_edate', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{Reports>zz_days}" />
+									<Text
+										text="{path:'Reports>zz_lg_date', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{Reports>zz_dept}" />
+									<Text text="{Reports>zz_bu}" />
+									<Text text="{Reports>zz_grp}" />
+									<Text text="{Reports>zz_section}" />
+									<Text text="{Reports>zz_approver}" />
+									<!-- <Text text="{Reports>zz_third_part}" /> -->
+									<Text text="{path:'Reports>ZZ_VREASON', formatter: 'sap.ui.project.e2etm.util.Formatter.rsgfch'}"/>
+									<Text text="{Reports>zz_daily_allowance}" />
+									<Text text="{Reports>zz_depu_all}" />
+									<Text text="{Reports>zz_lodg_all}" />
+									<Text text="{Reports>zz_onetime_all}" />
+
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+		</content>
+	</Page>
+</core:View>

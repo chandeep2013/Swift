@@ -1,0 +1,149 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons"
+	xmlns:table="sap.ui.table">
+
+	<Table itemPress="onItemPress" inset="false" growing="true" growingThreshold="100"
+		class="table_ticket_admin" items="{path: 'trworklist>/'}">
+		<!-- <headerToolbar> --> 
+		<!-- <Toolbar> -->
+		<!-- <Label text="Search by:"/> -->
+
+
+		<!-- <c:TextField id="trvlreq" -->
+		<!-- change="onSearchWorklist" /> -->
+		<!-- <ToolbarSpacer /> -->
+		<!-- <c:TextField id="empno" placeholder="Employee No" -->
+		<!-- change="onSearchWorklist" /> -->
+		<!-- <ToolbarSpacer /> -->
+		<!-- <c:TextField id="empname" placeholder="Name" change="onSearchWorklist" 
+			/> -->
+		<!-- <ToolbarSpacer /> -->
+		<!-- <c:TextField id="trvltype" placeholder="Travel Type" -->
+		<!-- change="onSearchWorklist" /> -->
+		<!-- <ToolbarSpacer /> -->
+
+
+		<!-- </Toolbar> -->
+		<!-- </headerToolbar> -->
+		<columns>
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<c:TextField placeholder="Search" id="trvlreq" change="onSearchWorklist" />
+					<Text text="Travel Request" />
+				</FlexBox>
+
+			</Column>
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<c:TextField id="empno" placeholder="Search" change="onSearchWorklist" />
+
+					<Text text="Employee No" />
+				</FlexBox>
+			</Column>
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<c:TextField id="empname" placeholder="Search"
+						change="onSearchWorklist" />
+					<Text text="Employee Name" />
+				</FlexBox>
+			</Column>
+
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<c:TextField id="trvltype" placeholder="Search" width="140px"
+						change="onSearchWorklist" />
+					<Text text="Visa Type" />
+				</FlexBox>
+			</Column>
+<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start"><!-- class = "FilterWithDateClass"  commented -->
+					<Input id="recdate" placeholder="YYYYMMDD" class="FilterWithDateClass" width="140px"
+						change="onSearchWorklist" valueHelpRequest ="onLiveChange" showValueHelp= "true"
+						valueHelpOnly="true"/>
+					<Text text="Received Date" />
+				</FlexBox>
+			</Column>
+			
+			<!--################# UCD1KOR 27 Jan 2020 Added New column ############## -->
+<Column width="6.5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Input id="ackdate" placeholder="YYYYMMDD" class="FilterWithDateClass" showValueHelp= "true"
+						valueHelpOnly="true"
+						change="onSearchWorklist" valueHelpRequest ="onLiveChange"/> <!-- added onlive change RBEI-197 filter with date range travel settlement 8/9/2020 ucd1kor -->
+					<Text text="Acknowledgement Date" />
+				</FlexBox>
+			</Column>
+			
+			<!--################# UCD1KOR 19 May 2020 Added New column ############## -->
+<Column width="3em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Digitized" class="DigitizedClass"/>
+				</FlexBox>
+			</Column>
+			
+		</columns>
+		<!-- <columns> -->
+		<!-- <Column width="5em"> -->
+
+		<!-- <Text text="Travel Req"/> -->
+
+
+		<!-- </Column> -->
+		<!-- <Column width="5em"> -->
+
+
+		<!-- <Text text="Employee No"/> -->
+
+		<!-- </Column> -->
+		<!-- <Column width="5em"> -->
+
+		<!-- <Text text="Name"/> -->
+
+		<!-- </Column> -->
+
+		<!-- <Column width="5em"> -->
+
+		<!-- <Text text="Travel Type"/> -->
+
+		<!-- </Column> -->
+
+
+		<!-- </columns> -->
+		<items>
+			<ColumnListItem type="Navigation" height="10px">
+				<cells>
+				<HBox> <!-- /*uml6kor 3/2/2021 	//start of code  added trvlsetl chnages RBEIITAPPPIPELINE-197_11 -->
+					<Text text="{trworklist>TravelPlan}" />
+		 			<core:Icon src="sap-icon://bold-text" class="bold_board" color="#031E48" visible="{path:'trworklist>OnlyBoard',formatter: 'sap.ui.project.e2etm.util.Formatter.BoardingTRST'}" tooltip="Boarding allowance claim only"></core:Icon>
+				</HBox>  <!--hbox and icon added /*uml6kor 3/2/2021 	//end of code  added trvlsetl chnages RBEIITAPPPIPELINE-197_11 -->
+					<Text text="{trworklist>EmpNo}" />
+					<Text text="{trworklist>EmpName}" />
+
+					<Text text="{trworklist>VisaType}" />
+                    <Text text="{path:'trworklist>ReceivedDt',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                    <!-- UCD1KOR 27 Jan 2020 added row for Acknowledgement column -->
+                     <Text text="{path:'trworklist>Ackndt',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                     <!-- UCD1KOR 19 May 2020 added row for Acknowledgement column -->
+                     <core:Icon src="sap-icon://accept" class="size1" color="#031E48" visible="{path:'trworklist>Digitalize',formatter: 'sap.ui.project.e2etm.util.Formatter.DigiFlag'}">
+			<core:layoutData>
+				<FlexItemData growFactor="1" />
+			</core:layoutData>
+		</core:Icon>
+				</cells>
+			</ColumnListItem>
+		</items>
+
+	</Table>
+	
+	<!-- ************************start of code for paging uml6kor_10/9/2020*********************** -->
+	<Bar design="SubHeader" visible="{path:'profile>/currentRole',formatter:'sap.ui.project.e2etm.util.Formatter.formatPageInitatorRole'}">
+	<contentMiddle>
+		<Button type="Emphasized" icon="sap-icon://navigation-left-arrow" press="onPrevious" enabled="{global>/prevbtn}">	</Button>
+		<Button type="Emphasized" text="First Page" press="onFirst" enabled="true">	</Button>	
+		<Button type="Emphasized" icon="sap-icon://navigation-right-arrow" press="onNext" enabled="{global>/nxtbtn}">	</Button>
+	</contentMiddle>
+	</Bar>
+	<!-- ************************end of code for paging uml6kor_10/9/2020*********************** -->
+	
+	
+</core:FragmentDefinition>

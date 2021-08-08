@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons"
+	xmlns:t="sap.ui.table">
+	<c:Dialog modal="true" title="Update Manager" type="Standard"
+		class="dialog" width="37%" id="submitMgrDialog">
+		<VBox class="sapUiSmallMargin">
+			<HBox>
+				<Text  text="- Please enter NT ID of manager" />
+			</HBox>
+				<Text  text="- If you are reporting to CL/SDM, please provide second level manager as well" />
+				<Text  text="- 1st Level manager is mandatory." />
+			<f:SimpleForm layout="ResponsiveGridLayout" labelSpanXL="3"
+				labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+				emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+				columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+				<f:content>
+					<Label text="1st Level Manager" class="required font_size_16 label_bold" />
+					<Input id="ManagerL1" placeholder="Enter NTID" />
+					<Label text="2nd Level Manager" class=" font_size_16 label_bold" />
+					<Input id="ManagerL2" placeholder="Enter NTID" maxLength="8"/>
+				</f:content>
+			</f:SimpleForm>
+			<FlexBox direction="Column" alignItems="Center"
+				justifyContent="Center">
+				<Button text="Submit" type="Emphasized" press="onSubmitMgrNTID" />
+			</FlexBox>
+			
+		</VBox>
+
+	</c:Dialog>
+</core:FragmentDefinition>

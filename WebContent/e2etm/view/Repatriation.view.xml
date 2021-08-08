@@ -1,0 +1,314 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.Repatriation" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Page class="sapUiSizeCompact resMainPageRepatriation" showHeader="true" title="Reservation" floatingFooter="true">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                    <Button icon="sap-icon://nav-back" press="onNavBack" visible="false"/>
+                </contentLeft>
+                <contentMiddle>
+                    <Title text="Repatriation" />
+                </contentMiddle>
+                 <contentRight>
+                    <Button icon="sap-icon://download" text="Download PDF" press="onViewPDFPress" visible="{parts: [{path:'repatriation>/ZZ_ROLE'},{path:'repatriation>/ZZ_ACTION'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableDownloadPDf'}"/>
+                 </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <Panel id="idPanel">
+                <VBox class="HBoxPanelContet_Class">
+                    <HBox fitContainer="true">
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false" class="simpleFormRepatriationClass ">
+                            <f:content>
+                                <Label text="Travel Plan No" design="Bold" />
+                                <Text text="{travelsettlement>/TravelPlan}" />
+                                <Label text="Employee No" design="Bold" />
+                                <Text text="{travelsettlement>/EmpNo}" />
+                                <Label text="From Country" design="Bold" />
+                                <Text text="{travelsettlement>/FromCountryText}" />
+                                <Label text="Start Date" design="Bold" />
+                                <Text text="{path:'travelsettlement>/StartDate',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                            </f:content>
+                        </f:SimpleForm>
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false" class="simpleFormRepatriationClass ">
+                            <f:content>
+                                <Label text="Request With" design="Bold" />
+                                <Text text="{path:'repatriation>/ZZ_REQ_WITH',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" maxLines="1" wrapping="false" tooltip="{path:'repatriation>/ZZ_REQ_WITH',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}"/>
+                                <Label text="Name" design="Bold" />
+                                <Text text="{path:'travelsettlement>/EmpName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" maxLines="1" wrapping="false" tooltip="{path:'travelsettlement>/EmpName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}"/>
+                                <Label text="From Location" design="Bold" />
+                                <Text text="{travelsettlement>/FromLoc}" />
+                                <Label text="End Date" design="Bold" />
+                                <Text text="{path:'travelsettlement>/EndDate',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                            </f:content>
+                        </f:SimpleForm>
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false" class="simpleFormRepatriationClass ">
+                            <f:content>
+                               <!--  <Label text="Department" design="Bold" />
+                                <Text text="{travelsettlement>/Department}" /> -->
+                                <Label text="Status" design="Bold" />
+                                <Text text="{repatriation>/ZZ_STATUS}" maxLines="1" wrapping="false" tooltip="{repatriation>/ZZ_STATUS}"/>
+                                <Label text="To Country" design="Bold" />
+                                <Text text="{travelsettlement>/ToCountryText}" />
+                                <Label text="To location" design="Bold" />
+                                <Text text="{travelsettlement>/ToLoc}" />
+                                
+                            </f:content>
+                        </f:SimpleForm>
+                        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false" class="simpleFormRepatriationClass ">
+                            <f:content>
+                               <!--  <Label text="Visa Type" design="Bold" />
+                                <Text text="{travelsettlement>/VisaType}" /> -->
+                                <Label text="Level" design="Bold" />
+                                <Text text="{travelsettlement>/Level}" />
+                                <Label text="Duration" design="Bold" />
+                                <Text text="{travelsettlement>/Duration}" />
+                                <Label text="Email Id" design="Bold" />
+                                <Text  text="{path:'travelsettlement>/OfcEmailId',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" maxLines="1" wrapping="false" tooltip="{path:'travelsettlement>/OfcEmailId',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}"/>
+                                
+                            </f:content>
+                        </f:SimpleForm>
+                    </HBox>
+                </VBox>
+            </Panel>
+            <VBox>
+                <IconTabBar select="onIconTabBarSelect">
+                    <items>
+                        <IconTabFilter icon="sap-icon://message-information" key="info" tooltip="Details">
+                            <!-- ################ Employee Form Start############# -->
+                            <VBox class="RepatriationBorderClass">
+                                <HBox class="parentHBoxClass marginLeft_Text_Class_36  margin_left_RepatritionClass">
+                                    <Text text="I" />
+                                    <Text text="{path:'travelsettlement>/EmpName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" class="margin_left_RepatritionClass" />
+                                    <Text text=", " />
+                                    <Text text="{travelsettlement>/EmpNo}" />
+                                    <Text text=", here by confirm that, my"  />
+                                    <Text text="{travelsettlement>/AsgType}" class="RepatritionClass" />
+                                    <Text text="assignment at " class="RepatritionClass "  />
+                                    <Text text="{repatriation>/ZZ_COMABBR}" class="margin_left_RepatritionClass" />
+                                    <Text text=", " visible="{path:'repatriation>/ZZ_COMABBR',formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleComma'}"/>
+                                    <Text text="{travelsettlement>/ToCountryText}" class="RepatritionClass1" />
+                                    <Text text=", attached to the TP no: " class="RepatritionClass1" />
+                                    <Text text="{travelsettlement>/TravelPlan}" class="RepatritionClass1" />
+                                    <Text text=","/>
+                                    <Text text="will end by" class="RepatritionClass1" />
+                                    <Text text="{path:'travelsettlement>/EndDate',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" class="RepatritionClass " />
+                                    <Text text="."/>
+                                </HBox>
+                                <VBox class="margin_top_VBoxRepatritionClass">
+                                    <Label text="Post Completion of my Assignment :" design="Bold" />
+                                </VBox>
+                                <VBox class=" margin_top_VBoxRepatritionClass">
+                                 <!-- <HBox class="alignmentHboxRepatritionClass">
+                                   </HBox> -->
+                                    <HBox class="alignmentHboxRepatritionClass">
+                                        <RadioButtonGroup id="idEMpRadio" selectedIndex="{repatriation>/ZZ_RADIO_ES}" select="employeeRadioSelect" class="{parts: [{path:'travelsettlement>/currentRole'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.backgroundColorFunction'}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'repatriation>/ZZ_REP_PERNR'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSubmitButtonWithCondition'}">
+                                			<buttons>
+                                				<RadioButton text="I will be returning back to India " selected="true"/>
+                                				<RadioButton text="Will be taking up a local contract at Host receiving unit "/>
+                                				<RadioButton text="Others"/>
+                                			</buttons>
+                                		</RadioButtonGroup>
+                                    </HBox>
+                                    <HBox class="alignmentHboxRepatritionClass" visible="{parts: [{path:'repatriation>/ZZ_RADIO_ES'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleEMpReason'}">
+                                        <Label  text="" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                        <TextArea id="idEMpRemarks" placeholder="Reason" liveChange="ChangeValueState"  width="306px" value="{repatriation>/ZZ_EMP_REMRK}" enabled="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'repatriation>/ZZ_REP_PERNR'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSubmitButtonWithCondition'}"></TextArea>
+                                   </HBox> 
+                                    <HBox class="alignmentHboxRepatritionClass">
+                                       <Label required="true" text="Effective from :" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                	   <DatePicker width="200px" tooltip="Please enter the date of the assignment" id="idEMpDate" placeholder="select Date" change="ChangeValueState" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd" class="margin_left_RepatritionClass" value="{repatriation>/ZZ_SDATE_E}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'repatriation>/ZZ_REP_PERNR'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSubmitButtonWithCondition'}"/>
+                                       <Text text=", This is informed to my department in RBEI and HR BP ." class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                    </HBox>
+                                    <HBox class="alignmentHboxRepatritionClass" >
+                                        <Label text="" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                        <TextArea id="idEMpComments" placeholder="Comments" liveChange="ChangeValueState"  width="306px" value="{repatriation>/ZZ_EMP_COMM}" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'repatriation>/ZZ_REP_PERNR'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSubmitButtonWithCondition'}"></TextArea>
+                                   </HBox> 
+                                </VBox>
+                            </VBox>
+                            <!-- ################ Employee Form End############# -->
+                            <!-- ################ Manager Form Start ############-->
+                            <!-- <VBox visible="{path:'travelsettlement>/currentRole',formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleButtons'}"> -->
+                            <VBox >
+                            <Text text=" "></Text>
+                            <VBox class="margin_top_VBoxRepatritionClass ">
+                                <Label text="RBEI Manager Confirmation :" design="Bold" />
+                            </VBox>
+                            <VBox class="RepatriationBorderClass">
+                                <HBox class="margin_top_VBox_RepatritionClass margin_left_RepatritionClass" maxLines = "2">
+                                    <Text text="I" />
+                                    <Text text="{path:'travelsettlement>/Manager',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" class="margin_left_RepatritionClass" />
+                                    <Text text=" , here by confirm that"  />
+                                    <Text text="{path:'travelsettlement>/EmpName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" class="margin_left_RepatritionClass" />
+                                    <Text text="has completed his/her assignment at " class="RepatritionClass " />
+                                    <Text text="{repatriation>/ZZ_COMABBR}" class="margin_left_RepatritionClass"/>
+                                    <Text text=", " visible="{path:'repatriation>/ZZ_COMABBR',formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleComma'}"/>
+                                    <Text text="in"/>
+                                    <Text text="{travelsettlement>/ToCountryText}" class="margin_left_RepatritionClass"/>
+                                    <Text text="on" class="RepatritionClass " />
+                                    <Text text="{path:'travelsettlement>/EndDate',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" class="margin_left_RepatritionClass" />
+                                     <Text text=". He/She will "/>
+                                </HBox>
+                                <VBox class=" margin_top_VBoxRepatritionClass">
+                                    <HBox class="alignmentHboxRepatritionClass">
+                                    	<RadioButtonGroup id="idManagerRadio" selectedIndex="{repatriation>/ZZ_RADIO_MS}" select="managerRadioSelect" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'travelsettlement>/loggedinEmpNo'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}">
+                                    		<buttons>
+                                    		 <RadioButton text="Resume back to work at RBEI " />
+                                    		  <RadioButton text="Be taking up a local contract at Host country "/>
+                                    		   <RadioButton text="Others"/>
+                                    		</buttons>
+                                    	</RadioButtonGroup>
+                                    </HBox>
+                                     <HBox class="alignmentHboxRepatritionClass" visible="{parts: [{path:'repatriation>/ZZ_RADIO_MS'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleMNGRReason'}">
+                                        <Label required="true" text="" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                        <TextArea id="idManagerRemarks" liveChange="ChangeValueState" placeholder="Reason" width="296px" value="{repatriation>/ZZ_MGR_REMRK}" editable="{path:'travelsettlement>/currentRole',formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}"></TextArea>
+                                   </HBox>
+                                    <HBox class="alignmentHboxRepatritionClass" >
+                                       <Label required="true" text="Effective from :" class="margin_top_RepatritionClass margin_left_RepatritionClass" width="122px"/>
+                                	   <DatePicker id="idManagerDate" tooltip="Please enter the date of the assignment" width="200px" change="ChangeValueState" placeholder="select Date" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd" class="margin_left_RepatritionClass" value="{repatriation>/ZZ_SDATE_M}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'travelsettlement>/loggedinEmpNo'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}"/>
+                                	</HBox>
+                                	 <HBox class="alignmentHboxRepatritionClass" >
+                                       <Label required="true" wrapping="true"  width="127px" tooltip="New Org unit of associate" text="New Org unit of associate :" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                	  <Input id="idEmpOrgUnit" liveChange="ChangeValueState" placeholder="Org unit of associate" width="200px" value="{repatriation>/EmpOrgUnit}" editable="{path:'travelsettlement>/currentRole',formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}"/>
+                                 </HBox>
+                                   <HBox class="alignmentHboxRepatritionClass" >
+                                       <Label required="true" text="Assign HRL-PP3 :" wrapping="true" class="margin_top_RepatritionClass margin_left_RepatritionClass"  width="122px"/>
+                                	   <ComboBox id="idAssignHRLPP3"  items="{hrpp>/}" selectedKey="{repatriation>/ZZ_HPPERNR}" tooltip="Please Select HRPP3" selectionChange="onChangeHrlpp" width="200px" placeholder="Select HRL-PP3"  class="margin_left_RepatritionClass RepatriationBorderClass" value="{repatriation>/ZZ_HPNAME}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'travelsettlement>/loggedinEmpNo'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}">
+                                	  		<core:Item key="{hrpp>ZZ_PERNR}" text="{hrpp>ZZ_HNAME}" tooltip="{hrpp>ZZ_EMAIL}"/>
+									</ComboBox>
+                                 </HBox> 
+                                 <HBox class="alignmentHboxRepatritionClass" >
+                                	   <TextArea id="idManagerComments" liveChange="ChangeValueState" width="333px" placeholder="Comments" class="margin_left_RepatritionClass" value="{repatriation>/ZZ_MGR_COMM}" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'travelsettlement>/loggedinEmpNo'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.ManagerFormEnabled'}"/>
+                                 </HBox>
+                                </VBox>
+                            </VBox>
+                            </VBox>
+                            <!-- ################ Manager Form End ############## -->
+                            <!--############## HRBP and HRL PP3 Form Start ###### -->
+                            <!-- <VBox class="sapUiSmallMargin" visible="{path:'travelsettlement>/currentRole',formatter: 'sap.ui.project.e2etm.util.Formatter.VisibilityHRBPForms'}" > -->
+                            <Text text=" "></Text>
+                            <VBox class="margin_top_VBoxRepatritionClass " visible="false">
+                                	<Label text="HRBP Confirmation :" design="Bold" />
+                            </VBox>
+                            <VBox class="RepatriationBorderClass cusFilUpl" visible="false">
+                            	<HBox class="comentHRBpClass" visible="fasle">
+                            		<Label text="Name :" class="remarksClass margin_left_RepatritionClass" width="76px"/>
+                                	<Text  text="{path:'repatriation>/ZZ_HNAME',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" class="remarksClass"/>
+                            	</HBox>
+                            	<HBox class="comentHRBpClass">
+                            		<Label text="Comments :" class="remarksClass margin_left_RepatritionClass"/>
+                                	<TextArea placeholder="Comments HRBP" liveChange="ChangeValueState" id="idHRBPComments" height="50px" width="22rem" value="{repatriation>/ZZ_HBP_COMM}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPComments'}"></TextArea>
+                            	</HBox>
+                            </VBox>
+                            <Text text=" "></Text>
+                            <!-- ######## HRBP Form End ##### -->
+                            <!-- ######## HRL PP3 Form Start ####-->
+                            <VBox class="margin_top_VBoxRepatritionClass ">
+                                	<Label text="HRL-PP3 Confirmation :" design="Bold" />
+                            </VBox>
+                            <VBox class="RepatriationBorderClass cusFilUpl">
+                                <Toolbar class="toolbarClass RepatritionToolbar ">
+                                    <Label text="Relocation allowance applicability :" class="margin_left_RepatritionClass" required="true"/>
+                                    <ComboBox id="idReLocationAllowance" selectionChange="onChangeRelocationAmount" class="RepatriationBorderClass" width="13.3rem" value="{repatriation>/ZZ_REP_ALLWC}" placeholder="Select" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}">
+                                    	<items>
+                                    			<core:Item key="Yes" text="Yes" />
+                                    			<core:Item key="No" text="No" />
+                                    	</items>
+                                    </ComboBox>
+                                    <ToolbarSpacer width="310px" />
+                                    <Label text="Amount"></Label>
+                                    <Input id="idRelocationAmount" placeholder="amount" description="INR" width="300px"  value="{repatriation>/ZZ_REP_RAAMT}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}"></Input>
+                                </Toolbar>
+                                 
+                                <Toolbar class="toolbarClass RepatritionToolbar comentHRBpClass">
+                                	<!-- <HBox>
+                                		<Label text="Remarks:" class="remarksClass"/>
+                                   	    <TextArea id="idHrlPP3Remarks"  placeholder="Remarks" width="22.5rem"  value="{repatriation>/ZZ_HRLPP_REMRKS}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}"/>
+                                	</HBox>
+                                	<ToolbarSpacer/>    visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}"-->
+                                	<HBox class="alignmentHboxRepatritionClass">
+                                       <Label required="true" text="Assign HRBP :" class="margin_top_RepatritionClass margin_left_RepatritionClass" />
+                                	   <ComboBox id="idAssignHRBP"  items="{hrbp>/}" selectedKey="{repatriation>/ZZ_HPERNR}" tooltip="Please Select hrbp" selectionChange="onChangeHrbp" width="200px" placeholder="select HRBP"  class="margin_left_RepatritionClass RepatriationBorderClass" value="{repatriation>/ZZ_HNAME}" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}">
+                                	  		<core:Item key="{hrbp>ZZ_PERNR}" text="{hrbp>ZZ_HNAME}" tooltip="{hrbp>ZZ_EMAIL}"/>
+									</ComboBox>
+                                 </HBox>
+                                	
+                                	<ToolbarSpacer width="400px" />
+                                	<HBox>
+                                		<Label text="Comments :" class="remarksClass margin_left_RepatritionClass"/>
+                                    	<TextArea id="idHRPPComments" liveChange="ChangeValueState" placeholder="Comments HRLPP3" height="50px" value = "{repatriation>/ZZ_HPP_COMM}" width="22rem" editable="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.enableHRBPForms'}"></TextArea>
+                                	</HBox>
+                                </Toolbar>
+ 
+                            </VBox>
+                            <!--############## HRL PP3 Form End ######## -->
+                            
+                            <!-- ############# History ############ -->
+			                <VBox class=" comentHRBpClass" >
+			                 <Label text="History :" design="Bold"/>
+			                <Table width="1210px" class="HBoxPanelContet_Class"  items="{history>/results}">
+			                    <columns>
+			                        <Column width="12em">
+			                            <Text text="Role" />
+			                        </Column>
+			                        <Column >
+			                            <Text text="Action" />
+			                        </Column>
+			                        <Column >
+			                            <Text text="Action Date" />
+			                        </Column>
+			                        <Column >
+			                            <Text text="Comments" />
+			                        </Column>
+			                        
+			                    </columns>
+			                    <items>
+			                        <ColumnListItem>
+			                            <cells>
+			                                <Text text="{path:'history>ZZ_ROLE',formatter: 'sap.ui.project.e2etm.util.Formatter.RoleText'}"/>
+			                                <Text text="{history>ACTIONBY}" />
+			                                <Text text="{parts: [{path:'history>ZZ_DATE'},{path:'history>ZZ_TIME'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.changeDateFormat'}" />
+			                                <Text text="{history>ZZ_COMMENTS}" />
+			                            </cells>
+			                        </ColumnListItem>
+			                    </items>
+			                </Table>
+			                </VBox>
+                        </IconTabFilter>
+                        <IconTabFilter icon="sap-icon://attachment" tooltip="Attachment" key="Attachment">
+                            <!-- ############# attachments - upload collection ################-->
+                            <core:Fragment fragmentName="sap.ui.project.e2etm.fragment.common.UploadCollection" type="XML" />
+                        </IconTabFilter>
+                        <IconTabFilter icon="sap-icon://comment" tooltip="Comments" class="parentClass">
+                            <List showSeparators="Inner" class="HBoxPanelContet_Class" items="{history>/results}">
+                                <FeedListItem sender="{history>ZZ_FULLNAME}" info="{history>ACTIONBY} - {path:'history>ZZ_ROLE',formatter: 'sap.ui.project.e2etm.util.Formatter.RoleText'}" timestamp="{parts: [{path:'history>ZZ_DATE'},{path:'history>ZZ_TIME'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.changeDateFormat'}" text="{history>ZZ_COMMENTS}" />
+                            </List>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar>
+            	<Button text="Back" type="Reject" press="onNavBack"></Button>
+            	
+                <ToolbarSpacer />
+                <!-- for hrbp,hrlpp3,manager -->
+                <Button type="Emphasized" text="Send Back" press="onPressSentBack" id="idSendBackButon" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/EndDate'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSendBackButtons'}"/>
+                <!--   <MenuButton text="SendBack" buttonMode="Regular" useDefaultActionOnly="true" type="Emphasized" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleNavBackButtons'}">
+					<menu>
+						<Menu itemSelected="onMenuAction">
+							<MenuItem text="Manager" press="onPressSentBack" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleNavBackButtons'}"/>
+							<MenuItem text="HRBP" press="onPressSentBack" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/display'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleNavBackButtons'}"/>
+						</Menu>
+					</menu>
+				</MenuButton> -->
+                <Button type="Accept" text="Approve" press="onPressApprove" id="idApproveButon" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'travelsettlement>/EndDate'},{path:'travelsettlement>/display'}],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleApproveButtons'}"/>
+               <!-- for employee --> 
+               <!--   <Button type="Emphasized" text="Save" /> -->
+                <Button type="Accept" text="Submit" press="onPressSubmit" id="idSubmitButon" visible="{parts: [{path:'travelsettlement>/currentRole'},{path:'repatriation>/ZZ_NEXTACTION'},{path:'repatriation>/ZZ_REP_PERNR'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleSubmitButtonWithCondition'}"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</core:View>

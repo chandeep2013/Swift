@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover class="popoverClass " placement="Bottom" contentWidth="245px"
+		showHeader="false">
+		<content>
+			<!-- <List class="listMarginTopClass" items="{Satus>/}" mode="MultiSelect"> 
+				<StandardListItem title="{Satus>StatusName}" type="Active" tooltip="{Satus>StatusName}" 
+				/> </List> -->
+			<Table id="idPopoverTable" itemPress="onItemPress" growing="true" items="{Satus>/}"
+				mode="MultiSelect" updateFinished="onFinished">
+				<columns>
+					<Column >
+						<Label text="All" design="bold" class="tableColumnPopOver"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Satus>StautsName}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<Toolbar class="ParentCLass">
+				<ToolbarSpacer/>
+				<Button text=" OK " width="100px" type="Transparent" press="onListItemStatusOkPress" />
+				<ToolbarSpacer/>
+			</Toolbar>
+		</content>
+		<!-- <footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button text="OK" press="onListItemStatusOkPress" />
+			</OverflowToolbar>
+		</footer> -->
+	</Popover>
+</core:FragmentDefinition>

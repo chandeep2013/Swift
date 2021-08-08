@@ -1,0 +1,237 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.InlandTravel_Digital"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Report" showHeader="true" enableScrolling="false">
+		<customHeader>
+			<Bar>
+				<!-- <contentRight> -->
+				<!-- <Button icon="sap-icon://full-screen" press="onChangeMode" /> -->
+				<!-- </contentRight> -->
+				<contentMiddle>
+
+					<Title text="Inland Travel – Digital Report" titleStyle="H3" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<Panel width="100%" height="100%" class="panelBorderTrSettle sapUiSizeCompact" >
+				<headerToolbar >
+					
+
+				</headerToolbar>
+				<content>
+				<VBox>
+					<HBox class="alignDateClass">
+						<Label text="Start :" class="margintop6Class"/>
+						<DatePicker id="idFromDateRange" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<Label text="To" class="margintop6Class"/>
+						<DatePicker id="idFromDateRange1" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					<HBox class="alignDateClass">
+						<Label text="End :" class="margintop6Class" width="37px"/>
+						<DatePicker id="idToDateRange" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<Label text="To" class="margintop6Class"/>
+						<DatePicker id="idToDateRange1" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<Button text="Submit" press="getReport" type="Emphasized" class="margin_left_RepatritionClass"></Button>
+					</HBox>
+				</VBox>
+				  
+				    <Toolbar >
+						<Label id="lblCount" design="Bold"/>
+						<ToolbarSpacer />
+						<Button icon="sap-icon://action-settings" type="Emphasized"
+							press="onPersoButtonPressed" />
+						<Button id="idExcelDownload" text="Download" type="Emphasized" press="excelDownload" visible="false"/>
+
+					</Toolbar>
+				  
+					<ScrollContainer horizontal="true" vertical="true" height="500px" width="auto"
+						focusable="true">
+						<VBox>
+						<Table id="InlandTravelReport" inset="false" updateFinished="onUpdateFinished"
+							class="growingTitle tableclass table_ticket_admin sapUiSizeCompact" noDataText="No Data"
+							items="{reportsData>/}" fixedLayout="true">
+							<columns>
+								<Column id="col5" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Employee No" />
+								</Column>
+
+								<Column id="col1" minScreenWidth="Tablet" demandPopin="true"
+									width="11em">
+									<Text text="Employee Name" />
+								</Column>
+								<Column id="bunit" minScreenWidth="Tablet" demandPopin="true"
+									width="8em">
+									<Text text="Business Unit" />
+								</Column>
+
+								<Column id="dept" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Department" />
+								</Column>
+								<Column id="txtAwt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Travel Number" />
+								</Column>
+								<Column id="txtSur" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="Travel Duration" />
+								</Column>
+
+								<Column id="col6" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Trip Begins On" />
+								</Column>
+								<Column id="col8" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Trip Ends On" />
+								</Column>
+								<Column id="reason" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Trip Destination" />
+								</Column>
+								<Column id="col11" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Country" />
+								</Column>
+								<Column id="ccode" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Trip Type" />
+								</Column>
+								<Column id="bcode" minScreenWidth="Tablet" demandPopin="true"
+									width="10em">
+									<Text text="Reason" />
+								</Column>
+								<Column id="col14" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="col15" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="Advance" />
+								</Column>
+								<Column id="col16" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="Status" />
+								</Column>
+								<!-- <Column id="col17" minScreenWidth="Tablet" demandPopin="true"
+									width="8em" visible="false">
+									<Text text="Travel Plan Status" />
+								</Column> -->
+								<Column id="col18" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Budget Code" />
+								</Column>
+								
+								<Column id="action" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Company Code" />
+								</Column>
+								
+								<Column id="role" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Cost Center" />
+								</Column>
+								
+								<Column id="tptype" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="WBS Element" />
+								</Column>
+								
+								<Column id="recdt" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Fund Center" />
+								</Column>
+								<Column id="Remarks" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Fund" />
+								</Column>
+								
+								<Column id="group" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="Action" />
+								</Column>
+								<Column id="txtDate1" minScreenWidth="Tablet"
+									demandPopin="true" width="10em">
+									<Text text="Role" />
+								</Column>
+								<Column id="txtDate2" minScreenWidth="Tablet"
+									demandPopin="true" width="6em">
+									<Text text="Received Date" />
+								</Column>
+								<Column id="col21" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Submitted Date" />
+								</Column>
+								<Column id="txtReim" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Final Approved Date" />
+								</Column>
+								<Column id="txtPacmp" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Acknowledment Date" />
+								</Column>
+								<Column id="txtCost" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Reviewed Date" />
+								</Column>
+								<Column id="mail" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Closed Date" />
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{reportsData>Pernr}" wrapping="false" tooltip="{reportsData>Reinr}" />
+										<Text text="{ parts: [ {path: 'reportsData>Ename'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" wrapping="true" tooltip="{Ename}" />
+										
+										<Text text="{reportsData>zbunit}" wrapping="true" tooltip="{reportsData>Business Unit}" />
+										<!-- <Text text="{zsection}" wrapping="true" tooltip="{Section}" /> -->
+										<Text text="{reportsData>zdept}" wrapping="true" tooltip="{reportsData>Department}" />
+										
+										<Text wrapping="false" text="{reportsData>Reinr}" tooltip="{reportsData>Reinr}" />
+										<Text text="{reportsData>Tripdur}" tooltip="{reportsData>Tripdur}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Datb1'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{ parts: [ {path: 'reportsData>Datv1'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<!-- <Text wrapping="false" text="{path:'Zlevel'}" /> -->
+										<Text text="{reportsData>Zort1}" tooltip="{reportsData>Zort1}" wrapping="true" />
+										<Text text="{reportsData>Zland}" tooltip="{reportsData>Zland}" wrapping="true" />
+										<Text text="{reportsData>Trptyp}" tooltip="{reportsData>Trptyp}" wrapping="true" />
+										<Text wrapping="true" text="{reportsData>Kunde}" tooltip="{reportsData>Kunde}" />
+										<Text text="{reportsData>Currency}" />
+										<Text text="{reportsData>Advance}" />
+										<Text text="{ parts: [ {path: 'reportsData>Status'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.ClosedOPenStatus' }" tooltip="{reportsData>Status}" wrapping="true" />
+									  	<!-- <Text text="-TP Status-" wrapping="true" />  -->
+									  	<Text text="{reportsData>Addfipo}" tooltip="{reportsData>Addfipo}" wrapping="true" />
+										<Text text="{reportsData>Addccod}" tooltip="{reportsData>Addccod}" wrapping="true" />
+										
+										<Text text="{reportsData>Addcost}" tooltip="{reportsData>Advamt}" wrapping="true" />
+										<Text text="{reportsData>Addpsid}" tooltip="{reportsData>Addpsid}" wrapping="true" />
+										<Text text="{reportsData>Addfctr}" tooltip="{reportsData>Addfctr}" wrapping="true" />
+										<Text text="{reportsData>Addfund}" tooltip="{reportsData>Addfund}" wrapping="true" />
+										
+										<Text text="{reportsData>action}" tooltip="{reportsData>Action}" wrapping="true" />
+										<Text text="{reportsData>role}" tooltip="{reportsData>Role}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>recdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Subdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Approvedt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Ackdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Reviewdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>Closedt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" tooltip="{reportsData>recdt}" wrapping="true" />
+										
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</VBox>
+					</ScrollContainer>
+				
+						<!-- <core:HTML id="html"/> -->
+				</content>
+			</Panel>
+
+		</content>
+	</Page>
+</core:View>

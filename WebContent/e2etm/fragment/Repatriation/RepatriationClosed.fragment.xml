@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<VBox class="HBoxPanelContet_Class">
+	    <Table id ="idHRPPTable" itemPress="handleLinkPress"  items="{hrpp>/}">
+		    <headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<ToolbarSpacer />
+						<SearchField id="idHRPPSearch" placeholder="Search with TP No/Emp No" search="onSearh" width="300px" />
+						<Button text="Search" press="onSearh" type="Emphasized"></Button>
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+	        <columns>
+	            <Column width="9em">
+	                <Text text="Travel Req" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Employee No" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true" >
+	                <Text text="Employee Name" />
+	            </Column>
+	             <Column minScreenWidth="Tablet" demandPopin="true" >
+	                <Text text="HRL-PP3" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true" >
+	                <Text text="Travelled Country" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="City" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Start Date" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="End Date" />
+	            </Column>
+	        </columns>
+	        <items>
+	            <ColumnListItem >
+	                <cells>
+	                    <Link text="{hrpp>ZZ_REP_REQ}" press="handleLinkPress" />
+	                    <Text text="{hrpp>ZZ_REP_PERNR}" />
+	                    <Text text="{path:'hrpp>ZZ_ENAME',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                     <Text text="{path:'hrpp>ZZ_HNAME',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                    <Text text="{hrpp>ZZ_TOCNTRY}" />
+	                    <Text text="{hrpp>ZZ_CITYTO}" />
+	                    <Text text="{path:'hrpp>ZZ_STDATE',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+	                    <Text text="{path:'hrpp>ZZ_ENDATE',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+	                </cells>
+	            </ColumnListItem>
+	        </items>
+	    </Table>
+    </VBox>
+</core:FragmentDefinition>

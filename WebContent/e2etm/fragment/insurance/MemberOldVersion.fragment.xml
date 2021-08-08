@@ -1,0 +1,69 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<!--############ UCD1KOR Commented Below aggregation Dec 15 #################   -->
+	<!-- ##############  items="{new>/OLD_VERSION/ZE2E_INS_DETAILSet/results}" #################-->
+	<!--############### visible={ 	path: 'new>/ZE2E_INS_HDR/ZE2E_REQ_STATUS/ZZ_REASON',
+				   					formatter: 'sap.ui.project.e2etm.util.Formatter.sapBoolean'} ############## -->
+	<Table items="{oldTraveller>/}"
+		mode="None"
+		visible="{ 	path: 'oldTraveller>/',
+				   					formatter: 'sap.ui.project.e2etm.util.Formatter.visibleoldTraveller'}">
+		<columns>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="8em">
+				<Label text="Name" required="true" />
+			</Column>
+<!-- 			<Column demandPopin="true" minScreenWidth="Desktop" width="5em"> -->
+<!-- 				<Label text="Gender" required="true" /> -->
+<!-- 			</Column> -->
+			<Column demandPopin="true" minScreenWidth="Desktop" width="7em">
+				<Label text="Relation" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="9em">
+				<Label text="Visa Type" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="8em">
+				<Label text="Ins. No" required="true" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="7.5em">
+				<Label text="DOB" required="true" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="8em">
+				<Label text="Passport" required="true" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="7.5em">
+				<Label text="Start Date" required="true" />
+			</Column>
+			<Column demandPopin="true" minScreenWidth="Desktop" width="7.5em">
+				<Label text="End Date" required="true" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Input value="{oldTraveller>ZZ_DEP_NAME}" editable="false" />
+<!-- 					<Input value="{new>ZZ_DEP_GENDER}" editable="false" /> -->
+
+					<Select items="{new>/DEPENDENT_TYPE/results}" enabled="false"
+						selectedKey="{oldTraveller>ZZ_DEPNDT_TYP}">
+						<core:Item key="{new>DOMVALUE_L}" text="{new>DDTEXT}" />
+					</Select>
+					<Select selectedKey="{oldTraveller>ZZ_VISA_TYPE}" enabled="false">
+						<core:Item key="BUSR" text="Business" tooltip="Business" />
+						<core:Item key="DPND" text="Dependent" tooltip="Dependent" />
+						<core:Item key="TOUR" text="Tourist" tooltip="Tourist" />
+						<core:Item key="TRNG" text="Training" tooltip="Training" />
+						<core:Item key="WRKP" text="Work permit" tooltip="Work permit" />
+					</Select>
+					<Input value="{oldTraveller>ZZ_INS_NO}" editable="false"/>
+					<DatePicker value="{oldTraveller>ZZ_DOB}" valueFormat="yyyyMMdd"
+						displayFormat="dd/MM/yyyy" change="handleChange" editable="false" />
+					<Input value="{oldTraveller>ZZ_PASSPORT}" editable="false" />
+					<DatePicker value="{oldTraveller>ZZ_BEGDA}" valueFormat="yyyyMMdd"
+						displayFormat="dd/MM/yyyy" change="handleChange" editable="false" />
+					<DatePicker value="{oldTraveller>ZZ_ENDDA}" valueFormat="yyyyMMdd"
+						displayFormat="dd/MM/yyyy" change="handleChange" editable="false" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

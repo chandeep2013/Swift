@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons" xmlns:commons="sap.ui.commons"
+	xmlns:sc="sap.suite.ui.commons">
+	<Dialog title="Change Date on Deputation" xmlns:l="sap.ui.layout"
+		showHeader="false" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact"
+		afterClose="afterClose">
+		<customHeader>
+			<Bar design="Header">
+				<contentMiddle>
+					<Label text="Change Date on Deputation"  class="customHeaderClass"></Label>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" press="onDateSelectionClose"
+						tooltip="Press to Close Pop up"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<VBox>
+			<HBox>
+				<Label text="Action Performed :" class="remarksClass"></Label>
+				<ComboBox placeholder="Select" width="265px" selectedKey="{global>/extDateKey}"
+					class="margin_top_11" change="DateChangeonDep">
+					<core:Item key="01" text="Date change with Visa Extension"></core:Item>
+					<core:Item key="02" text="Change in End date (advance/extend)"></core:Item>
+				</ComboBox>
+			</HBox>
+			<VBox class="mat_margin_top_20">
+				<!-- ############# Extension Docs Fragment ################ -->
+				<core:Fragment fragmentName="sap.ui.project.e2etm.fragment.common.ExtensionDocs"
+					type="XML" id="changeEndDateExt"/>
+			</VBox>
+		</VBox>
+		<beginButton>
+			<Button text="Next" type="Emphasized" press="onExtDocValidCheck"
+				width="100px"></Button>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

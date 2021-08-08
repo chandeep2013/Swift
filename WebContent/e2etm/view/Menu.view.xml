@@ -1,0 +1,191 @@
+<core:View controllerName="sap.ui.project.e2etm.controller.Menu" xmlns:commons="sap.ui.commons" xmlns:core="sap.ui.core"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:u="sap.ui.unified" xmlns="sap.m">
+	<!-- <Bar class="menu_bar_banner" id="logoBar">
+		<contentRight>
+			<FlexBox direction="Column" class="menu_logo">
+			    <Image src="images/Logo_Bosch.png" height="30px"
+					class="margin_top_15 margin_right_10"></Image>
+			</FlexBox>
+		</contentRight>
+		<contentLeft>
+			<FlexBox class="menu_logo" fitContainer="true">
+			    <Image src="images/logotext.png" class="margin_top_14"></Image>
+			</FlexBox>
+		</contentLeft>
+	</Bar> -->
+	<Bar class="user_bar" id="welcomeBar">
+		<contentRight>
+			<FlexBox alignItems="Center" class="line_height_32 margin_left_10" fitContainer="true" justifyContent="End">
+				<!-- <Label text="{i18n>welcome}:" class="margin_right_5"></Label> -->
+				<Link class="margin_right_10 margin_top_11" id="lblUsername" press="onEmployeeDetails" text="View Profile"></Link>
+				<Select change="handleChangeRole" class="normal_select" id="roleList" width="175px"></Select>
+				<core:Icon activeBackgroundColor="lightgray" activeColor="black" backgroundColor="lightgray"
+					class="border_black margin_left_5 padding_left_10 padding_right_10 margin_top_3 margin_right_3" height="26px" hoverBackgroundColor="black"
+					hoverColor="white" id="iconSubstitution" press="onSubStitutionPress" src="sap-icon://activity-individual" tooltip="Substitution"/>
+			</FlexBox>
+		</contentRight>
+		<contentLeft>
+			<Button class="home_request" icon="sap-icon://home" id="btnHome" press="onHomePress" text="HOME" type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnReport" press="onReportPress" text="REPORTS" type="Emphasized"
+				visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnTaxReport" press="onTaxReportPress" text="TAX CLEARANCE REPORTS"
+				type="Emphasized" visible="false"></Button>
+				<!--######################### UCD1KOR Nov 02 added new button PE Exposure Report #####################-->
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnPEExposureReport" press="onPEExposureReportPress" text="PE EXPOSURE REPORT"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnTransfer" press="onTransferPress" text="TRANSFER REPORTS"
+				type="Emphasized" visible="false"></Button>
+			<!-- ###################################Added new button for Business Travel Report by UIK1KOR#################################### -->
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnbtreport" press="onBusinesstravelPress" text="BUSINESS TRAVEL REPORT"
+				type="Emphasized" visible="true"></Button> 
+			<!--start TinhTD -->
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnBusiForm" press="onBusinessTravelHandle" text="{i18n>business_form}"
+				type="Emphasized"></Button>
+			<!--end TinhTD -->
+			<!--  commented by uml6kor 2/7/2019<Button class="new_request" icon="./images/new_request_icon.png" id="btnAddNewRequest" press="onTravelRequestCreate"
+				text="{i18n>deputation_info_travel}" type="Emphasized" visible="false"></Button>-->
+			<!-- start text change for deputation by uml6kor 2/7/2019 -->
+			 <Button class="new_request" icon="./images/new_request_icon.png" id="btnAddNewRequest" press="onTravelRequestCreate"
+				text="NEW REQUEST" type="Emphasized" visible="false"></Button>
+			<!-- end text change for deputation by uml6kor 2/7/2019 --> 
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnBusiVisaRequest" press="onBusinessVisaRequest"
+				text="BUSINESS VISA PLAN" type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://my-sales-order" id="btnForexSalesReport" press="onForexSalesReportPress" text="SALES"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://my-sales-order" id="btnForexEncashmentReport" press="onForexEncashmentReportPress"
+				text="ENCASHMENT" type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://my-sales-order" id="btnForexMasterReport" press="onForexMasterReportPress" text="MASTER"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://credit-card" id="btnCardReloadReport" press="onCardReloadReportPress"
+				text="CARD RELOAD REPORTS" type="Emphasized" visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://address-book" id="btnOnsiteAddressReport" press="onOnsiteAddressReportPress"
+				text="Onsite Address Reports" type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnMRReport" press="onMRPress" text="Monthly Remittance Report"
+				type="Emphasized" visible="false"></Button>
+				<!--UCD1KOR Finance Team Reports 28 May 2021 -->
+			<Button text="REPORTS" icon="sap-icon://trip-report" id="btnMRReportFn"  type="Emphasized" press="onMRPress" class="new_request MenuButtonIconline"/>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnTrstReport" press="onTrstReportPress" text="DAILY REPORT"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnTcktReport" press="onTcktReportPress" text="TICKETING REPORT"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnAirSavingsReport" press="onSavingsReportPress"
+				text="AIR SAVINGS REPORT" type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnQmmReport" press="onQmmReportPress" text="QMM-SLA Report"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnQeiReport" press="onQeiReportPress" text="OEI Report"
+				type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnSecoReport" press="onSecoReportPress"
+				text="SECONDARY ADVANCE REPORT" type="Emphasized" visible="false"></Button>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnSetlUsetlReport" press="onSetlUsetlReportPress"
+				text="SETTLED/UNSETTLED REPORT" type="Emphasized" visible="false"/>
+			<Button class="new_request" icon="./images/new_request_icon.png" id="btnSetlReport" press="onMoreReportPress" text="Other Reports"
+				type="Emphasized" visible="false"/>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnSlaRep" press="onSlaOutput" text="INS Recovery Report"
+				type="Emphasized" visible="false"></Button>
+			<!-- start uea6kor_7.12.2020 travelssettlement report -->
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnSettlementRep" press="onSettlementPress" text="Settlement Report" type="Emphasized"
+				visible="false"></Button>
+			<!-- start uea6kor_7.12.2020 travelssettlement report -->	
+			<!-- ########### UCD1KOR Nov 18, 2020  added MIS-Insurance Report-->
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnMISInsuranceRep" press="onMISInsurancePress" text="MIS-Insurance Report"
+				type="Emphasized" visible="false"></Button>	
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnMisRep" press="onMisOutput" text="MIS Deputations abroad" type="Emphasized"
+				visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://expense-report" id="btnDownCl" press="onDownloadCl" text="Download CL/HPC Sheets"
+				type="Emphasized" visible="false"></Button>
+				
+				<!--################### UCD1KOR Commented Below two Buttons ##########################  -->
+			<!-- <Button class="new_request MenuButtonIconline" id="btnViewTPPDF" press="onTPViewPDF" text="View TP PDF" type="Emphasized"
+				visible="false"></Button>
+			<Button class="new_request MenuButtonIconline" id="btnViewTPStat" press="onTPViewStat" text="View TP Status" type="Emphasized"
+				visible="false"></Button> -->
+				<!--########################## UCD1KOR Dec 15 Added New More Button for CTG Team - Start #####################  -->
+				<commons:MenuButton class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field" id="OnlyCTGMore" text="More">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://message-success" select="onTPViewPDF" text="View TP PDF"/>
+						<u:MenuItem icon="sap-icon://message-success" select="onTPViewStat" text="View TP Status"/>
+					</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+			<commons:MenuButton class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field" id="OnlyREPPMore" text="Reports">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://expense-report" select="onBusinesstravelPress" text="Business Travel Report"/>
+						<u:MenuItem icon="sap-icon://expense-report" select="onSettlementPress" text="Settlement Report"/>
+						<u:MenuItem icon="sap-icon://expense-report" select="onMISInsurancePress" text="MIS-Insurance Report"/>
+						<u:MenuItem icon="sap-icon://manager-insight" select="onViewReportPress" text="Repatriation Report"/>
+						<u:MenuItem icon="sap-icon://manager-insight" select="onPersTripReportPress" text="Personal Trip Report"/>
+						<u:MenuItem icon="sap-icon://manager-insight" select="onMisOutput" text="MIS Deputations abroad"/>
+						<u:MenuItem icon="sap-icon://manager-insight" select="onInlandMISReportPress" text="Inland MIS Report"/>
+					<!-- start uml6kor 4/5/2021  RBEIITAPPPIPELINE-1350 (Feedback form) -->
+						<u:MenuItem icon="sap-icon://manager-insight" select="onFeedBackReport" text="FeedBack Report"/>
+					<!-- end uml6kor 4/5/2021  RBEIITAPPPIPELINE-1350 (Feedback form) -->
+				</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+			<commons:MenuButton class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field" id="OnlyREDPMore" text="Reports">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://manager-insight" select="onFeedBackReport" text="FeedBack Report"/>
+					<!-- ucd1kor 19/5/2021  RBEIITAPPPIPELINE-1350 (Feedback form) -->
+				</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+			<!--########################## UCD1KOR Dec 15 Added New More Button for CTG Team - End #####################  -->	
+				
+			<Button class="new_request MenuButtonIconline" id="btnREPSHome" icon="sap-icon://home" press="onHomePress" type="Emphasized" width="25px" visible="false"/>
+            <Button class="new_request MenuButtonIconline" id="btnREPSReport" icon="sap-icon://manager-insight" text="Repatriation Reports" type="Emphasized" press="onViewReportPress" visible="false" />
+           <Button class="new_request MenuButtonIconline" icon="sap-icon://manager-insight" id="btnPersTripReport" press="onPersTripReportPress" text="Personal Trip Report" type="Emphasized"
+				visible="false"></Button>
+				<!-- start UCD1KOR 09/11/2020 Inland MIS Report report -->
+			<Button class="new_request MenuButtonIconline" icon="sap-icon://manager-insight" id="btnInlandMISReportReport" press="onInlandMISReportPress" text="Inland MIS Report" type="Emphasized"
+				visible="false"></Button>	
+			
+				<!-- end  uea6kor-uml6kor 22/9/2020 personal trip report -->
+				
+			<!-- 			<Button text="Download CL" id="btnCl" type="Emphasized" icon="sap-icon://expense-report" class="report_request" press="onDownloadCl" visible="true"></Button> -->
+			<!-- 			<Button text="Issue CL" id="btnIssueCl" type="Emphasized" icon="sap-icon://expense-report" class="report_request" press="onIssueCl" visible="true"></Button> -->
+			<!-- 			<Button text="Upload Manager" id="btnMgr" type="Emphasized" icon="sap-icon://expense-report" class="report_request" press="onUploadMgr" visible="true"></Button> -->
+			<commons:MenuButton class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field" id="OnlyDepuMenu" text="More" width="75px">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://notification-2" select="onSendNotificationsPress" text="SendNotifications"/>
+						<u:MenuItem icon="sap-icon://calendar" select="onPdmCalenderPress" text="PDM Calender"/>
+						<u:MenuItem icon="sap-icon://download" select="onDownloadCl" text="Download CL/HPC Sheets"/>
+						<u:MenuItem icon="sap-icon://generate-shortcut" select="onIssueCl" text="Issue CL"/>
+						<u:MenuItem icon="sap-icon://upload" select="onUploadMgr" text="Upload Manager Details"/>
+						<u:MenuItem icon="sap-icon://upload" select="onMonthlyReport" text="STVA Monthly Report"/>
+						<u:MenuItem icon="sap-icon://simulate" select="onCSGenerate" text="CGGS Calculation Sheet"/>
+						<!-- UCD1KOR 25 May 2020 Repatriation reports added  -->
+						<u:MenuItem icon="sap-icon://manager-insight" select="onRepatriationReports" text="Repatriation Reports"/>
+						<!-- UCD1KOR 09 Nov 2020 InlandMISReport  added  -->
+						<u:MenuItem icon="sap-icon://manager-insight" select="onInlandMISReport" text="Inland MIS Report"/>
+			    <!-- start uml6kor 4/5/2021  RBEIITAPPPIPELINE-1350 (Feedback form) -->
+						<u:MenuItem icon="sap-icon://manager-insight" select="onFeedBackReport" text="FeedBack Report"/>
+				<!-- end uml6kor 4/5/2021  RBEIITAPPPIPELINE-1350 (Feedback form) -->
+					</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+			<!-- UCD1KOR DEC 09 Added More button for Manager -->		
+			<commons:MenuButton class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field" id="OnlyMngr" text="More">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://expense-report" select="onMisOutput" text="MIS Deputations abroad"/>
+						<u:MenuItem icon="sap-icon://expense-report" select="onDownloadCl" text="Download CL/HPC Sheets"/>
+						
+					</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+			<!--UCD1KOR only MRCR Role  28/05/2021 -->
+			<commons:MenuButton id="onlyMRCRReports" class="margin_top_MoreClass" height="24px" icon="sap-icon://open-command-field"  text="More">
+				<commons:menu >
+					<u:Menu>
+						<u:MenuItem icon="sap-icon://expense-report" select="onMRPress" text="REPORTS"/>
+						<u:MenuItem icon="sap-icon://expense-report" select="onMISInsurancePress" text="MIS-Insurance Report"/>
+				</u:Menu>
+				</commons:menu>
+			</commons:MenuButton>
+		</contentLeft>
+	</Bar>
+</core:View>

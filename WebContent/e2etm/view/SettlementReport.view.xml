@@ -1,0 +1,338 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="sap.ui.project.e2etm.controller.SettlementReport"
+			xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Title" showHeader="true" enableScrolling="false">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Title text="Travel Settlement Report " titleStyle="H3" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>	
+		<content>
+			<Panel width="100%" height="100%" class="panelBorderTrSettle sapUiSizeCompact" >
+				<headerToolbar>
+				<Toolbar>
+					<Label text="Filter By:" />
+						<ComboBox id="idsettle" change="onChangeFilter" selectedKey="S" width="10%">
+							<items>
+								<core:Item text="Settled" key="S" />
+								<core:Item text="Unsettled" key="U" />
+							</items>
+						</ComboBox>
+					</Toolbar>
+				</headerToolbar>
+				<content>				
+				<VBox>
+				   <!-- added ids to hbox by uml6kor 2/3/2021 travel settlement filter changes( Changes to the CTG report) -->
+					<HBox id="idfromDateBox" class="alignDateClass">
+						<Label text="Settlement From Date:" class="margintop6Class"/>
+						<DatePicker id="idFromDateRangeS" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					<HBox id="idToDateBox" class="alignDateClass">
+						<Label text="Settlement To Date:" class="margintop6Class" width = "140px"/>
+						<DatePicker id="idToDateRangeE" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					
+					<HBox id="idfromSDateBox" class="alignDateClass" visible="false">
+						<Label text="Travel Start Date:" class="margintop6Class"/>
+						<DatePicker id="idSFromDateRange"  width="200px"  placeholder="From" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<DatePicker id="idSToDateRange"  width="200px"  placeholder="To" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					<HBox id="idfromEDateBox" class="alignDateClass" visible="false">
+							<Label text="Travel End Date :" class="margintop6Class"/>
+							<DatePicker id="idEFromDateRange" placeholder="From" class="sapUiSmallMarginRight" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+							<DatePicker id="idEToDateRange" placeholder="To" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					
+					<HBox class="alignDateClass">
+						<Label text="Fund:" class="margintop6Class" width="140px"/>
+						<MultiComboBox id="idFund"  placeholder="Select Fund" tooltip="Select Fund" width = "200px">
+							<core:Item key="F01" text="F01" /> 
+							<core:Item key="F02" text="F02" /> 
+							<core:Item key="F03" text="F03" /> 
+							<core:Item key="F04" text="F04" />
+							<core:Item key="F08" text="F08" />
+						</MultiComboBox>
+						<!-- commented by uml6kor 2/3/2021 travel settlement filter changes( Changes to the CTG report) -->
+						<!--  <Button text="Submit" press="getReport" type="Emphasized" class="margin_left_RepatritionClass" width="65px"></Button>-->
+					 </HBox>
+					
+					<HBox class="alignDateClass">
+						<Label text="Travel Type:" class="margintop6Class" width="140px"/>
+						<MultiComboBox selectionChange="onFilterAsg" id="idTrvTyp" placeholder="Select Travel Type" tooltip="Select Travel Travel" width = "200px" >
+								<core:Item key="DEPU" text="Deputation Travels" /> 
+								<core:Item key="BUSR" text="Business Travels" /> 
+								<core:Item key="SECO" text="Secondary Travels" /> 
+								<core:Item key="INFO" text="Info Travels" />
+						</MultiComboBox>
+						<Label id="lbAsgtyp" text="Assignment Type:" class="margintop6Class" width="140px" visible="false"/>
+						<MultiComboBox id="ipAsgtyp" items="{/AsgModelsF4Set}" visible="false" placeholder="Select Assignment Type" tooltip="Select Assignment Type" width = "200px">
+						<items>
+							<core:Item text="{AsgType}" key="{Key}" />
+						</items>
+						</MultiComboBox>
+					
+						<Button text="Submit" press="getReport" type="Emphasized" class="margin_left_RepatritionClass" width="65px"></Button>
+					</HBox>
+					
+				</VBox>			  
+				    <Toolbar >
+						<Label id="lblCount" design="Bold"/>
+						<ToolbarSpacer />
+						<Button icon="sap-icon://action-settings" type="Emphasized"
+							press="onSetlButtonPressed" />
+						<Button id="idExcelDownload" text="Download" type="Emphasized" press="excelDownload" visible="false"/>
+
+					</Toolbar>
+				  
+					<ScrollContainer horizontal="true" vertical="true" height="500px" width="auto"
+						focusable="true">
+						<VBox>
+						<Table id="SettlementReport" inset="false" updateFinished="onUpdateFinished"
+							class="growingTitle tableclass table_ticket_admin sapUiSizeCompact" noDataText="No Data"
+							items="{reportsData>/}" fixedLayout="true">
+							<columns>
+								<Column id="CoCd" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Company Code" />
+								</Column>
+								 
+								<Column id="BuArea" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Business Area" />
+								</Column> 
+								<Column id="TrNo" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Travel Request" />
+								</Column>
+								<Column id="EmpNo" minScreenWidth="Tablet" demandPopin="true"
+									width="11em">
+									<Text text="Employee Number" />
+								</Column>
+								  
+								<Column id="EmpName" minScreenWidth="Tablet" demandPopin="true"
+									width="9em">
+									<Text text="Employee Name" />
+								</Column>
+								<Column id="Grp" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Group" />
+								</Column>
+								<Column id="Dept" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Department" />
+								</Column>
+								<Column id="Sec" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Section" />
+								</Column>
+								<Column id="BU" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="BusinessUnit" />
+								</Column>
+								
+								<Column id="Vtype" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Visa Type" />
+								</Column>
+								<Column id="ToCty" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Trip destination" />
+								</Column>
+								<Column id="sDate" minScreenWidth="Tablet" demandPopin="true"
+									width="8em">
+									<Text text="Start date" />
+								</Column>
+								<Column id="eDate" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="End date" />
+								</Column>
+								<Column id="Bcode" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Budget Code" />
+								</Column>
+								<!--  
+								<Column id="CoCenter" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="Cost Center" />
+								</Column>
+								-->
+								<Column id="Wbs" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="WBS Element" />
+								</Column>
+								<Column id="CustName" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Customer Name" />
+								</Column>
+								<Column id="CustDept" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Customer Dept" />
+								</Column>
+								<Column id="CustPO" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Customer PO NO" />
+								</Column>
+								<Column id="CustCostCenter" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Customer Cost Center " />
+								</Column>
+								 
+								<Column id="taskid" minScreenWidth="Tablet" demandPopin="true"
+									width="10em">
+									<Text text="Task ID" />
+								</Column>
+								<Column id="Resid" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Resource ID" />
+								</Column>
+								
+								<Column id="AirTkt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Air Ticket" />
+								</Column>
+								<Column id="AirCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="BordAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Boarding Amount" />
+								</Column>
+								<Column id="BordCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="idWage" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Wage Taxes" />
+								</Column>
+								<Column id="idWageCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="ConveyAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Conveyance Amount" />
+								</Column>
+								<Column id="ConveyCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="LodgAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Lodging Amount" />
+								</Column>
+								<Column id="LodgeCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="InsurAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Insurance Amount" />
+								</Column>
+								<Column id="InsurCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="OtherAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Other Amount" />
+								</Column>
+								<Column id="OtherCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Currency" />
+								</Column>
+								<Column id="TotalAmt" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Total Amount" />
+								</Column>
+								<Column id="TotalCurr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Total in USD" />
+								</Column>
+								<!-- added by uml6kor 3/3/2021 for ctg report setl/unsetl chnages 4below fields -->
+								 <Column id="GID" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Global ID" />
+								</Column>
+								<Column id="DepReqr" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Deputation request Number" />
+								</Column>
+								<Column id="Asgtyp" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Assignment Model" />
+								</Column>
+								<Column id="RecvOrg" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Receiving Org Unit" />
+								</Column>
+								<Column id="Fund" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Fund" />
+								</Column>
+								</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{reportsData>CompanyCode}" wrapping="false" tooltip="{reportsData>CompanyCode}" />
+										<Text text="{reportsData>BusinessArea}" wrapping="false" tooltip="{reportsData>BusinessArea}" />
+										<Text text="{reportsData>TripNumber}" wrapping="false" tooltip="{reportsData>TripNumber}" />
+										<Text wrapping="false" text="{reportsData>PersonnelNumber}" tooltip="{reportsData>PersonnelNumber}" />
+										<Text wrapping="false" text="{reportsData>EmployeeName}" tooltip="{reportsData>EmployeeName}" />
+										<Text wrapping="false" text="{reportsData>Group}" tooltip="{reportsData>Group}" />
+										<Text wrapping="false" text="{reportsData>Department}" tooltip="{reportsData>Department}" />
+										<Text wrapping="false" text="{reportsData>Section}" tooltip="{reportsData>Section}" />
+										<Text wrapping="false" text="{reportsData>BusinessUnit}" tooltip="{reportsData>BusinessUnit}" />			
+										<Text wrapping="false" text="{reportsData>TripReason}" tooltip="{reportsData>TripReason}" />
+										<Text wrapping="false" text="{reportsData>Location}" tooltip="{reportsData>Location}" />		
+										<Text text="{ parts: [ {path: 'reportsData>StartDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{ parts: [ {path: 'reportsData>EndDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{reportsData>AddFipo}" tooltip="{reportsData>AddFipo}" wrapping="true" />
+										<Text text="{reportsData>COMMITMENTITEM}" tooltip="{reportsData>COMMITMENTITEM}" wrapping="true" />
+										<Text text="{reportsData>CustomerCordinatorName}" tooltip="{reportsData>CustomerCordinatorName}" wrapping="true" />
+										<Text text="{reportsData>CustomerCordinatorDept}" tooltip="{reportsData>CustomerCordinatorDept}" wrapping="true" />
+										<Text text="{reportsData>CustomerPONumber}" tooltip="{reportsData>CustomerPONumber}" wrapping="true" />
+										<Text text="{reportsData>CustomerCostCenter}" tooltip="{reportsData>CustomerCostCenter}" wrapping="true" />
+										<Text text="{reportsData>TaskID}" tooltip="{reportsData>TaskID}" wrapping="true" />
+										<Text text="{reportsData>ResourceId}" tooltip="{reportsData>ResourceId}" wrapping="true" />
+										<Text text="{reportsData>AirTicket}" tooltip="{reportsData>AirTicket}" wrapping="true" />
+										<Text text="{reportsData>AirCurrency}" tooltip="{reportsData>AirCurrency}" wrapping="true" />
+										<Text text="{reportsData>BoardingAmount}" tooltip="{reportsData>BoardingAmount}" wrapping="true" />
+										<Text text="{reportsData>BoardingCurrency}" tooltip="{reportsData>BoardingCurrency}" wrapping="true" />
+										<Text text="{reportsData>WageTaxAmount}" tooltip="{reportsData>WageTaxAmount}" wrapping="true" />
+										<Text text="{reportsData>WageTaxCurrency}" tooltip="{reportsData>WageTaxCurrency}" wrapping="true" />
+										<Text text="{reportsData>ConveyanceAmount}" tooltip="{reportsData>ConveyanceAmount}" wrapping="true" />
+										<Text text="{reportsData>ConveyanceCurrency}" tooltip="{reportsData>ConveyanceCurrency}" wrapping="true" />
+										<Text text="{reportsData>LodgingAmount}" tooltip="{reportsData>LodgingAmount}" wrapping="true" />
+										<Text text="{reportsData>LodgingCurrency}" tooltip="{reportsData>LodgingCurrency}" wrapping="true" />
+										<Text text="{reportsData>InuranceAmount}" tooltip="{reportsData>InuranceAmount}" wrapping="true" />
+										<Text text="{reportsData>InsuranceCurrency}" tooltip="{reportsData>InsuranceCurrency}" wrapping="true" />
+										<Text text="{reportsData>OtherAmount}" tooltip="{reportsData>OtherAmount}" wrapping="true" />
+										<Text text="{reportsData>OtherCurrency}" tooltip="{reportsData>OtherCurrency}" wrapping="true" />
+										<Text text="{reportsData>TotalCost}" tooltip="{reportsData>TotalCost}" wrapping="true" />
+										<Text text="{reportsData>AmountUSD}" tooltip="{reportsData>AmountUSD}" wrapping="true" />
+								<!-- added by uml6kor 3/3/2021 for ctg report setl/unsetl chnages 4below fields -->
+								        <Text text="{reportsData>GID}" tooltip="{reportsData>GID}" wrapping="true" />
+										<Text text="{reportsData>DepuReq}" tooltip="{reportsData>DepuReq}" wrapping="true" />
+										<Text text="{reportsData>AsgTyp}" tooltip="{reportsData>AsgTyp}" wrapping="true" />
+										<Text text="{reportsData>RecvOrg}" tooltip="{reportsData>RecvOrg}" wrapping="true" />
+										<Text text="{reportsData>AddFipo}" tooltip="{reportsData>AddFipo}" wrapping="true" />
+										<Text text="{reportsData>Fund}" tooltip="{reportsData>Fund}" wrapping="true" />
+										 										
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</VBox>
+					</ScrollContainer>
+				
+						<!-- <core:HTML id="html"/> -->
+				</content>
+			</Panel>
+	
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,14 @@
+<core:View xmlns:core="sap.ui.core" xmlns:forms="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" >
+	<FlexBox id="intlAcc" class="intlAcc">
+	<FlexBox id="intlAcc1" alignItems="Start">
+	<Label width="40px"></Label>
+	<Label class="font-size-18 intlVisitLbl" text="Visit" width="40px">
+	</Label>
+	<Link  class="font-size-18 acc_intl_lbl intlVisitLbl" design="Bold" href="http://bosch-hotels.com" target="_blank" text="www.bosch-hotels.com" width="180px">
+	</Link>
+	<Label class="font-size-18 intlVisitLbl" text="to block your accommodation">
+	</Label>
+	</FlexBox>
+	</FlexBox>
+</core:View>

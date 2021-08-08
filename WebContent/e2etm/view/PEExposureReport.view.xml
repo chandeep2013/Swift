@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns="sap.m"
+	xmlns:commons="sap.ui.commons" xmlns:l="sap.ui.layout" xmlns:view="sap.ui.core.mvc"
+	xmlns:table="sap.ui.table" controllerName="sap.ui.project.e2etm.controller.PEExposureReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page height="100%" showNavButton="true" navButtonPress="backPress"
+		class="sapUiSizeCompact resMainPage " title="PE EXPOSURE REPORT">
+		<Panel id="idPanel">
+			<!--###### UI Filters ####### -->
+			<VBox class="HBoxPanelContet_Class">
+				<HBox fitContainer="true">
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+						<f:content>
+							<Label text="Employee number" design="Bold"
+								class="sapUiSmallMarginRight" />
+							<Input placeholder="Employee number" width="200px" id="idPEReportEmpNo" type="Number"/>
+						</f:content>
+					</f:SimpleForm>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+						<f:content>
+							<Label text="Country" design="Bold" class="sapUiSmallMarginRight" />
+							<MultiComboBox id="idPECountry" placeholder="Select Country" width="245px"
+								tooltip="Select Country" items="{country>/results}" change="onCountryChange">
+								<core:Item key="{country>MOLGA}" text="{country>LTEXT}" />
+							</MultiComboBox>
+						</f:content>
+					</f:SimpleForm>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+						labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+						emptySpanS="0" singleContainerFullSize="false" width="20rem">
+						<f:content>
+							<Label text="Year" design="Bold" class="sapUiSmallMarginRight" />
+							<MultiComboBox id="idPEYear" placeholder="Select Year" width="245px"
+								tooltip="Select Year" items="{Year>/}">
+								<core:Item key="{Year>Key}" text="{Year>Text}" />
+							</MultiComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</HBox>
+				<Toolbar class="toolbarClass">
+					<ToolbarSpacer />
+					<Button text="Clear" width="100px" type="Emphasized"
+						press="handleClearSearchFilters" />
+					<Button text="Search" width="100px" type="Accept"
+						press="handleSearchButtonPress" />
+				</Toolbar>
+			</VBox>
+		</Panel>
+		<content>
+			<VBox class="HBoxPanelContet_Class">
+				<Toolbar class="toolbarClass">
+					<ToolbarSpacer />
+					<Button icon="sap-icon://download" text="Download" press="excelDownload"
+						tooltip="Click to download as elxs" />
+					<Button width="100px" icon="sap-icon://action-settings"
+						press="handleSettignsPress" />
+				</Toolbar>
+				<ScrollContainer horizontal="true" vertical="true"
+					height="500px" focusable="true">
+					<Table inset="false" class="table_ticket_admin tableclass sapUiSizeCompact"
+						id="idPEReportTable" items="{Reports>/results}" growing="true"
+						growingScrollToLoad="true">
+						<columns>
+							<Column width="5rem" id="idPETPNo">
+								<Text text="TP number" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPEEMPNo">
+								<Text text="Employee number" class="button_header" />
+							</Column>
+							<Column width="9rem" id="idPEEMPName">
+								<Text text="Employee Name" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPEReportCountry">
+								<Text text="Country" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPELoc">
+								<Text text="Location" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idPETPType">
+								<Text text="Travel Type" class="button_header"/>
+							</Column>
+							<Column width="5rem" id="idPEStDate">
+								<Text text="Start date" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPEEndDate">
+								<Text text="End date" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPEReportYear">
+								<Text text="Year" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idPEDept">
+								<Text text="Department" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPESection">
+								<Text text="Section" class="button_header" />
+							</Column>
+							<Column width="3rem" id="idPEBU">
+								<Text text="BU" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPENTID">
+								<Text text="NTID" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idPETRStDate">
+								<Text text="Personal Travel start date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idPETREndDate">
+								<Text text="Personal Travel End date" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idPETPDuration">
+								<Text text="Total Duration" class="button_header" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem height="10px">
+								<cells>
+									<Text text="{Reports>ZZ_TPNO}" />
+									<Text text="{Reports>ZZ_EMPNO}" />
+									<Text text="{path:'Reports>ZZ_EMPNAME', formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+									<Text text="{path:'Reports>ZZ_COUNTRY', formatter: 'sap.ui.project.e2etm.util.Formatter.formatCountry'}" />
+									<Text text="{Reports>ZZ_DEP_LOC}" />
+									<Text text="{Reports>ZZ_TRV_TYP}" />
+									<Text text="{path:'Reports>ZZ_TRV_SDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{path:'Reports>ZZ_TRV_EDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{Reports>ZZ_YEAR}" />
+									<Text text="{Reports>ZZ_DEPT}" />
+									<Text text="{Reports>ZZ_SECTION}" />
+									<Text text="{Reports>ZZ_BU}" />
+									<Text text="{Reports>ZZ_NTID}" />
+									<Text text="{path:'Reports>ZZ_PER_SDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{path:'Reports>ZZ_PER_EDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+									<Text text="{Reports>ZZ_DURATION}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+		</content>
+	</Page>
+</core:View>

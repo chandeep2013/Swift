@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons"
+	xmlns:table="sap.ui.table">
+
+	<Table id="RegistrationTable" itemPress="onItemPress" inset="false" growing="true" growingThreshold="100" 
+		  class="table_ticket_admin" items="{path: 'RegistrationSet>/'}">
+	<headerToolbar>
+	<Toolbar class="sapUiSizeCompact">
+	<PullToRefresh
+				id="pullToRefresh"
+				refresh="handleRefresh" class="RegsRefresh"/>
+	<ToolbarSpacer/>
+	<SearchField width="200px"  liveChange="RegsSearch" selectOnFocus="false"/>
+	</Toolbar>
+	</headerToolbar>	
+			<columns>
+			<Column width="3em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Travel Type" />
+				</FlexBox>
+
+			</Column>
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Employee No" />
+				</FlexBox>
+			</Column>
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Employee Name" />
+				</FlexBox>
+			</Column>			
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Travel Request" />
+				</FlexBox>
+
+			</Column>			
+
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Start Date" />
+				</FlexBox>
+			</Column>
+			
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="End Date" />
+				</FlexBox>
+			</Column>
+
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="Received Date" />
+				</FlexBox>
+			</Column>
+
+			<Column width="5em">
+				<FlexBox direction="Column" alignItems="Start">
+					<Text text="To Country" />
+				</FlexBox>
+			</Column>
+		</columns>
+	<items>
+			<ColumnListItem type="Navigation" height="10px">
+				<cells>
+					<Text text="{RegistrationSet>TType}" />
+					<Text text="{RegistrationSet>Pernr}" />
+					<Text text="{RegistrationSet>Name}" />
+					<Text text="{RegistrationSet>Reinr}" />
+                    <Text text="{path:'RegistrationSet>Begda',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                    <Text text="{path:'RegistrationSet>Endda',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+                    <Text text="{path:'RegistrationSet>Rdate',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+					<Text text="{RegistrationSet>Cntry}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+	
+</core:FragmentDefinition>

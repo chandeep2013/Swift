@@ -1,0 +1,52 @@
+ <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<VBox class="HBoxPanelContet_Class">
+	    <Table id ="idHRBPTable" itemPress="handleLinkPress"   items="{hrbp>/results}"><!-- mode="MultiSelect" -->
+	        <columns>
+	            <Column width="9em">
+	                <Text text="Travel Req" />
+	            </Column>
+	            <Column  minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Employee No" />
+	            </Column>
+	            <Column  minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Employee Name" />
+	            </Column>
+	            <Column   minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="HRL-PP3 " />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Travelled Country" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="City" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Start Date" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="End Date" />
+	            </Column>
+	            <Column hAlign="End" visible="false">
+	                <Text text="Received Date" />
+	            </Column>
+	        </columns>
+	        <items>
+	            <ColumnListItem >
+	                <cells>
+	                    <Link text="{hrbp>ZZ_REP_REQ}" press="handleLinkPress" />
+	                    <Text text="{hrbp>ZZ_REP_PERNR}" />
+	                    <Text text="{path:'hrbp>ZZ_ENAME',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                    <Text text="{path:'hrbp>ZZ_HNAME',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                    <Text text="{hrbp>ZZ_TOCNTRY}" />
+	                    <Text text="{hrbp>ZZ_CITYTO}" />
+	                    <Text text="{path:'hrbp>ZZ_STDATE',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}"/>
+	                    <Text text="{path:'hrbp>ZZ_ENDATE',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+	                    <Text text="15-01-2020" />
+	                </cells>
+	            </ColumnListItem>
+	        </items>
+	    </Table>
+    </VBox>
+</core:FragmentDefinition>

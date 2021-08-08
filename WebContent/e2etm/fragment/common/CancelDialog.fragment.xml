@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons">
+	<c:Dialog modal="true" width="510px" title="CANCEL REQUEST" class="dialog">
+	<!--################## UCD1KOR 16 July 2021 Changes #################### -->
+		<VBox>
+			<Label text="You are about to cancel your travel" design="Bold"/>
+			<Text text=" "/>
+			<Text class="dialog_margin_left" wrapping="true" text="It is not possible to revert the changes once request is cancelled. Kindly align with your manager before triggering the cancellation process."/>
+			<Text text=" "/>
+		</VBox>
+	    <FlexBox direction="Column">
+			<FlexBox class="dep_customer_flexbox_textarea">
+				<Label text="Your Comment" class="required"></Label>
+				<TextArea id="txtCancelRequestComment" maxLength="254"></TextArea>
+			</FlexBox>
+		</FlexBox>
+		<c:buttons>
+			<c:Button id="btnCancelRequest" text="Cancel Request" press="onCancelRequestButtonClick" height="30px" />
+		</c:buttons>
+	</c:Dialog> 
+</core:FragmentDefinition>

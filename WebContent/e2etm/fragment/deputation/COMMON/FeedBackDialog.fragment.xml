@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" >
+	<Dialog modal="true" width="100%" title="Service Quality of support for international deputation processing" class="dialog feedback_ParentClass">
+	    	<VBox>
+				<core:Fragment
+					fragmentName="sap.ui.project.e2etm.fragment.deputation.COMMON.FeedBackForm"
+					type="XML" />
+			</VBox>
+	    <buttons> 
+	    	<Button text="Submit" press="onSubmitFeedbackDialog" height="30px" visible="{ parts: [ {path: 'QAModel>/results/0/Role'},{path: 'QAModel>/editable'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.desableCheckBox' }" />
+			<Button text="Close" press="onCloseFeedbackDialog" height="30px"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

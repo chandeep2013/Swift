@@ -1,0 +1,42 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="sap.ui.project.e2etm.controller.RepDashboard"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="sapUiSizeCompact resMainPage" showHeader="false">
+		<content>
+		<mvc:XMLView viewName='sap.ui.project.e2etm.view.Menu' />
+			<VBox>
+				<IconTabBar id="idRepDashIconTabbar"
+					class="sapUiResponsiveContentPadding" select="getDetails">
+					<items>
+						<IconTabFilter text="In Process" key="inprocess">
+							<!-- ############# Repatriation Fragment ################ -->
+							<core:Fragment
+								fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repdashboard"
+								type="XML" />
+						</IconTabFilter>
+						<IconTabFilter text="Approved" key="approved">
+							<!-- ############# Repatriation Fragment ################ -->
+							<core:Fragment
+								fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repdashboard"
+								type="XML" />
+						</IconTabFilter>
+						<IconTabFilter text="All Requests" key="all" id="idRepDashAllRequests">
+							<!-- ############# Repatriation Fragment ################ -->
+							<core:Fragment
+								fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repdashboard"
+								type="XML" />
+						</IconTabFilter>
+						<IconTabFilter text="Upcoming" key="coming">
+							<!-- ############# Repatriation Fragment ################ -->
+							<core:Fragment
+								fragmentName="sap.ui.project.e2etm.fragment.Repatriation.Repdashboard"
+								type="XML" />
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+			</VBox>
+		</content>
+	</Page>
+
+</core:View>

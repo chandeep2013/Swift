@@ -1,0 +1,54 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.TrstReports"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+  <Page title="Title" showHeader="false">
+    <content>
+      <SplitApp id="splitapp" mode="PopoverMode">
+        <masterPages>
+          <Page showHeader="true" title="Reports">
+           <customHeader>
+             <Bar>
+               <contentLeft>
+                 <Button icon="sap-icon://menu2" press="onChangeMode" />
+               </contentLeft>
+
+             </Bar>
+           </customHeader>
+
+            <content>
+              <List id="masterlist" mode="SingleSelectMaster" itemPress="onItemPress">
+                <items>
+<!--                  <StandardListItem id="setlUsetlRep" type="Active" -->
+<!--                    title="Settled/Unsettled Report" /> -->
+                  <StandardListItem id="secoAdvRep" type="Active"
+                    title="Secondary Travel Advance" />
+                   <StandardListItem id="insRecRep" type="Active"
+                    title="INS Recovery Report" />
+                    <StandardListItem id="accSetlRep" type="Active"
+                    title="Accommodation Settlement Report" />
+                  <StandardListItem id="itmClDownload" type="Active"
+                    title="Download CL/HPC Sheets" />
+                    <!-- UCD1KOR 10 Jan 20 settlement/Un settlement Report added -->
+                    <StandardListItem id="itmSettleUnSettledDownload" type="Active"
+                    title="Settled/UnSettled Report" />
+                     <!-- UCD1KOR 18 May 2020 InlandTravel_Digital Report added -->
+                    <StandardListItem id="itmInlandTravel_DigitaldDownload" type="Active"
+                    title="Inland Travel - Digital" tooltip="Travels without physical document submission"/>
+                    <!--  uea6kor-uml6kor_24.9.2020 personal trip report -->
+                    <StandardListItem id="itmPersonalTripReport" type="Active"		
+                    title="Personal Trip Report" />
+                    <!--  uea6kor-uml6kor_24.9.2020 personal trip report-->
+                    <StandardListItem id="itmMISInsuranceReport" type="Active"		
+                    title="MIS Insurance Report" /><!-- UCD1KOR Nov 20, 2020 MIS Insurance Report  added -->
+                </items>
+              </List>
+            </content>
+          </Page>
+        </masterPages>
+        <detailPages>
+
+        </detailPages>
+      </SplitApp>
+    </content>
+  </Page>
+</core:View>

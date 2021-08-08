@@ -1,0 +1,43 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons">
+	<c:Dialog modal="true" title="VIEW TRAVEL PLAN STATUS" type="Standard"
+		class="dialog" width="40%" id="ViewTPstatDialog">
+		<!-- <FlexBox direction="Column" alignItems="Center"
+			justifyContent="Center">
+			<FlexBox direction="Row" alignItems="Center" justifyContent="SpaceBetween">
+				
+			</FlexBox>
+			
+		</FlexBox> -->
+		<!--ucd1kor 10/2/2020 tp status  -->
+		<VBox class="sapUiSmallMargin">
+		<f:SimpleForm 
+			layout="ResponsiveGridLayout"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false"   >
+			<f:content>
+				<Label text="Travel Plan" width="100px" />
+				<Input id="linktpno" />
+				<Label text="Status" />
+				<Input id="idTravelStatus" value="-" editable="fasle" />
+				<Label text=""/>
+				<Button text="View Status" type="Emphasized" press="onViewStatPress" />
+			</f:content>
+		</f:SimpleForm>
+	</VBox> 
+		
+<!--ucd1kor 10/2/2020 tp status  -->
+		
+	</c:Dialog>
+</core:FragmentDefinition>

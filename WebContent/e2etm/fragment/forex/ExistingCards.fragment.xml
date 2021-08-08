@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons">
+	<Dialog id="idExistingCards" title="Existing Cards" class="sapUiSizeCompact" contentWidth="42%">
+	<customHeader>
+		<Toolbar>
+				<content>
+					<ToolbarSpacer width="5px" />
+					<Title  text="Existing Cards" class="fontSizeCalss"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://decline"  press="onCloseExistingCards"/>
+				</content>
+		</Toolbar>
+	</customHeader>
+		<content>
+			<Table id="idExistingCardsTable" mode="MultiSelect" items="{forexmodel>/cardsAll}" >
+		<columns>
+			<Column width="125px">
+				<Text text="Type of Currency" />
+			</Column>
+			<Column width="125px">
+				<Text text="Issued Banker" />
+			</Column>
+			<Column width="125px">
+				<Text text="Card no" />
+			</Column>
+			<Column width="125px">
+				<Text text="Card Validity" />
+			</Column>
+		</columns>
+		<items><!--  -->
+			<ColumnListItem>
+				<cells>
+					<c:ComboBox  editable="{fieldproperties>/existingcards}" change="onCurrencyChange" value="{forexmodel>Currency}"
+										displaySecondaryValues="true" items="{curModel>/}">
+						<c:items>
+							<core:ListItem additionalText="{curModel>FIELD2}" text="{curModel>FIELD1}" />
+						</c:items>
+					</c:ComboBox>
+					<c:ComboBox  editable="{fieldproperties>/existingcards}" selectedKey="{forexmodel>IssuedBanker}" displaySecondaryValues="true"
+										items="{Bank>/}">
+						<c:items>
+							<core:ListItem additionalText="{Bank>FIELD3}" text="{Bank>FIELD3}" key="{Bank>FIELD2}" />
+						</c:items>
+					</c:ComboBox>
+					<c:TextField width="136px" value="{forexmodel>CardNo}" editable="{fieldproperties>/existingcards}" />
+					<DatePicker width="136px" value="{path:'forexmodel>CardValidUpto'}" class="datepick_read_only"
+										displayFormat="dd.MM.yyyy" editable="{fieldproperties>/existingcards}"
+										valueFormat="yyyyMMdd" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<VBox class="toolbarCard">
+		<OverflowToolbar ><!-- id="idUpdateCardButton" -->
+				<content>
+					<ToolbarSpacer />
+					<Button  text="Delimit Card" type="Emphasized" icon="sap-icon://negative" class="margin_left_10" press="onDelimitCard"/>
+					<Button  text="Update Card"  type="Emphasized" icon="sap-icon://add-coursebook" class="margin_left_10" press="onUpdateCard"/>
+				</content>
+	</OverflowToolbar>
+	</VBox>
+	
+		</content>
+		<!-- <beginButton>
+			<Button text="Submit" press="onAddNewCard" />
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onNewCardClose" />
+		</endButton> -->
+	</Dialog>
+</core:FragmentDefinition>

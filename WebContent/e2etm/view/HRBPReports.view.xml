@@ -1,0 +1,184 @@
+<core:View controllerName="sap.ui.project.e2etm.controller.HRBPReports"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+	<Page class="sapUiSizeCompact resMainPage " showHeader="true">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button   icon="sap-icon://nav-back" press="onNavBack" class="backButtonClass"/>
+				</contentLeft>
+				<contentMiddle>
+					<Title text="HRBP/HRL-PP3 Reports" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+			<content>
+					<Panel id="idPanel">
+					<!--###### UI Filters  #######-->
+						<VBox class="HBoxPanelContet_Class">
+						<HBox fitContainer="true" >
+							
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Country" design="Bold" class="sapUiSmallMarginRight"/>
+									<ComboBox id="idHRBPCountry"  placeholder="Select Country" tooltip="Select Country"
+										items="{reports>/}" change="onCountryChange">
+										<core:Item key="{reports>MOLGA}" text="{reports>LTEXT}"/>
+									</ComboBox>
+									<Label text="Assignment" design="Bold" class="sapUiSmallMarginRight"/>
+									<Select id="idHRBPAssignMentGroup" />
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Trip Begin date" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idTripStartDate" placeholder="Start Date" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+									<Label text="Trip End date" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idTripEndDate"  placeholder="End Date" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Months" design="Bold" class="sapUiSmallMarginRight"/>
+									<MultiComboBox width="200px" id="idHrbpMonths"
+										selectionChange="handleSelectionChange" placeholder="Select Date">
+										<core:Item key="31/01" text="January"/>
+										<core:Item key="29/02" text="February"/>
+										<core:Item key="31/03" text="March"/>
+										<core:Item key="30/04" text="April"/>
+										<core:Item key="31/05" text="May"/>
+										<core:Item key="30/06" text="June"/>
+										<core:Item key="31/07" text="July"/>
+										<core:Item key="31/08" text="August"/>
+										<core:Item key="30/09" text="September"/>
+										<core:Item key="31/10" text="October"/>
+										<core:Item key="30/11" text="November"/>
+										<core:Item key="31/12" text="December"/>
+									</MultiComboBox>
+									<Label text="Year" design="Bold" class="sapUiSmallMarginRight"/>
+									<Input id="idHrbpYear" maxLength="4" placeholder="Enter Year" />
+								</f:content>
+							</f:SimpleForm>
+							
+						</HBox>
+						<Toolbar class="toolbarClass">
+								<ToolbarSpacer/>
+								<Button id="idHRBPClearBtn" text="Clear" width="100px" type="Emphasized" press="handleClearSearchFilters" />
+								<Button id="idHRBPSearchBtn" text="Search" width="100px" type="Accept" press="handleSearchButtonPress"/>
+						</Toolbar>
+						</VBox>
+					</Panel>
+					<!--###### Reports Table ###########  -->
+					<VBox class="cargoReportsTableCLass">
+					<Toolbar class="toolbarClass">
+							<Title id="idCargoTableInfoToolBar" class="textBoldClass" text="Reports"/>
+							<ToolbarSpacer/>
+							<Button id="idHRBPExcelDownload" icon="sap-icon://download"  visible="fasle" text="Download" press="excelDownload" tooltip="Click to download as elxs"/>
+							<Button id="idHRBPSettingsBtn" width="100px" icon="sap-icon://action-settings" press="handleSettignsPress"/>
+					</Toolbar>
+					<ScrollContainer horizontal="true" vertical="true" height="500px"
+						focusable="true">
+						<Table id="idHRBPReportsTable" inset="false" items="{reportsData>/}" >
+							<infoToolbar>
+								<!-- <OverflowToolbar>
+									<Label id="idCargoTableInfoToolBar" text="Reports"/>
+								</OverflowToolbar> -->
+							</infoToolbar>
+							<columns>
+								<Column hAlign="Center" width="8em" id="idHRBPEmpNo" >
+									<Text class="textBoldClass" text="Employee No"/>
+								</Column>
+								<Column hAlign="Left" width="9em" id="idHRBPEmpNmae" >
+									<Text class="textBoldClass" text="Name of the Employee"/>
+								</Column>
+								<Column hAlign="left" width="7em" id="idHRBPTopMngnt" >
+									<Text class="textBoldClass" text="Top Management"/>
+								</Column>
+								<Column hAlign="left" width="7em" id="idHRBPSrMngnt">
+									<Text class="textBoldClass" text="Senior Managemnet"/>
+								</Column>
+								<Column hAlign="left" width="7em" id="idHRBPMidMngnt">
+									<Text class="textBoldClass" text="Middle Management"/>
+								</Column>
+								<Column hAlign="left" width="6em" id="idHRBPTPNo">
+									<Text class="textBoldClass" text="Trip Number"/>
+								</Column>
+								<Column hAlign="left" width="6em" id="idHRBPAssModel">
+									<Text class="textBoldClass" text="Assignment Model"/>
+								</Column>
+								<Column hAlign="left" width="6em" id="idHRBPHostEntity">
+									<Text class="textBoldClass" text="Host Entity"/>
+								</Column>
+								<Column hAlign="left" width="5em" id="idHRBPTPDuration">
+									<Text class="textBoldClass" text="Trip Duration"/>
+								</Column>
+								<Column hAlign="left" width="5.5em" id="idHRBPBeginDate">
+									<Text class="textBoldClass" text="Trip Begin Date"/>
+								</Column>
+								<Column hAlign="left" width="5.5em" id="idHRBPEndDate">
+									<Text class="textBoldClass" text="Trip End Date"/>
+								</Column>
+								<Column hAlign="left" width="7em" id="idHRBPTripDestination">
+									<Text class="textBoldClass" text="Trip Destination"/>
+								</Column>
+								<Column hAlign="left" width="6em" id="idHRBPTCntyTxt">
+									<Text class="textBoldClass" text="Country"/>
+								</Column>
+								<Column hAlign="left" width="10em" id="idHRBPReason" >
+									<Text class="textBoldClass" text="Reason for Repatriation"/>
+								</Column>
+								<Column hAlign="left" width="8em" id="idHRBPEffDate">
+									<Text class="textBoldClass" text="Effective date of Repatriation"/>
+								</Column>
+								<Column hAlign="left" width="12em" id="idHRBPEmail">
+									<Text class="textBoldClass" text="E-mail Id"/>
+								</Column>
+								<Column hAlign="left" width="9em" id="idHrbpDeputationReq">
+									<Text class="textBoldClass" text="Deputation request"/>
+								</Column>
+								<Column hAlign="left" width="7em" id="idHrbpAmount">
+									<Text class="textBoldClass" text="Amount"/>
+								</Column>
+								<Column hAlign="left" width="12em" id="idHRBPApplicability">
+									<Text class="textBoldClass" text="Reallocation Applicability"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{reportsData>ZZ_REP_PERNR}"/>
+										<Text text="{ parts: [ {path: 'reportsData>ZZ_ENAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"/>
+										<Text text="{reportsData>ZZ_BUH}"/>
+										<Text text="{reportsData>ZZ_SH}"/>
+										<Text text="{reportsData>ZZ_DH}"/>
+										<Text text="{reportsData>ZZ_REP_REQ}"/>
+										<Text text="{reportsData>ZZ_ASG_TYP}"/>
+										<Text text="{reportsData>ZZ_COMABBR}"/>
+										<Text text="{reportsData>ZZ_DEP_DAYS}"/>
+										<Text text="{ parts: [ {path: 'reportsData>BEGDA'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{ parts: [ {path: 'reportsData>ENDDA'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{reportsData>ZZ_TRVTO_LOC}"/>
+										<Text text="{reportsData>ZZ_TO_CNTY}"/>
+										<Text text="{reportsData>ZZ_REASON}"/>
+										<Text text="{parts: [ {path: 'reportsData>ZZ_SDATE_M'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo'}"/>
+										<Text text="{ parts: [ {path: 'reportsData>ZZ_MAILID'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"/>
+										<Text text="{reportsData>DepRequestNo}"/>
+										<Text text="{reportsData>AllowncAmount}"/>
+										<Text text="{ parts: [ {path: 'reportsData>AllowApplicability'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</ScrollContainer>
+					</VBox>
+				</content>
+		
+	</Page>
+</core:View>

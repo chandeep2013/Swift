@@ -1,0 +1,78 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<VBox class="HBoxPanelContet_Class">
+	    <Table itemPress="handleLinkPress"  items="{repdash>/results}">
+		    <headerToolbar>
+				<OverflowToolbar>
+					<content>
+						<Label text="Approved From :" visible="{repdash>/searchDate}" width="110px"></Label>
+						<DatePicker placeholder="Date" value ="{repdash>/StartFrom}" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd" visible="{repdash>/searchDate}" width="150px"></DatePicker>
+						<ToolbarSpacer width="30px"  visible="{repdash>/searchDate}"></ToolbarSpacer>
+						<Label text="Approved To :"  visible="{repdash>/searchDate}" width="110px"></Label>
+						<DatePicker placeholder="Date"  value="{repdash>/StartTo}" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd" width="150px" visible="{repdash>/searchDate}"></DatePicker>
+						<ToolbarSpacer width="30px"  visible="{repdash>/searchDate}"></ToolbarSpacer>
+						<Button type="Accept" text="Search" press="getDetails"  visible="{repdash>/searchDate}" width="100px"></Button>
+						<ToolbarSpacer />
+						<SearchField placeholder="Search with TP No/Emp No" value="{repdash>/searchVal}" width="300px" visible="{repdash>/search}"/>
+						<Button text="Search" press="getDetails" type="Emphasized" visible="{repdash>/search}" width="100px"></Button>
+						<Button text="Download" press="excelDownload" type="Accept" width="100px"></Button>
+					</content>
+				</OverflowToolbar>
+			</headerToolbar>
+	        <columns>
+	            <Column width="9em">
+	                <Text text="Travel Req" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Employee No" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true" >
+	                <Text text="Employee Name" />
+	            </Column>
+	            <!--##################### 19 Apr 2021 Added new column ###################  -->
+	            <Column minScreenWidth="Tablet" demandPopin="true" visible="{repdash>/hideStatus}">
+	                <Text text="Status" />
+	            </Column>
+	             <Column minScreenWidth="Tablet" demandPopin="true" visible="{repdash>/hideHrlpp}" >
+	                <Text text="HRL-PP3" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true" >
+	                <Text text="Travelled Country" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="City" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="Start Date" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true">
+	                <Text text="End Date" />
+	            </Column>
+	            <Column minScreenWidth="Tablet" demandPopin="true" visible="{repdash>/searchDate}">
+	                <Text text="Approved Date" />
+	            </Column>
+	        </columns>
+	        <items>
+	            <ColumnListItem >
+	                <cells>
+	                <VBox> 
+ 	                    <Link text="{repdash>RepReqNo}" press="handleLinkPress" visible="{repdash>/hidelink}"/>
+						<Text text="{repdash>RepReqNo}" visible="{repdash>/hidetext}"/>
+					</VBox>
+	                    <Text text="{repdash>EmpNo}" />
+	                    <Text text="{path:'repdash>EmpName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                    <Text text="{parts:[{path:'repdash>Role'}, {path:'repdash>Action'}], formatter: 'sap.ui.project.e2etm.util.Formatter.ArrangeStatus'}"/>
+	                    <Text text="{path:'repdash>HrlName',formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+	                    <Text text="{repdash>ToCountry}" />
+	                    <Text text="{repdash>ToCity}" />
+	                    <Text text="{path:'repdash>Begda',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+	                    <Text text="{path:'repdash>Endda',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+						 <Text text="{path:'repdash>ApprovedDate',
+										formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />				
+	                </cells>
+	            </ColumnListItem>
+	        </items>
+	    </Table>
+    </VBox>
+</core:FragmentDefinition>

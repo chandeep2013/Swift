@@ -1,0 +1,94 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons"
+	xmlns:table="sap.ui.table">
+<!-- <ScrollContainer> -->
+	<Table  itemPress="onItemPress" inset="false" class="tableclass table_ticket_admin"	 
+		items="{path: '/'}"  fixedLayout="true" mode="MultiSelect"> <!-- growing="true" growingThreshold="10" -->
+		<headerToolbar>
+			<Toolbar visible="false">
+				<Label text="Assign Request" class="font_size_14" />
+				<c:TextField width="200px"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns><!-- uml6kor_upgrade 5/11/2019 change of width=20% to minwidth=X% for all columns  -->
+			<Column minwidth="20%" >
+				<Button text="Travel Req" icon="sap-icon://sort"  class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+			</Column>
+			<Column minwidth="20%" >
+				<Button text="Employee No" icon="sap-icon://sort" class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+			</Column>
+			<Column minwidth="20%" >
+				<Button text="Name" icon="sap-icon://sort" class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+			</Column>
+			<Column minwidth="15%" >
+				<Button text="Start Date" icon="sap-icon://sort" class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+			</Column>
+			<Column minwidth="15%" >
+				<Button text="Location" icon="sap-icon://sort" class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+			</Column>
+		
+			<Column minwidth="35%" >
+				<Button text="Request Type" icon="sap-icon://sort" class="button_header button_header_upgrade" type="Transparent" press="onMenu" />
+				
+			</Column>
+			<Column minwidth="30%" >
+				<Button text="{path:'pepayroll>/role',formatter:'sap.ui.project.e2etm.util.Formatter.changeTableText'}" icon="sap-icon://sort" class="button_header" type="Transparent" press="onMenu" />
+			</Column>
+			<Column minwidth="40%" ><!-- 2 Dec 2019 margin_left_Column Added  -->
+				<Button text="Request With" icon="sap-icon://sort" class="button_header button_header_upgrade margin_left_Column" type="Transparent" press="onMenu" />
+			</Column>
+		   
+			<Column  minwidth="30%" visible="{pepayroll>/spvisible}"> <!-- width=20 to minwidth=40 -->
+<!-- 				<Button text="Send to PayrollTeam" tooltip="Send to Payroll Team"  class="button_header"/> -->
+				<Text text="Send to Payroll Team" tooltip="Send to Payroll Team" textAlign="Center" wrapping="true"
+					class="label_small_bold"/>
+			</Column>
+		<Column  minwidth="20%" visible="{pepayroll>/auvisible}">
+<!-- 				<Button text="Advance Updated" tooltip="Advance Updated"  class="button_header"/> -->
+	<Text text="Advance Updated" tooltip="Advance Updated" textAlign="Center" wrapping="true"
+					class="label_small_bold"/>
+			</Column>
+			<!-- UCD1KOR 12 Dec 2019 setting visiblity hide for bankName column visible="{pepayroll>/bankvisible}" -->
+		<Column  maxwidth="10%" visible="false">
+
+      	  <Text text="BankName" tooltip="Bank Name" textAlign="Center" wrapping="true"
+					class="label_small_bold"/>
+		</Column>
+		<!-- ################ UCD1KOR Added below column for FEMA 22 May 2021 #################### -->
+		<Column  maxwidth="10%" visible="{ parts: [ {path: 'pepayroll>/femavisible'},{path: 'profile>/currentRole'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.VisibleFema' }">
+      	  <Text text="FEMA" tooltip="Bank Name" textAlign="Center" wrapping="true"
+					class="label_small_bold"/>
+		</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Navigation" height="10px" >
+				<cells>
+					<Text text="{TravelPlan}" />
+					<Text text="{EmpNo}" />
+					<Text text="{EmpName}" wrapping="false" tooltip="{EmpName}"/>
+					<Text
+						text="{path:'StartDate',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+					<Text text="{Location}" />
+					
+					<Text text="{RequestType}" />
+					<Text text="{path:'ReceivedDt',formatter: 'sap.ui.project.e2etm.util.Formatter.sapDate'}" />
+					<Text text="{ForexResp}"  wrapping="false" tooltip="{ForexResp}"/>
+					<CheckBox editable="false" selected="{path:'PePayroll',formatter:'sap.ui.project.e2etm.util.Formatter.formatBooleanValue'}"/>
+					<CheckBox editable="false" selected="{path:'AdvUpdated',formatter:'sap.ui.project.e2etm.util.Formatter.formatBooleanValue'}"/>
+					<Text text="{BankName}"  wrapping="false" tooltip="{BankName}"/>
+					<Link text="FEMA" href="{EvUrl}" target="_blank" press="onPressFEMA" enabled="{path:'EvUrl',formatter: 'sap.ui.project.e2etm.util.Formatter.enableEvUrl'}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<!-- ************************start of code for paging uml6kor_10/9/2020*********************** -->
+	<Bar design="SubHeader" visible="{path:'pepayroll>/role',formatter:'sap.ui.project.e2etm.util.Formatter.formatPageInitatorRole'}">
+	<contentMiddle>
+		<Button type="Emphasized" icon="sap-icon://navigation-left-arrow" press="onPrevious" enabled="{global>/prevbtn}">	</Button>
+		<Button type="Emphasized" text="First Page" press="onFirst" enabled="true">	</Button>	
+		<Button type="Emphasized" icon="sap-icon://navigation-right-arrow" press="onNext" enabled="{global>/nxtbtn}">	</Button>
+	</contentMiddle>
+	</Bar>
+	<!-- ************************end of code for paging uml6kor_10/9/2020*********************** -->
+<!-- 	</ScrollContainer> -->
+</core:FragmentDefinition>

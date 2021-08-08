@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<!--created fragment RBEI-197 filter with date range travel settlement 8/9/2020 ucd1kor -->
+	<Dialog xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+		title="" showHeader="true" class="sapUiSizeCompact">
+		<!-- contentWidth="28%" -->
+		<customHeader>
+			<Bar design="Header">
+				<contentMiddle>
+					<Label text="Filer with Date"  class="customHeaderClass"></Label>
+				</contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" press="onClosePopup"
+						tooltip="Press to Close Pop up"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<HBox>
+					<Label text="From :" design="Bold" />
+					<DatePicker placeholder="select Date" width="100%" change="ChangeValueState" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"  value="{global>/FilterStartDate}"/>
+				</HBox>
+				<HBox>
+					<Label text="To  :" design="Bold" />
+					<DatePicker class="margin_left_20px" width="92%" placeholder="select Date" change="ChangeValueState" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"  value="{global>/FilterEndDate}"/>
+				</HBox>
+			</VBox>
+		</content>
+		<endButton>
+			<Button text="Proceed" type="Reject" press="onPressProceed" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition> 

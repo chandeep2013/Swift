@@ -1,0 +1,93 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:c="sap.ui.commons">
+	<Panel id="panelpayback" width="100%" expandable="true" expandAnimation="true"
+		class="panelBorderTrSettle">
+		<headerToolbar>
+			<Toolbar>
+				<Label text="Recovery" class="AdvLabelBold" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<ScrollContainer>
+				<Table id="paybackexp" items="{travelsettlement>/recv/expenses/}"
+					class="sapUiSizeCompact" mode="MultiSelect" width="100%">
+					<headerToolbar>
+						<Toolbar>
+							<c:Button id="paybackAdd" text="Add row" icon="sap-icon://add"
+								press="onAdd" enabled="{parts:[{path:'travelsettlement>/traveldetails/Action'},{path:'travelsettlement>/traveldetails/Role'}],formatter:'sap.ui.project.e2etm.util.Formatter.RecoveryEditable'}"></c:Button>
+							<c:Button id="paybackDel" text="Delete row" icon="sap-icon://less"
+								class="margin_left_10" press="onDel" enabled="{parts:[{path:'travelsettlement>/traveldetails/Action'},{path:'travelsettlement>/traveldetails/Role'}],formatter:'sap.ui.project.e2etm.util.Formatter.RecoveryEditable'}"></c:Button>
+							<ToolbarSpacer />
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="7rem">
+							<Label text="Category" design="Bold"></Label>
+							<footer>
+								<FlexBox direction="Column" items="{travelsettlement>/recv/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.Subtotal"
+											type="XML" />
+									</items>
+								</FlexBox>
+							</footer>
+						</Column>
+						<Column width="6rem">
+							<Label text="Amount" design="Bold"></Label>
+							<footer>
+								<FlexBox direction="Column" items="{travelsettlement>/recv/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.CompanyPaid"
+											type="XML" />
+									</items>
+								</FlexBox>
+							</footer>
+						</Column>
+						<Column width="5rem">
+							<Label text="Currency" design="Bold"></Label>
+							<footer>
+								<FlexBox direction="Column" items="{travelsettlement>/recv/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.Currency"
+											type="XML" />
+									</items>
+								</FlexBox>
+							</footer>
+						</Column>
+						<Column width="20rem">
+							<Label text="Remarks by Trvl Settlement" design="Bold"></Label>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem height="10px">
+							<cells>
+								<c:ComboBox selectedKey = "{travelsettlement>Otype}" value="{path:'travelsettlement>Rmrks'}" width="100%" 
+								placeholder = "Select Category" items="{path: 'rcvModel>/typeMode', templateShareable:false}" editable = "{parts:[{path:'travelsettlement>/traveldetails/Action'},{path:'travelsettlement>/traveldetails/Role'}],formatter:'sap.ui.project.e2etm.util.Formatter.RecoveryEditable'}">
+									<c:items> 
+									<core:ListItem key="{rcvModel>ZZ_EXP_TYP}" text="{rcvModel>ZZ_EXP_TXT}"/>
+									</c:items>
+								</c:ComboBox><!--  value="{path:'travelsettlement>Rmrks'}" -->
+								<Input change="onCalculate1" value="{travelsettlement>Pacmp}" editable = "{parts:[{path:'travelsettlement>/traveldetails/Action'},{path:'travelsettlement>/traveldetails/Role'}],formatter:'sap.ui.project.e2etm.util.Formatter.RecoveryEditable'}"/>
+								<c:ComboBox width="100%" change="onCalculate1"
+									value="{path:'travelsettlement>Waers'}"  items="{path: 'curModel>/', templateShareable:false}"
+									 editable = "{parts:[{path:'travelsettlement>/traveldetails/Action'},{path:'travelsettlement>/traveldetails/Role'}],formatter:'sap.ui.project.e2etm.util.Formatter.RecoveryEditable'}"> 
+									<c:items>
+										<core:ListItem additionalText="{curModel>FIELD2}"
+											text="{curModel>FIELD1}" />
+									</c:items>
+								</c:ComboBox><!-- change="onCalculate1" -->
+
+								<TextArea cols="80" rows="1" value="{travelsettlement>Tremr}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+
+			</ScrollContainer>
+		</content>
+	</Panel>
+</core:FragmentDefinition>

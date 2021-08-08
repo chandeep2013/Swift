@@ -1,0 +1,134 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+			xmlns:f="sap.ui.layout.form" controllerName="sap.ui.project.e2etm.controller.RegistrationDetails" 
+			xmlns:table="sap.ui.table" xmlns:c="sap.ui.commons"
+			xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Registration Details">
+		<customHeader>
+		<Bar>
+			<contentMiddle>
+				<Text text="Registration Details" />
+			</contentMiddle>
+			<!-- <contentRight>
+			<Link text="Help"></Link>
+			</contentRight> -->
+		</Bar>
+	</customHeader>
+		<content>
+		<f:SimpleForm  maxContainerCols="3" 
+		editable="false" layout="ResponsiveGridLayout" labelSpanL="6"
+		labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="1" class="SimcardForm">
+		<f:content>
+		<core:Title ></core:Title>
+			<Label text="Employee Number" ></Label>
+			<Text text="{EmpData>/pernr}"></Text>
+			<Label text="Employee Name"></Label>
+			<Text text="{EmpData>/name}"></Text>
+			<Label text="Department"></Label>
+			<Text text="{EmpData>/Department}"></Text>
+			<Label text="Employee Location" ></Label>
+			<Text text="{EmpData>/baselocation}"></Text>
+			<Label text="Email ID"></Label>
+			<Text text="{EmpData>/email}"></Text>
+		<core:Title ></core:Title>
+			<Label text="Travelling From Country"></Label>
+			<Text text="{empTravelData>/ZZ_FR_CNTRY_TXT}"></Text>
+			<Label text="Travelling From Location"></Label>
+			<Text text="{empTravelData>/ZZ_FMLOC}"></Text>
+			<Label text="Start Date"></Label>
+			<Text text="{path:'empTravelData>/ZZ_DATV1',type:'sap.ui.model.type.Date',formatOptions: {
+					pattern:'dd.MM.yyyy',
+					source: {
+						pattern: 'yyyyMMdd'
+					}
+				}}"></Text>
+			<Label text="Visa Type"></Label>
+			<Text text="{empTravelData>/ZZ_TRV_TYP}"></Text>
+		    <core:Title ></core:Title>
+			<Label text="Travelling To Country"></Label>
+			<Text text="{empTravelData>/ZZ_TO_CNTRY_TXT}"></Text>
+			<Label text="Travelling To Location"></Label>
+			<Text text="{empTravelData>/ZZ_LOCATION_END}"></Text>
+			<Label text="End Date"></Label>
+			<Text text="{path:'empTravelData>/ZZ_DATB1',type:'sap.ui.model.type.Date',formatOptions: {
+					pattern:'dd.MM.yyyy',
+					source: {
+						pattern: 'yyyyMMdd'
+						}
+					}}"></Text>
+			<Label text="Mobile Number"></Label>
+			<Text text="{empTravelData>/ZZ_MOBILE}"></Text>	
+		</f:content>
+		</f:SimpleForm>
+		<IconTabBar id="RegAdminIconTab" select="RegAdminTabSelect"
+				class="sapUiResponsiveContentPadding">
+				<items>
+				<IconTabFilter id="Admin_Reg_info"   key=" " icon="sap-icon://message-information">
+					<content>
+						<Panel headerText="Registration Details" expandable="true" expanded="true">
+							<Table id="RegAdminTable" inset="false" class="tableclass table_ticket_admin sapUiSizeCompact"
+									mode="MultiSelect" width="100%" items="{RegistrationDetailsSet>/}">
+									<headerToolbar>
+										<Toolbar>
+											<c:Button id="RegDetailAdd" text="Add row" icon="sap-icon://add" enabled="{EnabledataModel>/editable}"
+												press="onAdd"></c:Button>
+											<c:Button id = "RegDetailDel" text="Delete row" icon="sap-icon://delete" enabled="{EnabledataModel>/editable}"
+												class="margin_left_10" press="onDel"></c:Button>							
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column width="4rem">
+											<Text text="Registration Details" tooltip="Registration Details" class="required" />
+										</Column>	
+										<Column width="4rem">
+											<Text text="Validity Start Date" tooltip="Validity Start Date"  class="required"/>
+										</Column>
+										<Column width="4rem">
+											<Text text="Validity End Date" tooltip="Validity End Date" class="required"/>
+										</Column>
+										<Column width="4rem">
+											<Text text="Remarks" tooltip="Remarks" />
+										</Column>
+										
+									</columns>
+										<items>
+											<ColumnListItem>
+												<cells>		
+													<Input value="{RegistrationDetailsSet>REGDETAILS}" editable="{EnabledataModel>/editable}" />
+													<DatePicker displayFormat="dd-MM-yyyy" placeholder="DD-MM-YYYY" value="{RegistrationDetailsSet>BEGDA}" valueFormat="yyyyMMdd" editable="{EnabledataModel>/editable}" />
+													<DatePicker displayFormat="dd-MM-yyyy" placeholder="DD-MM-YYYY" value="{RegistrationDetailsSet>ENDDA}" valueFormat="yyyyMMdd" editable="{EnabledataModel>/editable}"/>
+													<Input value="{RegistrationDetailsSet>REMARKS}" editable="{EnabledataModel>/editable}"/> 	
+												</cells>
+											</ColumnListItem>
+										</items>
+							</Table>
+						</Panel>
+					</content>	  
+				</IconTabFilter>
+				
+				<IconTabFilter id="attachments"   key=" " icon="sap-icon://attachment">
+				<core:Fragment
+					fragmentName="sap.ui.project.e2etm.fragment.common.UploadCollection"
+					type="XML" />
+				</IconTabFilter>				
+				</items>
+	    </IconTabBar>
+		
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="close" text="Close" type="Accept" press="onClose" icon="sap-icon://save" class="deputation_itb_request_accept_color" visible="{EnabledataModel>/editable}"/>	
+				</contentRight> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+				<contentMiddle>
+					<!-- <Button id="reject" text="Reject" type="Reject" press="onReject" icon="sap-icon://decline" />
+					<Button id="save" text="Save" type="Accept" press="onSave" icon="sap-icon://save" /> -->
+				</contentMiddle>
+				<contentLeft>
+					<Button text="Back"  icon="sap-icon://response" type="Reject" press="onBack" class="deputation_itb_request_reject_color" />
+				</contentLeft> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+			</Bar>
+		</footer>
+		
+		
+	</Page>
+</core:View>

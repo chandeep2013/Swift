@@ -1,0 +1,99 @@
+<core:View controllerName="sap.ui.project.e2etm.controller.travelrequest.TVRDetail" xmlns:c="sap.ui.commons"
+	xmlns:cc="sap.ui.project.e2etm.controls" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns="sap.m">
+	<!-- <Title level="H3" text="Travel Details" class="customHeaderBar"/> -->
+	<FlexBox alignItems="Start" class="travelling_flex_box font-size-18" direction="Column" id="flbPassenger" templateShareable="true">
+		<FlexBox alignItems="End" width="100%">
+			<Link class="link_right_side_objlayout" press="onUpdatePofileNav" text="Update Profile Data" enabled="{trvRequestDtl>/ZZ_TRV_STATUS}" visible="false"></Link>
+		</FlexBox>
+		<VBox id="passengerLst" items="{ path: 'trvRequestDtl>/travelingDtl/aPassenger'}" templateShareable="true">
+			<Panel class="psgPanel" expandable="true" expanded="{trvRequestDtl>ZZ_EXPANDED}" id="pnlPassenger">
+				<headerToolbar>
+					<Toolbar height="30px" class="hadPassenger travelerHeader">
+						<ComboBox change="onDependentChange"  class="mxWidth120 selfComboHeight cm_input_border_bottom font-size-18" enabled="{trvRequestDtl>ZZ_ENABLED}"
+							filterSecondaryValues="true" items="{ path: 'trvRequestDtl>/travelingDtl/aDependent'}" max-width="102px"
+							selectedKey="{trvRequestDtl>ZZ_ZSLFDPD}" showSecondaryValues="true">
+							<core:ListItem additionalText="{trvRequestDtl>DDTEXT}" key="{trvRequestDtl>DOMVALUE_L}" text="{trvRequestDtl>DDTEXT}"/>
+						</ComboBox>
+						<ToolbarSpacer visible="{trvRequestDtl>ZZ_VISIBLE}" width="20px"/>
+						<ToolbarSpacer width="20px"/>
+						<Button class="addPassengerBtn cmLightButton" icon="sap-icon://add" id="addNewPsgBtn" press="onAddNewPassenger" text="Add Traveler"
+							type="Emphasized" visible="{trvRequestDtl>ZZ_VISIBLE_ADD_BTN}"/>
+						<ToolbarSpacer width="20px"/>
+						<Button class="remPassengerBtn cmLightButton" icon="sap-icon://delete" id="reducewPsgBtn" press="onRemovePassenger" text="Remove Traveler"
+							type="Emphasized" visible="{trvRequestDtl>ZZ_VISIBLE_REMOVE_BTN}"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<FlexBox class="passenger_detail_flexbox">
+						<c:TabStrip id="travelType" class="sapUiResponsiveContentPadding passenger_detail_tab font-size-18" enableTabReordering="{trvRequestDtl>ZZ_TRV_STATUS}"
+							select="onTripChangeHandle" selectedIndex="{trvRequestDtl>/ZZ_TRIP_TAB}" >
+							<c:tabs >
+								<c:Tab text="ONE WAY" class="traveldetailmultiblock" visible="{trvRequestDtl>/oneWay}" >
+									<core:Fragment fragmentName="sap.ui.project.e2etm.fragment.travel.request.psg.TSingle" type="XML" visible="false"/>
+								</c:Tab>
+								<c:Tab text="ROUND TRIP" class="traveldetailmultiblock" visible="{trvRequestDtl>/roundTrip}">
+									<core:Fragment fragmentName="sap.ui.project.e2etm.fragment.travel.request.psg.TRound" type="XML"/>
+								</c:Tab>
+								<c:Tab text="MULTI-CITY" class="traveldetailmultiblock" visible="{trvRequestDtl>/multiCity}">
+									<core:Fragment fragmentName="sap.ui.project.e2etm.fragment.travel.request.psg.TMCity" type="XML"/>
+								</c:Tab>
+							</c:tabs>
+						</c:TabStrip>
+					</FlexBox>
+				</content>
+				<Toolbar class="travelDetailToolBar">
+					<Image densityAware="true" src="images/flight-seat.png" visible="{trvRequestDtl>ZZ_VISIBLE}"/>
+					<Select change="onHeaderChange" class="cm_input_border_bottom travelWindow font-size-18" enabled="{trvRequestDtl>ZZ_TRV_STATUS}"
+						items="{ path: 'trvRequestDtl>/travelingDtl/aFlighSeat'}" selectedKey="{trvRequestDtl>ZZ_ZSEAT}" visible="{trvRequestDtl>ZZ_VISIBLE}"
+						width="14.5rem">
+						<items>
+							<core:Item key="{trvRequestDtl>DOMVALUE_L}" text="{trvRequestDtl>DDTEXT}"/>
+						</items>
+					</Select>
+					<ToolbarSpacer visible="{trvRequestDtl>ZZ_VISIBLE}" width="40px"/>
+					<Image densityAware="true" src="images/Meal.png" visible="{trvRequestDtl>ZZ_VISIBLE}"/>
+					<ComboBox change="onHeaderChange" class="cm_input_border_bottom font-size-18" enabled="{trvRequestDtl>ZZ_TRV_STATUS}"
+						filterSecondaryValues="true" items="{ path: 'trvRequestDtl>/travelingDtl/aMeal'}" max-width="150px" selectedKey="{trvRequestDtl>ZZ_ZMEAL}"
+						showSecondaryValues="true" visible="{trvRequestDtl>ZZ_VISIBLE}">
+						<core:Item key="{trvRequestDtl>DOMVALUE_L}" text="{trvRequestDtl>DDTEXT}"/>
+					</ComboBox>
+					<ToolbarSpacer width="40px"/>
+					<Image densityAware="true" src="images/Phone.png" visible="{trvRequestDtl>ZZ_VISIBLE}"/><!-- added visible by uml6kor 11/9/2019 -->
+					<Input change="onHeaderChange" class="mxWidth200 travelWindow cm_input_base_border_bot font-size-18" enabled="{trvRequestDtl>ZZ_TRV_STATUS}"
+						type="Number" value="{trvRequestDtl>ZZ_MOBILE}" visible="{trvRequestDtl>ZZ_VISIBLE}"/><!-- added visible by uml6kor 11/9/2019 -->
+				</Toolbar>
+			</Panel>
+		</VBox>
+		<Link  id="taxi_id" class="taxi_margin_left" press="onNavToTaxiApp" text="Open Taxi Indent Application" visible="{trvRequestDtl>/ZZ_TAXI_LINK_ENABLED}"/>
+	</FlexBox>
+	<l:Grid class="Grid_purpose_travel" id="gridPuposeofTravel" defaultSpan="L2 M6 S10">
+		<l:content>
+			<Label class="font-size-18 lblPusposeTravel"  text="What is your purpose of travel? *">
+				<layoutData>
+					<l:GridData linebreakL="true" linebreakM="true" linebreakS="true" span="L4 M4 S7"/>
+				</layoutData> 
+			</Label>
+			<Select change="onPurpuseChange" class="cm_input_border_bottom purpose_combobox font-size-18 comboPurposeTravel" enabled="{trvRequestDtl>/ZZ_TRV_STATUS}"
+				filterSecondaryValues="true" selectedKey="{trvRequestDtl>/ZZ_ZPURPOSE}" showSecondaryValues="true"
+				valueState="{trvRequestDtl>/ZZ_ZPURPOSE_ERROR}" width="100%">
+				<core:ListItem additionalText="Business Meetings" key="BMPP" text="Business Meetings"/>
+				<core:ListItem key="WCSI" text="Workshop/Conference/Seminar/Exhibition Internal"/>
+				<core:ListItem key="WCSE" text="Workshop/Conference/Seminar/Exhibition External"/>
+				<core:ListItem key="CRTP" text="Class room trainings (for short durations)"/>
+			</Select>
+			<Label class="font-size-18 lblCatgoryCustomer"  text="Category of customer you are travelling for *">
+				<layoutData>
+					<l:GridData linebreakL="true" linebreakM="true" linebreakS="true" span="L5 M5 S8"/>
+				</layoutData>
+			</Label>
+			<RadioButtonGroup buttons="{ path: 'trvRequestDtl>/travelingDtl/aTravelCat'}" class="trvCategoryGrp font-size-18" columns="6"
+				id="trvCategoryGrp" select="onChangeCustomerCat" selectedIndex="{trvRequestDtl>/ZZ_CATID_SELIDX}">
+				<layoutData>
+					<l:GridData linebreakL="false" linebreakM="false" linebreakS="false" span="L7 M5 S8"/>
+				</layoutData>
+				<RadioButton class="trvCatItem" enabled="{trvRequestDtl>/ZZ_TRV_STATUS}" text="{trvRequestDtl>ZZ_SUB_DEP_DESC}"/>
+			</RadioButtonGroup>
+		</l:content>
+	</l:Grid>
+</core:View>

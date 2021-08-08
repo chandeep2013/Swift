@@ -1,0 +1,24 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:view="sap.ui.core.mvc" controllerName="sap.ui.project.e2etm.controller.Registration"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Online Registration" showHeader="false">
+	<!--#################### UCD1KOR Nov 30,2020  showHeader="false" Added ################## -->
+	<content>
+	<view:XMLView viewName='sap.ui.project.e2etm.view.Menu' />
+	<IconTabBar id="RegIconBar" select="RegistrationTabBarSelect" applyContentPadding="false">
+	<items>
+	<IconTabFilter text="New" id="NewRegITab" key="N" icon="sap-icon://create">
+	</IconTabFilter>
+	<IconTabFilter text="Date Change" id="DateChangeRegITab" key="D" icon="sap-icon://request">
+	</IconTabFilter>
+	<IconTabFilter text="Closed" id="ClosedRegITab" key="C" icon="sap-icon://complete">
+	</IconTabFilter>
+	</items>
+	</IconTabBar>
+	
+	<core:Fragment id="RegsTableFragment" fragmentName="sap.ui.project.e2etm.fragment.Registration.RegistrationTable" 
+					type="XML" /> 
+	
+	</content>
+	</Page>
+	</core:View>

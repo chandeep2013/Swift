@@ -1,0 +1,95 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons" xmlns:commons="sap.ui.commons" xmlns:unified="sap.ui.unified" 
+	xmlns:sc="sap.suite.ui.commons">
+	<VBox visible="{global>/extDoc}" > <!-- modified visibility uea6kor-uml6kor 24/8/2020 RBEIITAPPPIPELINE-217 -->
+		<c:Panel id="panelExtensionDocs" text="Extension Related Documents " class="panelCollapse" ><!-- modified text uea6kor-uml6kor 24/8/2020 RBEIITAPPPIPELINE-217 -->
+			<FlexBox>
+				<FlexBox width="250px" class="margin_5 padding_0 document_panel"
+					direction="Column" id="idListEXT_DocFlexBox">
+					<FlexBox class="background_lightgray">
+						<Label text="Documents" class="padding_10 label_bold"></Label>
+						<!-- <Link text="[Templates]" tooltip="Templates to be downloaded in 
+							[IE]" press="onOpenTemplates" target="_blank" class="padding_10 margin_top_2" 
+							id="linkTemplate"></Link> -->
+					</FlexBox><!-- id="List_Document_Id" -->
+					<List id="List_ExtDocument_Id" class="background_lightgray padding_10"
+						items="{ path: '/DocumentName',templateShareable:false }" mode="None">
+						<CustomListItem class="background_lightgray customer_list_document">
+							<FlexBox class="margin_top_5 margin_bottom_5">
+								<Image src="{Image}" class="margin_top_5 margin_left_22"
+									height="10px" width="10px"></Image>
+								<c:Link text="{DocName}" tooltip="{DocName}" class="nonURLDoc"
+									visible="{isNonURL}"></c:Link>
+								<c:Link text="{DocName}" tooltip="{DocName}" class="URLDoc"
+									visible="{isURL}" href="{Url}" target="_blank"></c:Link>
+							</FlexBox>
+						</CustomListItem>
+					</List>
+				</FlexBox>
+				<FlexBox direction="Column" id="idActionEXT_DocFlexBox">
+					<FlexBox justifyContent="End">
+						<commons:Button text="Download" class="margin_5"
+							press="onExtFileDownloadPress" icon="sap-icon://download"></commons:Button>
+						<FlexBox alignItems="Start" justifyContent="End"
+							id="FileUploadExtButtonsId"><!-- id="FileUploadButtonsId" -->
+							<commons:Button text="Remove" class="margin_5"
+								press="onExtRemovePress" icon="sap-icon://delete"></commons:Button>
+							<commons:Button text="Select File" class="margin_5"
+								press="onExtFileSelectPress" icon="sap-icon://action" id="ExtSelectBtn" ></commons:Button>
+							
+							<commons:Button text="Upload" class="margin_5"
+								press="onExtFileSelectPress" icon="sap-icon://action" id="btnExtFormsUploader" visible="false"></commons:Button>
+									
+							<!-- <unified:FileUploader icon="sap-icon://action" id="btnExtFormsUploader" 
+				buttonText="Upload" class="resize_dubtn" buttonOnly="true" change="onExtFormsUpload" sameFilenameAllowed="true" visible="false"/> -->
+						</FlexBox>
+					</FlexBox><!-- flexBoxMigrationDocuments -->
+					<!-- <FlexBox class="margin_left_10 margin_top_5" visible="false"> <Label 
+						text="For documents, please refer this link" class="line_height_30"></Label> 
+						<Link text="Link1" class="margin_left_5 line_height_30" target="_blank" href="file://bosch.com/dfsrb/DfsIN/loc/Kor/HRL/HRL-SC/520_Deputation/"></Link> 
+						<Label text="or" class="margin_left_5 line_height_30"></Label> <Link text="Link2" 
+						class="margin_left_5 line_height_30" target="_blank" href="https://inside-ilm.bosch.com/irj/go/km/navigation/guid/b062ff01-2a21-3210-e49f-cc26ac2ff6e1"></Link> 
+						</FlexBox> -->
+					<FlexBox class="flexbox_document_list"><!-- id="ViewRepeatId" -->
+
+						<!-- <c:Carousel  id="ExtViewRepeatId" content="{/FileUpload}" width="670px" height="100px" defaultItemHeight="100px" defaultItemWidth="150px">
+							<c:content>
+								<FlexBox direction="Column" alignItems="Center"
+								justifyContent="Center">
+								<Image src="{Image}" width="50px" height="50px"></Image>
+								<Link text="{FileName}{Extension}" press="onFilePress"
+									tooltip="{FileName}{Extension}" href="{URL}" target="_blank"
+									class="viewRepeatURL"></Link>
+								<c:CheckBox checked="{Checked}"></c:CheckBox>
+							</FlexBox>
+							</c:content>
+						</c:Carousel> -->
+
+						 <sc:ViewRepeater id="ExtViewRepeatId" rows="{/FileUpload}"
+							class="dmsRowRepeater" showSearchField="false" showViews="false"
+							numberOfRows="12">
+							<FlexBox direction="Column" alignItems="Center"
+								justifyContent="Center">
+								<Image src="{Image}" width="50px" height="50px"></Image>
+								<Link text="{FileName}{Extension}" press="onFilePress"
+									tooltip="{FileName}{Extension}" href="{URL}" target="_blank"
+									class="viewRepeatURL"></Link>
+								<c:CheckBox checked="{Checked}"></c:CheckBox>
+							</FlexBox>
+							<sc:noData>
+								<c:TextView text=""></c:TextView>
+							</sc:noData>
+						</sc:ViewRepeater>
+					</FlexBox>
+
+					<FlexBox direction="Column" class="margin_left_10 margin_top_10" 
+						id="ConfirmExtUpload"> 
+						<commons:CheckBox id="checkExtBoxConfirm" text="I 
+						have submitted the required documents">
+						</commons:CheckBox> 
+						</FlexBox>  
+				</FlexBox>
+			</FlexBox>
+		</c:Panel>
+	</VBox>
+</core:FragmentDefinition>

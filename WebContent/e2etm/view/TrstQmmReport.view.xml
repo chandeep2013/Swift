@@ -1,0 +1,448 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.TrstQmmReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="reportPage" title="QMM-SLA Compliance">
+		<content>
+			<Panel class="sapUiSizeCompact" headerText="Filter By:">
+				<VBox class="sapUiLargeMarginBeginEnd">
+					<HBox justifyContent="SpaceBetween" height="30px" id="idQmmRadioHBox">
+						<HBox justifyContent="Center">
+							<Label width="128px" text="Select Report" class="required margin_top_8" />
+							<RadioButtonGroup id="idQmmReportSelect"
+								columns="3" class="sapUiMediumMarginBottom" select="onSelectQmmReport">
+								<RadioButton text="Advance" />
+								<RadioButton text="Inland" />
+								<RadioButton text="International" />
+							</RadioButtonGroup>
+						</HBox>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<HBox alignItems="Center">
+							<Label width="128px" text="Initiation Start Date" />
+							<DatePicker id="fromdate" width="180px" displayFormat="dd-MM-yyyy"
+								placeholder="DD-MM-YYYY" editable="{travelsettlement>/fieldproperties/editable}"
+								value="{Scndt}" valueFormat="yyyyMMdd" />
+
+						</HBox>
+						<HBox alignItems="Center">
+							<Label width="128px" text="Initiation End Date" />
+							<DatePicker id="todate" width="180px" displayFormat="dd-MM-yyyy"
+								placeholder="DD-MM-YYYY" editable="{travelsettlement>/fieldproperties/editable}"
+								value="{Scndt}" valueFormat="yyyyMMdd" />
+						</HBox>
+					</HBox>
+					<HBox id="flxTpEmp" justifyContent="SpaceBetween">
+						<HBox alignItems="Center">
+							<Label width="128px" text="Travel Plan" />
+							<Input id="tpno" width="180px" placeholder="Travel Plan No" />
+						</HBox>
+						<HBox alignItems="Center">
+							<Label width="128px" text="Employee No" />
+							<Input id="empno" width="180px" placeholder="Employee No" />
+						</HBox>
+					</HBox>
+					<HBox id="flxTkMod" justifyContent="SpaceBetween">
+						<HBox alignItems="Center">
+							<Label width="128px" text="Travel Type" />
+							<Input id="traveltype" width="180px" placeholder="Travel Type" />
+						</HBox>
+						<HBox alignItems="Center">
+							<Label width="128px" text="Module" />
+							<Input id="module" width="180px" placeholder="Module" />
+						</HBox>
+					</HBox>
+
+					<HBox justifyContent="Center">
+						<Button text="Search" type="Accept" press="onSubmit" />
+					</HBox>
+				</VBox>
+			</Panel>
+			<Panel width="auto" class="panelBorderTrSettle sapUiSizeCompact">
+				<headerToolbar>
+					<Toolbar>
+						<Label id="idDetailsRecords" text="Details" />
+						<ToolbarSpacer />
+						<Button text="Download" type="Emphasized" press="excelDownload" />
+					</Toolbar>
+				</headerToolbar>
+				<content><!--  -->
+					<ScrollContainer horizontal="true" vertical="true" height="450px"
+						focusable="true">
+						<Table id="qmmRep"  sticky="ColumnHeaders"
+							class="tableclass table_ticket_admin sapUiSizeCompact"
+							noDataText="{No Data}" items="{/}" fixedLayout="true">
+
+							<columns>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									id="idQmmEmpNo" visible="false">
+									<Text text="Employee No" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="180px"
+									id="idQmmEmpName" visible="false">
+									<Text text="Name" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									id="idQmmTpNo" visible="false">
+									<Text text="Travel Plan" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="60px"
+									id="idTrstQmmType" visible="false">
+									<Text text="Travel Type" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="60px"
+									visible="false">
+									<Text text="Module" />
+								</Column>
+								<!--######################### New Columns for OEI UCD1KOR Dec 10 
+									################################### -->
+
+								<Column minScreenWidth="Tablet" demandPopin="true" width="90px"
+									visible="false" id="idQmmStartDate">
+									<Text text="Start Date" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="90px"
+									visible="false" id="idQmmEndDate">
+									<Text text="End Date" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="60px"
+									visible="false" id="idQmmDays">
+									<Text text="Days" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmTravelCountry">
+									<Text text="Travel Country" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="124px"
+									visible="false" id="idQmmTravellocation">
+									<Text text="Travel location" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="80px"
+									visible="false" id="idQmmGroup">
+									<Text text="Group" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmDepartment">
+									<Text text="Department" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmSection">
+									<Text text="Section" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="60px"
+									visible="false" id="idQmmBU">
+									<Text text="BU" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="60px"
+									visible="false" id="idQmmFund">
+									<Text text="Fund" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmFundCenter">
+									<Text text="Fund Center" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="150px"
+									visible="false" id="idQmmCostcenter">
+									<Text text="Cost center" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmWBS">
+									<Text text="WBS" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="100px"
+									visible="false" id="idQmmBudgetCode">
+									<Text text="Budget Code" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="130px"
+									visible="false" id="idQmmEmpSubdate">
+									<Text text="Employee Submission date" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="130px"
+									visible="false" id="idQmmFnlMngrApr">
+									<Text text="Final Manager Approval" />
+								</Column>
+
+								<!-- ################# New columns for QMM-Advanced UCD1KOR Dec 10################################### -->
+								<Column minScreenWidth="Tablet" demandPopin="true" 
+									width="120px" visible="false">
+									<Text text="SAP Doc" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									visible="false">
+									<Text text="Doc No" /><!-- only for Inlad -->
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									id="idQmmReceivedatCob" visible="false">
+									<Text text="Received at Cob" /><!-- only for Inlad -->
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									id="idQmmReceivedOn" visible="false">
+									<Text text="Received on" /><!-- only for INTL -->
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="130px"
+									id="idQmmMailForex" visible="false">
+									<Text text="Mail sent for Forex surrender" /><!-- only for 
+										INTL -->
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="130px"
+									id="idQmmEnhncRec" visible="false">
+									<Text text="Encashment Received on" /><!-- only for INTL -->
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									visible="false">
+									<Text text="Mail sent for Forex surrender" /><!-- only for 
+										INTL -->
+								</Column>
+								<Column id="txtInidt" minScreenWidth="Tablet"
+									demandPopin="true" width="100px" visible="false">
+									<Text text="Initiation Date" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									id="idQmmPostedOn" visible="false">
+									<Text text="Posted On" />
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true" width="120px"
+									id="idQmmReimbursedOn" visible="false">
+									<Text text="Reimbursed on" />
+								</Column>
+								<Column minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px" id="idQmmIntlLeadTime">
+									<Text text="Lead Time" /><!--only for INTL -->
+								</Column>
+								<Column minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px" id="idQmmLeadTime">
+									<Text text="Lead Time" />
+								</Column>
+								<Column id="txtLtime" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Net Lead Time" />
+								</Column>
+								<Column minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px" id="idQmmSlaCompliace">
+									<Text text="SLA Compliance" />
+								</Column>
+								<!-- ################# New columns QMM-Advanced UCD1KOR Dec 10 Stop 
+									################################### -->
+
+								<Column id="txtPlace" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Place" />
+								</Column>
+								<!-- #################### UCD1KOR New colums added for OEI Report 
+									########################### -->
+
+								<Column id="txtScndt" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Scanning Date" />
+								</Column>
+								<Column id="idQmmTrvlSetAckDate" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="150px">
+									<Text text="Travel Settlement Acknowledgement date" />
+								</Column>
+								<Column id="idQmmReviewbyTRST" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="120px">
+									<Text text="Review by TRST" />
+								</Column>
+								<Column id="idQmmApprbyTRST" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="120px">
+									<Text text="Approve by TRST" />
+								</Column>
+								<Column id="idQmmSentForex" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="120px">
+									<Text text="Sent for Forex Surrender" />
+								</Column>
+								<Column id="idQmmINRrec" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="INR receivables" />
+								</Column>
+								<Column id="idQmmEnhncDate" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="120px">
+									<Text text="Encashment Date" />
+								</Column>
+								<Column id="idQmmTaxables" minScreenWidth="Tablet"
+									visible="false" demandPopin="true" width="120px">
+									<Text text="Taxables" />
+								</Column>
+								<!-- #################### UCD1KOR New colums added for OEI Report 
+									########################### -->
+
+
+								<Column id="txtAccdt" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Accounting Date" />
+								</Column>
+								<Column id="txtClsdt" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="100px">
+									<Text text="Closed Date" />
+								</Column>
+								<Column id="txtPaydt" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Payment Date" />
+								</Column>
+								<Column id="txtDocno" minScreenWidth="Tablet" visible="false"
+									demandPopin="true" width="120px">
+									<Text text="Document No" />
+								</Column>
+
+								<Column id="txtSLA" minScreenWidth="Tablet" demandPopin="true"
+									visible="false" width="120px">
+									<Text text="Within/Outside SLA" />
+								</Column>
+
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{Pernr}" wrapping="false" />
+										<Text
+											text="{path:'Name',formatter:'sap.ui.project.e2etm.util.Formatter.NameFormat'}"
+											wrapping="true" tooltip="{Name}" />
+										<Text text="{Reinr}" wrapping="false" />
+										<Text text="{path:'Trvky'}" wrapping="false" />
+										<Text text="{path:'Modid'}" wrapping="false" />
+										<!-- 5 -->
+										<Text
+											text="{path:'Begda',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'Endda',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'Days',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'Tocntry',formatter:'sap.ui.project.e2etm.util.Formatter.formatCountry'}"
+											wrapping="false" />
+										<Text
+											text="{path:'ToLoc',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+											<!-- 10 -->
+										<Text
+											text="{path:'EGrp',formatter:'sap.ui.project.e2etm.util.Formatter.EmpGroupSetlUnsetlReport'}"
+											wrapping="false" />
+										<Text
+											text="{path:'Dept',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'Sect',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'BU',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'Fund',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<!-- 15 -->
+										<Text
+											text="{path:'FundCent',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'CostCent',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'WBSelement',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'BudCode',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}"
+											wrapping="false" />
+										<Text
+											text="{path:'Subdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="false" />
+										<!-- 20 -->
+										<Text
+											text="{path:'FinalmgrApp',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<!-- ######### SAP Doc############## -->
+										<Text text="notRequired" wrapping="false" />
+										<Text text="notRequired" wrapping="false" /> 
+										<!-- <Text text="Received at Cob" />  text="{Docno}"-->
+										<Text
+											text="{path:'Recvdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'Recvdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<!--25  -->
+										<Text text="{path:'forexSur',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}" wrapping="true" />
+										<Text
+											text="{path:'EnCashdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text text="{forexSur}" wrapping="false" />
+										<Text
+											text="{path:'Inidt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'PostedOn',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<!-- 30 -->
+										<Text
+											text="{path:'ReimbOn',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<!-- <Text text="Lead Time" /> -->
+										<Text text="{path:'LeadT1',formatter:'sap.ui.project.e2etm.util.Formatter.showNALead'}" wrapping="false" />
+										<Text text="{path:'LeadT2',formatter:'sap.ui.project.e2etm.util.Formatter.showNALead'}" wrapping="false" />
+										<Text text="{path:'LeadTime',formatter:'sap.ui.project.e2etm.util.Formatter.showNALead'}" wrapping="false" />
+										<Text text="{path:'SLA',formatter:'sap.ui.project.e2etm.util.Formatter.showNA'}" tooltip="{SLA}" wrapping="false" />
+										<!-- 35 -->
+										<Text text="--Place--" wrapping="false" />
+										<DatePicker displayFormat="dd-MM-yyyy" placeholder="DD-MM-YYYY"
+											editable="{path:'Scndt',formatter:'sap.ui.project.e2etm.util.Formatter.editQmmScndt'}"
+											change="onChange" value="{Scndt}" valueFormat="yyyyMMdd"
+											required="true" />
+										<Text
+											text="{path:'TSAckdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'TSReviewdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'TSApprvdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'forexSur',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+
+										<Text
+											text="{path:'InrRecv',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'EnCashdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'Taxables',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+
+										<DatePicker displayFormat="dd-MM-yyyy" placeholder="DD-MM-YYYY"
+											change="onChange" value="{Accdt}" valueFormat="yyyyMMdd"
+											required="true" />
+										<Text
+											text="{path:'Clsdt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+										<Text
+											text="{path:'Paydt',formatter:'sap.ui.project.e2etm.util.Formatter.sapDate'}"
+											wrapping="true" />
+
+										<!-- <Text text="{Docno}" /> <Text text="{SLA}" /> -->
+
+
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Bar>
+
+				<contentRight>
+
+					<Button text="Save" type="Accept" press="onSave"
+						icon="sap-icon://sys-enter" />
+
+				</contentRight>
+			</Bar>
+		</footer>
+
+	</Page>
+</core:View>

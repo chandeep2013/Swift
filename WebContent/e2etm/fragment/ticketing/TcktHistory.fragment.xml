@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:c="sap.ui.commons" xmlns:f="sap.ui.layout.form">
+    <Dialog title="History" class="sapUiSizeCompact">
+        <VBox class="sapUiSmallMargin">
+            <Table items="{
+			path:'HistoryTable>/',
+			sorter: {
+				path: 'Item',
+				descending: true
+			}
+		}">
+                <columns>
+                    <Column width="5em"  mergeDuplicates="true">
+                        <header>
+                            <Label text="Item" design = "bold"/>
+                        </header>
+                    </Column>
+                    <Column width="5em">
+                        <header>
+                            <Label text="Options"  design = "bold"/>
+                        </header>
+                    </Column>
+                    <Column >
+                        <header>
+                            <Label text="Description"  design = "bold"/>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Label text="Total Fare"  design = "bold"/>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Label text="Special Notes"  design = "bold"/>
+                        </header>
+                    </Column>
+                    <Column >
+                        <header>
+                            <Text text="Selected Option" />
+                        </header>
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <Text text="{parts: [{path:'HistoryTable>Item'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.ItemName'}" />
+                    <Text text="{parts: [{path:'HistoryTable>Seqno'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.optionName'}" />
+                    <Text  text="{HistoryTable>Optiontxt}" wrapping="true"/>
+                    <Text text="{HistoryTable>Tfare}" />
+                    <Text text="{HistoryTable>Spnotes}" wrapping="true"/>
+                    <CheckBox selected="{parts: [{path:'HistoryTable>Options'} ],formatter: 'sap.ui.project.e2etm.util.Formatter.optionSelected'}" editable="false"/>
+                </ColumnListItem>
+            </Table>
+        </VBox>
+        <endButton>
+            <Button text="Close" type="Reject" press="onCloseTicketHistory" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

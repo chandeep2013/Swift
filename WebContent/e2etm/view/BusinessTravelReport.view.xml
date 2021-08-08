@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+       xmlns:f="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns="sap.m"
+       xmlns:commons="sap.ui.commons" xmlns:l="sap.ui.layout" xmlns:view="sap.ui.core.mvc"
+       xmlns:table="sap.ui.table" controllerName="sap.ui.project.e2etm.controller.BusinessTravelReport"
+       xmlns:html="http://www.w3.org/1999/xhtml">
+       <Page height="100%" showNavButton="true" navButtonPress="backPress"
+             class="sapUiSizeCompact resMainPage " title="Businesss Travel Report">
+             <Panel id="idPanel">
+                    <!--###### UI Filters ####### -->
+                    <VBox class="HBoxPanelContet_Class">
+                          <HBox fitContainer="true">
+                          <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+                                                     adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+                                                     class="gridClass ">
+                                       <f:content>
+                                       
+                                              <Label text="Start Date From" design="Bold" class="sapUiSmallMarginRight"/>
+                                                    <DatePicker id="idBTSdate" placeholder="Start From" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+                                              <Label text="Start Date To " design="Bold"/>
+                                              <DatePicker displayFormat="dd/MM/yyyy" id="idBTtoSDt" placeholder="Start To" valueFormat="yyyyMMdd"/>  
+                                              
+                                              
+                          
+                                       </f:content>
+                                 </f:SimpleForm>
+                                 <f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+                                       labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+                                       adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                                       emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+                                       <f:content>
+                                       <Label text="End date From" design="Bold" class="sapUiSmallMarginRight"/>
+                                                    <DatePicker id="idBTEdate"  placeholder="End From" displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+                                                    <Label text="End date To " design="Bold"/>
+                                              <DatePicker displayFormat="dd/MM/yyyy" id="idBTtoEDt" placeholder="End To" valueFormat="yyyyMMdd"/>  
+                                              
+                                       </f:content>
+                                 </f:SimpleForm>
+                                 <f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+                                       labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+                                       adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                                       emptySpanS="0" singleContainerFullSize="false" class="gridClass ">
+                                       <f:content>
+                                       <Label text="Travel Type" design="Bold" class="sapUiSmallMarginRight" />
+                                              <MultiComboBox id="idBTtraveltype" placeholder="Select Travel Type" width="245px"
+                                                     tooltip="Select Travel Type"  change="onCountryChange">
+                                                    <items>
+                                                    <core:Item key="BUSR" text="BUSR" />
+                                                    <core:Item key="INFO" text="INFO" />
+                                                    <core:Item key="SECO" text="SECO" />
+                                                    </items>
+                                              </MultiComboBox>
+                                              <Label text="To country" design="Bold" class="sapUiSmallMarginRight" />
+                                              <MultiComboBox id="idBTcntry" placeholder="Select Country" width="245px"
+                                                     tooltip="Select Country" items="{country>/results}" change="onCountryChange">
+                                                    <core:Item key="{country>MOLGA}" text="{country>LTEXT}" />
+                                              </MultiComboBox>
+                                       </f:content>
+                                 </f:SimpleForm>
+                          </HBox>
+                          <Toolbar class="toolbarClass">
+                                 <ToolbarSpacer />
+                                 <Button text="Clear" width="100px" type="Emphasized"
+                                        press="handleClearSearchFilters" />
+                                 <Button text="Search" width="100px" type="Accept"
+                                        press="handleSearchButtonPress" />
+                          </Toolbar>
+                    </VBox>
+             </Panel>
+             <content>
+                    <VBox class="HBoxPanelContet_Class">
+                          <Toolbar class="toolbarClass">
+                                 <ToolbarSpacer />
+                                 <Button icon="sap-icon://download" text="Download" press="excelDownload"
+                                       tooltip="Click to download as elxs" />
+                                 <Button width="100px" icon="sap-icon://action-settings"
+                                        press="handleSettignsPress" />
+                          </Toolbar>
+                          <ScrollContainer horizontal="true" vertical="true"
+                                 height="500px" focusable="true">
+                                 <Table inset="false" class="table_ticket_admin tableclass sapUiSizeCompact"
+                                       id="idBTReportTable" items="{Reports>/results}" growing="true"
+                                        growingScrollToLoad="true" sticky="ColumnHeaders" >
+                                       <columns>
+                                              <Column width="5rem" id="idBTREQNo">
+                                                    <Text text="REQ NO" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTEMPNo">
+                                                    <Text text="EMP NO" class="button_header" />
+                                              </Column>
+<!--                                          <Column width="3rem" id="idBTGID">
+                                                    <Text text="GID" class="button_header" />
+                                              </Column> -->
+                                              <Column width="5rem" id="idBTJobLvl">
+                                                    <Text text="Job Level" class="button_header" />
+                                              </Column>
+                                              <Column width="9rem" id="idBTEname">
+                                                    <Text text="ASSOCIATE NAME" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTDOB">
+                                                    <Text text="DOB" class="button_header"/>
+                                              </Column>
+                                              <Column width="5rem" id="idBTDOJ">
+                                                    <Text text="DOJ" class="button_header"/>
+                                              </Column>
+                                              <Column width="6rem" id="idBTPass">
+                                                    <Text text="PASSPORT" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTTR">
+                                                    <Text text="TRAVEL REQ" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTSDate">
+                                                    <Text text="START DATE" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTEndDate">
+                                                    <Text text="END DATE" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTNDays">
+                                                    <Text text="NO. OF DAYS" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTFcntry">
+                                                    <Text text="FROM COUNTRY" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTFloc">
+                                                    <Text text="FROM LOCATION" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTTcntry">
+                                                    <Text text="TO COUNTRY" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTTloc">
+                                                    <Text text="TO LOCATION" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTTtyp">
+                                                    <Text text="Travel Type" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTEmail">
+                                                    <Text text="EMAIL" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTGrp">
+                                                    <Text text="GROUP" class="button_header" />
+                                              </Column>
+                                              <Column width="3rem" id="idBTBU">
+                                                    <Text text="BU" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTSection">
+                                                    <Text text="Section" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTDept">
+                                                    <Text text="Department" class="button_header" />
+                                              </Column>
+                                              <Column width="8rem" id="idBTAprovTpSdate">
+                                                    <Text text="Approved TP Start date" class="button_header" />
+                                              </Column>
+                                              <Column width="8rem" id="idBTAprovTpEdate">
+                                                    <Text text="Approved TP End date" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTTickt">
+                                                    <Text text="Ticket issued" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTGNDR">
+                                                    <Text text="Gender" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTApprover">
+                                                    <Text text="Approver Name" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTNTID">
+                                                    <Text text="Associate NT ID" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTWorkLoc">
+                                                    <Text text="Work Location" class="button_header" />
+                                              </Column>
+                                              <Column width="8rem" id="idBTPTSdate">
+                                                    <Text text="Personal Travel Start Date" class="button_header" />
+                                              </Column>
+                                              <Column width="8rem" id="idBTPTEdate">
+                                                    <Text text="Personal Travel End Date" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTPTapprover">
+                                                    <Text text="Approver" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTTcost">
+                                                    <Text text="Ticket cost" class="button_header" />
+                                              </Column>
+                                              <Column width="5rem" id="idBTAir">
+                                                    <Text text="Airline" class="button_header" />
+                                              </Column>
+                                              <Column width="6rem" id="idBTTktTyp">
+                                                    <Text text="Ticket type" class="button_header" />
+                                              </Column>
+                                       </columns>
+                                       <items>
+                                              <ColumnListItem height="10px">
+                                                    <cells>
+                                                           <Text text="{Reports>ZZ_DEP_REQ}" />
+                                                           <Text text="{Reports>ZZ_TRV_PERNR}" />
+                                                           <!-- <Text text="{Reports>ZZ_GID}" /> -->
+                                                           <Text text="{Reports>ZZ_JOB_LVL}" />
+                                                           <Text text="{Reports>ZZ_NAME}" />
+                                                           <Text text="{path:'Reports>ZZ_DOB', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{path:'Reports>ZZ_DOJ', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{Reports>ZZ_PASSPORT}" />
+                                                           <Text text="{Reports>ZZ_TRV_REQ}" />
+                                                           <Text text="{path:'Reports>BEGDA', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{path:'Reports>ENDDA', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{Reports>NDAYS}" />
+                                                           <Text text="{path:'Reports>ZZ_TRVFM_CNTY', formatter: 'sap.ui.project.e2etm.util.Formatter.formatCountry'}" />
+                                                           <Text text="{Reports>ZZ_TRVFM_LOC}" />
+                                                           <Text text="{path:'Reports>ZZ_TO_CNTY', formatter: 'sap.ui.project.e2etm.util.Formatter.formatCountry'}" />
+                                                           <Text text="{Reports>ZZ_TRVTO_LOC}" />
+                                                           <Text text="{Reports>ZZ_TRV_KEY}" />
+                                                           <Text text="{Reports>ZZ_EMAIL}" />
+                                                           <Text text="{Reports>ZZ_GRP}" />
+                                                           <Text text="{Reports>ZZ_BU}" />
+                                                           <Text text="{Reports>ZZ_SEC}" />
+                                                           <Text text="{Reports>ZZ_DEPT}" />
+                                                           <Text text="{path:'Reports>ZZ_DEP_STDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{path:'Reports>ZZ_DEP_ENDATE', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{Reports>ZZ_TKT_STATUS}" />
+                                                           <Text text="{Reports>ZZ_SEX}" />
+                                                           <Text text="{Reports>ZZ_APPROVER}" />
+                                                           <Text text="{Reports>ZZ_NTID}" />
+                                                           <Text text="{Reports>ZZ_WLOC}" />
+                                                           <Text text="{path:'Reports>ZZ_PTSDT', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{path:'Reports>ZZ_PTEDT', formatter: 'sap.ui.project.e2etm.util.Formatter.changeDate'}" />
+                                                           <Text text="{Reports>ZZ_APPROVER}" />
+                                                           <Text text="{Reports>ZZ_EXP}" />
+                                                           <Text text="{Reports>ZZ_AIRLINE}" /> 
+                                                           <Text text="{Reports>ZZ_TYP}" />
+                                                    </cells>
+                                              </ColumnListItem>
+                                       </items>
+                                 </Table>
+                          </ScrollContainer>
+                    </VBox>
+             </content>
+       </Page>
+</core:View>

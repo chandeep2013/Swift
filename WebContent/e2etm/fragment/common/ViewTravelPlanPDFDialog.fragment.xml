@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons"
+	xmlns:t="sap.ui.table">
+	<c:Dialog modal="true" title="VIEW TRAVEL PLAN" type="Standard"
+		class="dialog" width="40%" id="ViewTPDialog">
+		<FlexBox direction="Column" alignItems="Center"
+			justifyContent="Center">
+			<FlexBox direction="Row" alignItems="Center" justifyContent="SpaceBetween">
+				<Label text="Travel Plan" width="100px" />
+				<Input id="linktpno" />
+			</FlexBox>
+			<Button text="View PDF" type="Emphasized" press="onViewPDFPress" />
+		</FlexBox>
+
+	</c:Dialog>
+</core:FragmentDefinition>

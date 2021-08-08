@@ -1,0 +1,172 @@
+<core:View controllerName="sap.ui.project.e2etm.controller.Cargo_Reports"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+
+	<Page class="sapUiSizeCompact resMainPage " showHeader="true">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button id="idBackButton" visible="fasle" icon="sap-icon://nav-back" press="onNavBack" class="backButtonClass"/>
+				</contentLeft>
+				<contentMiddle>
+					<Title text="Cargo Reports" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+			<content>
+					<Panel id="idPanel">
+					<!--###### UI Filters  #######-->
+						<VBox class="HBoxPanelContet_Class">
+						<HBox fitContainer="true" >
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Employee No" design="Bold" class="sapUiSmallMarginRight"/>
+									<Input id="idEmployeeNo" placeholder="Employee No"/>
+									<Label text="Travel Plan No" labelFor="idRequesterStatus" design="Bold" class="sapUiSmallMarginRight"/>
+									<Input id="idTravelPlanNo" placeholder="Travel Plan No"/>
+									
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Country" design="Bold" class="sapUiSmallMarginRight"/>
+									<ComboBox id="idCountry"  placeholder="Select Country" tooltip="Select Country"
+										items="{reports>/}">
+										<core:Item key="{reports>MOLGA}" text="{reports>LTEXT}"/>
+									</ComboBox>
+									<Label text="Cargo type" design="Bold" class="sapUiSmallMarginRight"/>
+									<ComboBox id="idCargoType" placeholder="Selected Cargo Type" tooltip="Cargo Type">
+										<core:Item key="" text="Please Select"/>
+										<core:Item key="CARO" text="OnWard"/>
+										<core:Item key="CARR" text="Return"/>
+									</ComboBox>
+									<Label text="Start Date" design="Bold" class="sapUiSmallMarginRight"  visible="false"/>
+									<DatePicker id="idRequestCreationDateFrom" placeholder="Start Date" displayFormat="dd-MMM-yy" valueFormat="yyyyMMdd"  visible="false"/>
+									
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass ">
+								<f:content>
+									<Label text="Vendor" design="Bold" class="sapUiSmallMarginRight"/>
+									<ComboBox id="idVendor" placeholder="Selected Vendor" tooltip="Vendor" class="cargoInput">
+										<core:Item key="" text="Please Select"/>
+										<core:Item key="AAL" text="AA Log"/>
+										<core:Item key="DHL" text="DHL"/>
+									</ComboBox>
+									<Label text="End Date" design="Bold" class="sapUiSmallMarginRight" visible="false"/>
+									<DatePicker id="idRequestCreationDateTo" placeholder="End Date" displayFormat="dd-MMM-yy" valueFormat="yyyyMMdd"  visible="false" />
+								</f:content>
+							</f:SimpleForm>
+						</HBox>
+						<Toolbar class="toolbarClass">
+								<ToolbarSpacer/>
+								<Button id="idClearBtn" text="Clear" width="100px" type="Emphasized" press="handleClearSearchFilters" />
+								<Button id="idSearchBtn" text="Search" width="100px" type="Accept" press="handleSearchButtonPress"/>
+						</Toolbar>
+						</VBox>
+					</Panel>
+					<!--###### Reports Table ###########  -->
+					<VBox class="cargoReportsTableCLass">
+					<Toolbar class="toolbarClass">
+							<Title id="idCargoTableInfoToolBar" class="textBoldClass" text="Reports"/>
+							<ToolbarSpacer/>
+							<Button id="idExcelDownloadButton" icon="sap-icon://download"  visible="fasle" text="Download" press="excelDownload" tooltip="Click to download as elxs"/>
+							<Button id="idSettingsBtn" width="100px" icon="sap-icon://action-settings" press="handleSettignsPress"/>
+					</Toolbar>
+					<ScrollContainer horizontal="true" vertical="true" height="500px"
+						focusable="true">
+						<Table id="idCargoReporsTable" inset="false" items="{reportsData>/}" >
+							<infoToolbar>
+								<!-- <OverflowToolbar>
+									<Label id="idCargoTableInfoToolBar" text="Reports"/>
+								</OverflowToolbar> -->
+							</infoToolbar>
+							<columns>
+								<Column hAlign="Center" width="7em" id="idEmployeeNoCol" >
+									<Text class="textBoldClass" text="Employee No"/>
+								</Column>
+								<Column hAlign="Left" width="8em" id="idAssocitionCol" >
+									<Text class="textBoldClass" text="Assosiate Name"/>
+								</Column>
+								<Column hAlign="End" width="7em" id="idTravelPlanCol" >
+									<Text class="textBoldClass" text="Travel Plan No"/>
+								</Column>
+								<Column hAlign="End" width="5.5em" id="idDepReqNoCol">
+									<Text class="textBoldClass" text="Deputation Request Number"/>
+								</Column>
+								<Column hAlign="Center" width="5em" id="idCargoTypeCol">
+									<Text class="textBoldClass" text="Cargo Type"/>
+								</Column>
+								<Column hAlign="Center" width="6em" id="idDepartmentCol">
+									<Text class="textBoldClass" text="Department"/>
+								</Column>
+								<Column hAlign="Center" width="6em" id="idDepStartDateCol">
+									<Text class="textBoldClass" text="Deputation Start Date"/>
+								</Column>
+								<Column hAlign="Center" width="6em" id="idDepENdDateCol">
+									<Text class="textBoldClass" text="Deputation End Date"/>
+								</Column>
+								<Column hAlign="Center" width="5em" id="idVendorCol">
+									<Text class="textBoldClass" text="Vendor"/>
+								</Column>
+								<Column hAlign="Center" width="5.5em" id="idDepDurationCol">
+									<Text class="textBoldClass" text="Deputation Duration"/>
+								</Column>
+								<Column hAlign="Center" width="7em" id="idCargoeqCreationDateCol">
+									<Text class="textBoldClass" text="CARGO Request Created Date"/>
+								</Column>
+								<Column hAlign="Center" width="7em" id="idCargoeqApproveDateCol">
+									<Text class="textBoldClass" text="CARGO Request approved date"/>
+								</Column>
+								<Column hAlign="Center" width="7em" id="idCargoeqMovementDateCol">
+									<Text class="textBoldClass" text="CARGO Movement Date"/>
+								</Column>
+								<Column hAlign="Center" width="5em" id="idcargoEligibiltyCol">
+									<Text class="textBoldClass" text="Cargo Eligibility (kg)"/>
+								</Column>
+								<Column hAlign="Center" width="5em" id="idCounrtyCol">
+									<Text class="textBoldClass" text="Country"/>
+								</Column>
+								<Column hAlign="Center" width="5em" id="idNTIDCol">
+									<Text class="textBoldClass" text="NT ID"/>
+								</Column>
+								<Column hAlign="Center" width="8em" id="idRemarksCol">
+									<Text class="textBoldClass" text="Remarks"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{reportsData>ZZ_OWNER}"/>
+										<Text text="{ parts: [ {path: 'reportsData>SNAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"/>
+										<Text text="{reportsData>ZZ_REINR}"/>
+										<Text text="{reportsData>ZZ_DEPNO}"/>
+										<Text text="{reportsData>ZZ_CAR_TYP}"/>
+										<Text text="{reportsData>ZZ_STEXT_D}"/>
+										<Text text="{ parts: [ {path: 'reportsData>BEGDA'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{ parts: [ {path: 'reportsData>ENDDA'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{reportsData>Vendor}"/>
+										<Text text="{reportsData>ZZ_DURATION}"/>
+										<Text text="{ parts: [ {path: 'reportsData>ZZ_RTIMESTAMP'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{ parts: [ {path: 'reportsData>ZZ_RTIMESTAMP_APPROVE'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{ parts: [ {path: 'reportsData>ZZ_CAR_PLA'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }"/>
+										<Text text="{reportsData>ZZ_ELIGIBILITY}"/>
+										<Text text="{reportsData>ZZ_TO_CNTY}"/>
+										<Text text="{reportsData>USRID}"/>
+										<Text text="{reportsData>ZZ_COMMENTS}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</ScrollContainer>
+					</VBox>
+				</content>
+		
+	</Page>
+</core:View>

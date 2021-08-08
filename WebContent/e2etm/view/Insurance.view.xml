@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns="sap.m"
+	controllerName="sap.ui.project.e2etm.controller.Insurance">
+	<Page title="INSURANCE DETAILS" class="pageInsurance">
+		<headerContent>
+			<Link text="Help"
+				href="http://sgpmis02.apac.bosch.com/Helpdesk/ESS/swifthelpdoc/"
+				target="_blank" />
+		</headerContent>
+		<FlexBox class="sapUiSizeCompact" direction="Column">
+			<core:Fragment fragmentName="sap.ui.project.e2etm.fragment.insurance.Insurance"
+				type="XML" />
+		</FlexBox>
+		<footer>
+			<Bar>
+				<contentLeft>
+					<Button id="btnBack" text="Back" type="Emphasized" press="onBackPress" class="deputation_itb_request_emphasized_color"
+						icon="sap-icon://home"></Button> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+				</contentLeft>
+
+				<contentMiddle>
+					<Button id="btnSave" text="Save" type="Emphasized" press="onSavePress" class="deputation_itb_request_emphasized_color"
+						icon="sap-icon://save"></Button> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+				</contentMiddle>
+
+				<contentRight>
+					<Button id="btnSendBack" text="Send Back" type="Emphasized" class="deputation_itb_request_emphasized_color"
+						icon="sap-icon://employee" press="onSendBackPress"
+						visible="{
+							path: 'profile>/currentRole',
+							formatter: 'sap.ui.project.e2etm.util.Formatter.isNotEmployee'
+						}"> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+					</Button>
+					<!-- <Button id="btnCancel" text="Cancel" type="Reject" press="onCancelPress" -->
+					<!-- icon="sap-icon://home"></Button> -->
+					<Button id="btnNext" text="Next" type="Emphasized" press="onNextPress" class="deputation_itb_request_emphasized_color" 
+						icon="sap-icon://media-forward"></Button> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+					<Button id="btnSubmit" text="Submit" type="Accept" press="onSubmitPress" class="deputation_itb_request_accept_color"
+						icon="sap-icon://accept"></Button> <!-- Added by uea6kor_upgrade_class _5.11.2019 -->
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

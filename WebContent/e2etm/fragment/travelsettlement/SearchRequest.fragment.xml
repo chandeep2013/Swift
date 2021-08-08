@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <!-- ############# 13 March 2020 UCD1KOR adding new functionality #################-->
+    <VBox class="sapUiSmallMargin ">
+        <f:SimpleForm class="searchRequestClass" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+            <f:content>
+                <Label text="Travel Plan" class="margin_top_4"/>
+                <Input id="srchTp" type="Number" width="200px" placeholder="TP Number" />
+                <Label text="Employee No." class="margin_top_4"/>
+                <Input id="srchEmp" type="Number" width="200px" placeholder="Employee Number"/>
+            </f:content>
+        </f:SimpleForm>
+    </VBox>
+    <!-- <FlexBox direction="Column" alignItems="Center"  justifyContent="Center">
+		<FlexBox direction="Row" alignItems="Center" justifyContent="SpaceBetween">
+			<Label text="Travel Plan"  width="100px" />
+			<Input id="srchTp" type="Number"/>
+		</FlexBox>
+		<FlexBox direction="Row" visible="false" alignItems="Center" justifyContent="SpaceBetween">
+			<Label text="Module" width="100px" />
+			<ComboBox id="srchModule">
+				<items>
+					<core:Item key="TRST" text="Travel Settlement" />
+					<core:Item key="PYVR" text="Payment Voucher" />
+					<core:Item key="INRA" text="INR Advance" />
+				</items>
+			</ComboBox>
+		</FlexBox>
+
+		
+	</FlexBox> -->
+    <HBox class="hboxMarginLeft280">
+        <Button text="View PDF" type="Emphasized" press="onViewRequest" class="sapUiSmallMarginTop" width="100px" />
+        <Button text="View Status" type="Emphasized" press="onViewStatus" class="sapUiSmallMarginTop box_left" width="100px" />
+    </HBox>
+    <VBox width="550px" class="searchRequestClass210 ">
+        <Table class="HBoxPanelContet_Class" items="{    path: 'staus>/',    sorter: {     path: 'ZZ_REINR'    }   }" id="idStatusTable" visible="false">
+            <columns>
+                <Column >
+                    <Text text="TP No" />
+                </Column>
+                <Column >
+                    <Text text="Status" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                         <Label text="{staus>ZZ_REINR}"  width="100px" />
+                         <Text text="{staus>ZZ_STATUS}"  />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+    </core:FragmentDefinition>
+    

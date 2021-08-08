@@ -1,0 +1,170 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.FeedBackReport"
+	displayBlock="true" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Page class="sapUiSizeCompact resMainPage" showHeader="true">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Title text="Feedback Report" design="Bold" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<Panel>
+				<!--###### UI Filters ####### -->
+				<VBox class="HBoxPanelContet_Class">
+					<HBox fitContainer="true">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+							labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+							emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+							class="gridClass ">
+							<f:content>
+								<Label text="Country" design="Bold" class="sapUiSmallMarginRight" />
+								<MultiComboBox id="idFeedbackCountry" width="250px" placeholder="Select Country" tooltip="Select Country"
+										items="{reports>/results}"  selectionChange="onCountryChange">
+										<core:Item key="{reports>MOLGA}" text="{reports>LTEXT}"/>
+									</MultiComboBox>
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout"
+							labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+							emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+							class="gridClass ">
+							<f:content>
+								<Label text="Assignment Model" design="Bold" class="sapUiSmallMarginRight" />
+								<MultiComboBox id="idFeedbackAssignment" placeholder="Model"  width="250px"
+									tooltip="Model" class="cargoInput">
+									<core:Item key="STA" text="STA" />
+									<core:Item key="STAPP" text="STAPP" />
+									<core:Item key="STX" text="STX" />
+									<core:Item key="LTX" text="LTX" />
+									<core:Item key="NCX" text="NCX" />
+								</MultiComboBox>
+							</f:content>
+						</f:SimpleForm>
+					</HBox>
+					<Toolbar class="toolbarClass">
+						<ToolbarSpacer />
+						<Button text="Clear" width="100px" type="Emphasized"
+							press="handleClearSearchFilters" />
+						<Button text="Search" width="100px" type="Accept"
+							press="fetchDetails" />
+					</Toolbar>
+				</VBox>
+			</Panel>
+			<VBox>
+				<ScrollContainer horizontal="true" vertical="true"
+					height="650px" focusable="true">
+					<Table itemPress="OnReqPress" items="{fbModel>/results}" id="idfbTable">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<SearchField id="idSearch" placeholder="Search with Req No/Emp No/EmpName"
+										width="300px" search="onSearch" livechange="onSearch" />
+									<ToolbarSpacer />
+									<Button text="Download" press="excelDownload" type="Accept"
+										width="100px"></Button>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="9em" demandPopin="true">
+								<Text text="Employee Number" />
+							</Column>
+							<Column width="11em" demandPopin="true">
+								<Text text="Employee Name" />
+							</Column>
+							<Column width="9em">
+								<Text text="Deputation Request" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="Country" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="Assignment Model" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="1. Lead Time" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="2. Reliability" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="3. Communication" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="4. Quality" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="5. Responsiveness" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="6. Courtesy" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="7. Competence" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="8. Availability/ Access" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="9. Error free transaction" />
+							</Column>
+							<Column width="9em" demandPopin="true">
+								<Text text="10. Initiative" />
+							</Column>
+							<Column width="13em" demandPopin="true">
+								<Text text="Suggestion" />
+							</Column>
+							<Column width="13em" demandPopin="true">
+								<Text
+									text="Name of the Deputation team member supported you (optional)" />
+							</Column>
+							<Column width="13em" demandPopin="true">
+								<Text text="Additional feedback that you may want to share" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Link text="{fbModel>EmployeeNumber}" press="handleLinkPress" />
+									<Text
+										text="{path:'fbModel>EmpName', formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat'}" />
+									<Text text="{fbModel>DeputationRequest}" />
+									<Text
+										text="{path:'fbModel>Country', formatter: 'sap.ui.project.e2etm.util.Formatter.formatTextCountry'}" />
+									<Text text="{fbModel>AssignmentModel}" />
+									<Text
+										text="{path:'fbModel>lead', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Reli', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Comm', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Qual', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Resp', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Court', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Comp', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Avai', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Errfr', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<Text
+										text="{path:'fbModel>Ini', formatter: 'sap.ui.project.e2etm.util.Formatter.RatingDescr'}" />
+									<TextArea value="{fbModel>Suggestions}" enabled="false" maxLength="1000"/>
+									<Text text="{fbModel>RequestHandledby}" />
+									<TextArea value="{fbModel>AdditionalFeedback}" enabled="false"  maxLength="1000"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+		</content>
+	</Page>
+</core:View>

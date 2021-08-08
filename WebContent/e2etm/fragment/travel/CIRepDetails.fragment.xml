@@ -1,0 +1,160 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:c="sap.ui.commons">
+	<!-- class border_lightgray removed -->
+	<!-- <FlexBox justifyContent="SpaceBetween" 
+		class="margin_bottom_5 padding_10  background_gradient_gray"
+		direction="Column">
+		<FlexBox>
+			<FlexBox class="" justifyContent="SpaceBetween">
+				<Label text="Customer Type" class="required line_height_30 margin_right_10"
+					width="200px" tooltip="Customer Type"></Label>
+				<Select selectedKey="{ZZ_CI_CUSTTYP}" valueState="{ZZ_CI_CUSTTYP_ERROR}" class="margin_right_10"
+					enabled="{/view/isFuture}" change="onCustomerTypeChange" width="250px">
+					<items>
+					    <core:Item text="Please select" key="" />
+						<core:Item text="Bosch" key="BSCH" />
+						<core:Item text="Non Bosch" key="NBSCH" />
+					</items>
+				</Select>	
+			</FlexBox>
+			<FlexBox class="" justifyContent="SpaceBetween" visible="{path:'ZZ_CI_CUSTTYP',formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDivision'}">
+				<Label text="Division"
+					class="required line_height_30 margin_right_10 margin_left_20"
+					width="250px" tooltip="Division"></Label>
+				<c:ValueHelpField id="ipDivision" value="{ZZ_CI_DIVISION}" class="normal_input1 margin_right_10"
+					valueHelpRequest="onValueHelpRequest" valueState="{ZZ_CI_DIVISION_ERROR}" width="250px"
+					enabled="{/view/isFuture}"></c:ValueHelpField>	
+			</FlexBox>
+		</FlexBox>
+		
+		<FlexBox>
+			<FlexBox class="" justifyContent="SpaceBetween" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<Label text="BU" class="required line_height_30 margin_right_10"
+					width="200px" tooltip="BU"></Label>
+				<Input value="{ZZ_CI_BU}" width="250px" editable="false" class="margin_right_10"/>
+			</FlexBox>
+		</FlexBox>
+		<FlexBox>
+			<FlexBox class="" justifyContent="SpaceBetween" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<Label text="Department" class="line_height_30 margin_right_10"
+					width="200px" tooltip="Department"></Label>
+				<c:ValueHelpField id="ipDepartment" valueState="{ZZ_CI_DEP_ERROR}" class="normal_input1 margin_right_10"
+					value="{ZZ_CI_DEP}" valueHelpRequest="onValueHelpRequest"
+					enabled="{/view/isFuture}" width="250px"></c:ValueHelpField>	
+			</FlexBox>
+			<FlexBox class="" justifyContent="SpaceBetween" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<Label text="Group"
+					class="line_height_30 margin_right_10 margin_left_20"
+					width="250px" tooltip="Customer Cost Centre"></Label>
+				<c:ValueHelpField id="ipGroup"  class="normal_input1 margin_right_10"  width="250px"
+					value="{ZZ_CI_GRP}" valueHelpRequest="onValueHelpRequest" enabled="{/view/isFuture}"></c:ValueHelpField>	
+			</FlexBox>
+
+		</FlexBox>
+	</FlexBox> -->
+	<!-- //////############################# Commented Below code added above Form  ###################################///// Start -->
+	<!--  -->
+	 <l:Grid>
+		<l:content>
+			<HBox alignItems="Center" width="290px">
+				<layoutData>
+					<l:GridData span="L4 M6 S12" />
+				</layoutData>
+				<Label text="Customer Type" width="110px"
+					class="required" tooltip="Customer Type"></Label>
+				<Select selectedKey="{ZZ_CI_CUSTTYP}" valueState="{ZZ_CI_CUSTTYP_ERROR}" 
+					enabled="{/view/isFuture}" change="onCustomerTypeChange">
+					<items>
+					    <core:Item text="Please select" key="" />
+						<core:Item text="Bosch" key="BSCH" />
+						<core:Item text="Non Bosch" key="NBSCH" />
+					</items>
+				</Select>
+
+			</HBox>
+			<VBox>
+			
+				<HBox class="" alignItems="Center" visible="{path:'ZZ_CI_CUSTTYP',formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDivision'}">
+				<layoutData>
+					<l:GridData span="L4 M6 S12" />
+				</layoutData>
+				<Label text="Division" width="80px" class="required" tooltip="Division"></Label>
+				<c:ValueHelpField id="ipDivision" value="{ZZ_CI_DIVISION}" class="normal_input1 cust_leg_entity"
+					valueHelpRequest="onValueHelpRequest" valueState="{ZZ_CI_DIVISION_ERROR}"
+					enabled="{/view/isFuture}" width="150px"></c:ValueHelpField>
+				</HBox>
+				<HBox class="" alignItems="Center" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<layoutData>
+					<l:GridData span="L4 M6 S12" />
+				</layoutData>
+				<Label text="BU" class="required" width="110px" tooltip="BU"></Label>
+				<Input value="{ZZ_CI_BU}" width="140px" editable="false" />
+				</HBox>
+			</VBox>
+			<VBox>
+				<HBox class="" alignItems="Center" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<layoutData>
+					<l:GridData span="L4 M6 S12" />
+				</layoutData>
+				<Label text="Department" class="required" width="110px"
+					tooltip="Department"></Label>
+				<c:ValueHelpField id="ipDepartment" valueState="{ZZ_CI_DEP_ERROR}" class="normal_input1 cust_leg_entity"
+					value="{ZZ_CI_DEP}" valueHelpRequest="onValueHelpRequest" width="160px"
+					enabled="{/view/isFuture}"></c:ValueHelpField>
+			</HBox>
+			
+			<HBox class="" alignItems="Center" visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}">
+				<layoutData>
+					<l:GridData span="L4 M6 S12" />
+				</layoutData>
+				<Label text="Group" width="110px" tooltip="Group"></Label>
+				<c:ValueHelpField id="ipGroup"  class="normal_input1 cust_leg_entity margin_top_2"
+					value="{ZZ_CI_GRP}" valueHelpRequest="onValueHelpRequest" enabled="{/view/isFuture}"></c:ValueHelpField>
+			</HBox>
+			</VBox>
+		</l:content>
+	</l:Grid> 
+	
+	<!-- //////############################# Commented Below code added above Form ####################################///// Start -->
+
+<!-- 	<FlexBox> -->
+<!-- 		<FlexBox alignItems="Center" class="" justifyContent="SpaceBetween" -->
+<!-- 			visible="{path:'ZZ_CI_CUSTTYP',formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDivision'}"> -->
+<!-- 			<Label text="Division" width="200px" -->
+<!-- 				class="required line_height_30 margin_right_10" tooltip="Division"></Label> -->
+<!-- 			<c:ValueHelpField id="ipDivision" value="{ZZ_CI_DIVISION}" -->
+<!-- 				width="250px" class="normal_input margin_right_10" valueHelpRequest="onValueHelpRequest" -->
+<!-- 				valueState="{ZZ_CI_DIVISION_ERROR}" enabled="{/view/isFuture}"></c:ValueHelpField> -->
+
+<!-- 		</FlexBox> -->
+<!-- 		<FlexBox alignItems="Center" class="" justifyContent="SpaceBetween" -->
+<!-- 			visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}"> -->
+<!-- 			<Label text="Department" width="250px" -->
+<!-- 				class="required line_height_30 margin_right_10 margin_left_20" -->
+<!-- 				tooltip="Department"></Label> -->
+<!-- 			<c:ValueHelpField id="ipDepartment" valueState="{ZZ_CI_DEP_ERROR}" -->
+<!-- 				value="{ZZ_CI_DEP}" width="250px" class="normal_input margin_right_10" -->
+<!-- 				valueHelpRequest="onValueHelpRequest" enabled="{/view/isFuture}"></c:ValueHelpField> -->
+<!-- 		</FlexBox> -->
+<!-- 	</FlexBox> -->
+<!-- 	<FlexBox> -->
+<!-- 		<FlexBox alignItems="Center" class="" justifyContent="SpaceBetween" -->
+<!-- 			visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}"> -->
+<!-- 			<Label text="BU" width="200px" -->
+<!-- 				class="required line_height_30 margin_right_10" tooltip="BU"></Label> -->
+<!-- 			<Input value="{ZZ_CI_BU}" editable="false" width="250px" -->
+<!-- 				class="normal_input margin_right_10"></Input> -->
+<!-- 		</FlexBox> -->
+<!-- 		<FlexBox alignItems="Center" class="" justifyContent="SpaceBetween" -->
+<!-- 			visible="{parts:[{path:'ZZ_CI_DIVISION'},{path:'ZZ_CI_CUSTTYP'}],formatter:'sap.ui.project.e2etm.util.Formatter.visibleCIDepartment'}"> -->
+<!-- 			<Label text="Group" width="250px" -->
+<!-- 				class="required line_height_30 margin_right_10 margin_left_20" -->
+<!-- 				tooltip="Group"></Label> -->
+<!-- 			<c:ValueHelpField id="ipGroup" valueState="{ZZ_CI_GRP_ERROR}" -->
+<!-- 				value="{ZZ_CI_GRP}" width="250px" class="normal_input margin_right_10" -->
+<!-- 				valueHelpRequest="onValueHelpRequest" enabled="{/view/isFuture}"></c:ValueHelpField> -->
+<!-- 		</FlexBox> -->
+<!-- 	</FlexBox> -->
+
+</core:FragmentDefinition>

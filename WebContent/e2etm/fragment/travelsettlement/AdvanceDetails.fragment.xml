@@ -1,0 +1,79 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:c="sap.ui.commons" xmlns:f="sap.ui.layout.form">
+    <Dialog title="Advance Details" class="sapUiSizeCompact" contentWidth="65%">
+        <VBox class="sapUiSmallMargin">
+           <Table items="{travelsettlement>/advance/expenses/}"
+					class="sapUiSizeCompact" width="100%">
+					<columns>
+						<Column width="20rem">
+							<c:Label text="Remarks" tooltip="Remarks" textAlign="Center"
+								class="label_small_bold"></c:Label>
+								<footer>
+							<FlexBox direction="Column" items="{travelsettlement>/advance/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.Subtotal"
+											type="XML" />
+									</items>
+								</FlexBox>
+								</footer>
+						</Column>
+							<Column width="6rem">
+							<c:Label text="Amount" tooltip="Amount" textAlign="Center"
+								class="label_small_bold"></c:Label>
+							<footer>
+								<FlexBox direction="Column" items="{travelsettlement>/advance/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.CompanyPaid"
+											type="XML" />
+									</items>
+								</FlexBox>
+							</footer>
+						</Column>
+						<Column width="5rem">
+							<c:Label text="Currency" tooltip="Currency" textAlign="Center"
+								class="label_small_bold"></c:Label>
+							<footer>
+								<FlexBox direction="Column" items="{travelsettlement>/advance/footer}">
+									<items>
+										<core:Fragment
+											fragmentName="sap.ui.project.e2etm.fragment.travelsettlement.Currency"
+											type="XML" />
+									</items>
+								</FlexBox>
+							</footer>
+						</Column>
+						<Column width="7rem"
+							visible="{travelsettlement>/fieldproperties/trvlvisible}">
+							<c:Label text="Remarks by Trvl Settlement" tooltip="Remarks by Trvl Settlement"
+								textAlign="Center" class="label_small_bold"></c:Label>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem height="10px">
+							<cells>
+								<Input value="{travelsettlement>Rmrks}" editable="false"/>
+								<Input change="onCalculate1" value="{travelsettlement>Pacmp}" 
+									editable="false" />
+								<c:ComboBox width="100%" change="onCalculate1"
+									editable="false" 
+		                            value="{path:'travelsettlement>Waers'}"
+									displaySecondaryValues="true" items="{curModel>/}">
+									<c:items>
+										<core:ListItem additionalText="{curModel>FIELD2}"
+											text="{curModel>FIELD1}" />
+
+									</c:items>
+								</c:ComboBox>
+								<TextArea cols="30" rows="1" value="{travelsettlement>Tremr}"
+									editable="false" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+        </VBox>
+        <endButton>
+            <Button text="Close" type="Reject" press="onCloseonAdvanceDetails" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

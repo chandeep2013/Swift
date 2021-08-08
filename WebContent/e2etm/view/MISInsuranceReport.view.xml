@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns="sap.m"  xmlns:l="sap.ui.layout" xmlns:view="sap.ui.core.mvc" controllerName="sap.ui.project.e2etm.controller.MISInsuranceReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page height="100%" showNavButton="true" navButtonPress="backPress"
+		class="sapUiSizeCompact resMainPage " title="MIS Insurance REPORT">
+
+		<content>
+			<VBox class="HBoxPanelContet_Class">
+			
+			<Panel id="idPanel">
+					<!--###### UI Filters  #######-->
+						<VBox class="HBoxPanelContet_Class" >
+						<HBox > 
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass  " width="310px">
+								<f:content>
+									<Label text="Select Report " design="Bold" required="true"/>
+									<RadioButtonGroup id="idMisInsrRadio" columns="2" select="MisInsrRadioSelect" height="1.7rem" >
+										<RadioButton text="OMP" />
+										<RadioButton  text="FHP" />
+									</RadioButtonGroup>
+								</f:content>
+							</f:SimpleForm>
+							
+						</HBox>
+						<HBox fitContainer="true" class="margin_top_insr">
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass " width="310px">
+								<f:content>
+									<Label text="Start From" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idMisInsrStartFromDate" placeholder="From" displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd"/>
+									<Label text="End From" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idMisInsrEndFromDate" placeholder="From" displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd"/>
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass " width="310px">
+								<f:content>
+									<Label text="Start To" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idMisInsrStartToDate" placeholder="To"  displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd"/>
+									<Label text="End To" design="Bold" class="sapUiSmallMarginRight"/>
+									<DatePicker id="idMisInsrEndToDate" placeholder="To"  displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd"/>
+								</f:content>
+							</f:SimpleForm>
+							<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="5" labelSpanL="5" labelSpanM="5" labelSpanS="5"
+								adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" singleContainerFullSize="false"
+								class="gridClass " width="310px">
+								<f:content>
+									<Label text="Emp No" design="Bold" class="sapUiSmallMarginRight"/>
+									<Input id="idMisInsrEmpNO" placeholder="Emp No" />
+									<Label text="Req No" design="Bold" class="sapUiSmallMarginRight"/>
+									<Input id="idMisInsrTpNO" placeholder="Req No" />
+									</f:content>
+							</f:SimpleForm>
+						</HBox>
+						<Toolbar class="toolbarClass">
+								<ToolbarSpacer/>
+								<Button  text="Clear" width="100px" type="Emphasized" press="handleClearSearchFilters" />
+								<Button  text="Search" width="100px" type="Accept" press="handleSearchButtonPress"/>
+						</Toolbar>
+						</VBox>
+					</Panel>
+			
+				<Toolbar class="toolbarClass">
+					<ToolbarSpacer width="17px"/>
+					<SearchField id="idMisEmpSearch" width="300px" placeholder="Employee No or Request No" search=".onSearch" liveChange=".onSearch" ></SearchField>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://download" text="Download" press="excelDownload"
+						tooltip="Click to download as elxs" />
+					<Button width="100px" icon="sap-icon://action-settings" id="idMisInsrSettings"
+						press="handleSettignsPress" />
+				</Toolbar>
+				<ScrollContainer horizontal="true" vertical="true"
+					height="500px" focusable="true">
+					<Table inset="false" class="table_ticket_admin tableclass sapUiSizeCompact"
+						id="idMISReportTable" items="{Reports>/}" sticky="ColumnHeaders" >
+						<columns>
+							<Column width="4rem" id="idMisInsrSLNo">
+								<Text text="SL.No" class="button_header" />
+							</Column>
+							<Column width="9rem" id="idMisInsrEmpName">
+								<Text text="Emp Name " class="button_header" />
+							</Column>
+							
+							<Column width="5rem" id="idMisInsrEmpNo">
+								<Text text="Emp No." class="button_header" />
+							</Column>
+							
+							<Column width="5rem" id="idMisInsrTPNo">
+								<Text text="TP No" class="button_header" />
+							</Column>
+							
+							<Column width="5rem" id="idMisInsrCountry">
+								<Text text="Country" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrStartDate">
+								<Text text="Start date" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrEndDate">
+								<Text text="End date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMisInsrCertificate">
+								<Text text="Certificate #" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrDep1">
+								<Text text="Dep 1 Name" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrPolicyNo1">
+								<Text text="Policy No" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrStartDate1">
+								<Text text="Start Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMisInsrEndDate1">
+								<Text text="End Date" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrDep2">
+								<Text text="Dep 2 Name" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrPolicyNo2">
+								<Text text="Policy No" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrStartDate2">
+								<Text text="Start Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMisInsrEndDate2">
+								<Text text="End Date" class="button_header" />
+							</Column>
+							
+							<Column width="7rem" id="idMisInsrDep3">
+								<Text text="Dep 3 Name" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrPolicyNo3">
+								<Text text="Policy No" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrStartDate3">
+								<Text text="Start Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMisInsrEndDate3">
+								<Text text="End Date" class="button_header" />
+							</Column>
+							
+							<Column width="7rem" id="idMisInsrDep4">
+								<Text text="Dep 4 Name" class="button_header" />
+							</Column>
+							<Column width="5rem" id="idMisInsrPolicyNo4">
+								<Text text="Policy No" class="button_header" />
+							</Column>
+							<Column width="7rem" id="idMisInsrStartDate4">
+								<Text text="Start Date" class="button_header" />
+							</Column>
+							<Column width="6rem" id="idMisInsrEndDate4">
+								<Text text="End Date" class="button_header" />
+							</Column>
+							
+							<Column width="7.5rem" id="idMisInsrTotalPremiumINR">
+								<Text text="Non Medical (INR)" class="button_header" />
+							</Column>
+							<Column width="7.5rem" id="idMisInsrTotalPremiumEUR">
+								<Text text="Medical (EUR)" class="button_header" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem height="10px">
+								<cells>
+									<Text text="{Reports>zz_slno}" />
+									<Text text="{ parts: [ {path: 'Reports>ZZ_EMP_NAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" />
+									<Text text="{Reports>ZZ_PERNR}" />
+									<Text text="{Reports>ZZ_TRV_REQ}" />
+									<Text text="{Reports>ZZ_CNTRY_NAME}" />
+									<Text text="{path:'Reports>ZZ_EMP_SD', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									<Text text="{path:'Reports>ZZ_EMP_ED', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}"  />
+									<Text text="{Reports>ZZ_INS_NO}" />
+									
+									<Text text="{ parts: [ {path: 'Reports>ZZ_SP_NAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" />
+									<Text text="{Reports>ZZ_SP_INS_NO}" />
+									<Text text="{path:'Reports>ZZ_SP_SD', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									<Text text="{path:'Reports>ZZ_SP_ED', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									
+									
+									<Text text="{ parts: [ {path: 'Reports>ZZ_KD1_NAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" />
+									<Text text="{Reports>ZZ_KD1_INS_NO}" />
+									<Text text="{path:'Reports>ZZ_KD1_SD', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									<Text text="{path:'Reports>ZZ_KD1_ED', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									
+									
+									<Text text="{ parts: [ {path: 'Reports>ZZ_KD2_NAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" />
+									<Text text="{Reports>ZZ_KD2_INS_NO}" />
+									<Text text="{path:'Reports>ZZ_KD2_SD', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									<Text text="{path:'Reports>ZZ_KD2_ED', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									
+									
+									<Text text="{ parts: [ {path: 'Reports>ZZ_KD3_NAME'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }" />
+									<Text text="{Reports>ZZ_KD3_INS_NO}" />
+									<Text text="{path:'Reports>ZZ_KD3_SD', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									<Text text="{path:'Reports>ZZ_KD3_ED', formatter: 'sap.ui.project.e2etm.util.Formatter.dateFormat'}" />
+									
+									
+									<Text text="{Reports>ZZ_PR_AMT}" />
+									<Text text="{Reports>ZZ_PRN_AMT}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+			</VBox>
+		</content>
+	</Page>
+</core:View>

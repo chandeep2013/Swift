@@ -1,0 +1,114 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons">
+	<c:Dialog modal="true" width="590px" title="PRIMARY INFORMATION"
+		class="dialog" id="requestDialog">
+		<!-- ################ UCD1KOR 11 July 2021 Changes for Copy BUSR Requests 
+			510px ############################ -->
+		<!-- <RadioButtonGroup id="idCreateCopyRadioButton" columns="2" width="100%" 
+			class="sapUiMediumMarginBottom" select="onSelectCreateCopyRadio"> <RadioButton 
+			text="Create New request" /> <RadioButton text="Copy from existing request" 
+			/> </RadioButtonGroup> -->
+		<FlexBox direction="Column" id="idCreateForm">
+			<FlexBox class="dep_customer_flexbox_select_short_with_to">
+				<Label text="From Date" class="required"></Label>
+				<c:DatePicker enabled="{enabled}"
+					yyyymmdd="{global>/screenData/ZZ_DEP_STDATE}" id="dpStartDate"
+					value="{path: 'global>/screenData/ZZ_DEP_STDATE_VALUE', type: 'sap.ui.project.e2etm.util.Formatter.sapDatePicker'}"
+					placeholder="Select Date" change="onDeputationDateChange"
+					valueState="{global>/screenData/ZZ_DEP_STDATE_ERROR}" />
+				<Label text="To"></Label>
+				<c:DatePicker enabled="{enabled}"
+					yyyymmdd="{global>/screenData/ZZ_DEP_ENDATE}" id="dpEndDate"
+					value="{path: 'global>/screenData/ZZ_DEP_ENDATE_VALUE', type: 'sap.ui.project.e2etm.util.Formatter.sapDatePicker'}"
+					placeholder="Select Date" change="onDeputationDateChange"
+					valueState="{global>/screenData/ZZ_DEP_ENDATE_ERROR}" />
+			</FlexBox>
+			<FlexBox class="dep_customer_flexbox_select_short_with_to">
+				<Label text="From Country" class="required"></Label>
+				<Select autoAdjustWidth="true" change="onCountryFromChange"
+					enabled="{enabled}" items="{ path: 'global>/country'}" selectedKey="{global>/screenData/ZZ_DEP_FRCNTRY}">
+					<core:Item key="{global>MOLGA}" text="{global>LTEXT}" />
+				</Select>
+				<Label text="To"></Label>
+				<Select autoAdjustWidth="true" change="onCountryToChange"
+					enabled="{enabled}" items="{ path: 'global>/country'}" selectedKey="{global>/screenData/ZZ_DEP_TOCNTRY}">
+					<core:Item key="{global>MOLGA}" text="{global>LTEXT}" />
+				</Select>
+			</FlexBox>
+			<FlexBox class="dep_customer_flexbox_select_short_with_to">
+				<Label text="From Location" class="required"></Label>
+				<Select autoAdjustWidth="true" id="cbBoxFromCity" change="onLocationChange"
+					enabled="{enabled}" items="{ path: 'global>/cityfrom'}"
+					selectedKey="{global>/screenData/ZZ_DEP_FRMLOC}">
+					<core:Item key="{global>MOLGA}" text="{global>BLAND}" />
+				</Select>
+				<Label text="To"></Label>
+				<Select autoAdjustWidth="true" id="cbBoxToCity" change="onLocationChange"
+					tooltip="Enter Work location in case of work permit" enabled="{enabled}"
+					items="{ path: 'global>/cityto'}" selectedKey="{global>/screenData/ZZ_DEP_TOLOC}">
+					<core:Item key="{global>MOLGA}" text="{global>BLAND}" />
+				</Select>
+			</FlexBox>
+			<FlexBox class="dep_customer_flexbox_select">
+				<Label text="Purpose of travel" class="required"></Label>
+				<Select autoAdjustWidth="true"
+					valueState="{global>/screenData/ZZ_TRV_CAT_ERROR}" id="TravelCategoryId"
+					change="onCategoryChange" items="{ path: 'global>/visaType'}"
+					selectedKey="{global>/screenData/ZZ_TRV_CAT}">
+					<core:Item key="{global>ZZ_VKEY}"
+						text="{parts : [{path : 'global>ZZ_VISA_DESC'},{path : 'global>ZZ_MIN'},{path : 'global>ZZ_MAX'}], 
+				    formatter: 'sap.ui.project.e2etm.util.Formatter.visisblePleaseSelectTravelCategory'}" />
+				</Select>
+			</FlexBox>
+		</FlexBox>
+		<!-- ################ UCD1KOR 11 July 2021 Changes for Copy BUSR Requests 
+			############################ -->
+		<HBox>
+			<Label id="idCopyText"
+				text="Would you like to copy details from previous travels ?" class="margin_top_17" />
+			<Switch id="idCreateCopySwitch" class="switchclass" state="false"
+				customTextOn="Yes" height="26px" customTextOff="No"
+				change="onSelectCreateCopySwitch">
+				<layoutData>
+					<FlexItemData growFactor="1" />
+				</layoutData>
+			</Switch>
+		</HBox>
+		<VBox fitContainer="true" id="idCopyBUSRRequest" class="copyParentClass">
+			<Toolbar class="toolbarCopyClass">
+				<Label text="Select Request to copy data from:"/>
+			</Toolbar>
+			<ScrollContainer horizontal="true" vertical="true"
+				height="150px" focusable="true">
+				<List id="idCopyReqList" items="{ path: 'MyReqTasks>/'}" mode="SingleSelectLeft">
+					<StandardListItem 
+					title="{parts : [{path : 'MyReqTasks>'}], 
+				    formatter: 'sap.ui.project.e2etm.util.Formatter.CopyRequestTitle'}"
+				     description= "{parts : [{path : 'MyReqTasks>'}], 
+				    formatter: 'sap.ui.project.e2etm.util.Formatter.CopyRequestDesc'}" />
+
+
+				</List>
+			</ScrollContainer><!-- type="Navigation" press="onListItemPress" -->
+			<Label visible="false"
+				text="Following data will be copied to the new request created. Uncheck if not relevant"
+				design="Bold" class="margin_top_10" />
+			<HBox visible="false">
+				<CheckBox id="idCopyGeneralData" text="General Data"
+					selected="true" />
+				<CheckBox id="idCopyTravelDetails" text="Travel Details"
+					selected="true" class="marginleft86px" />
+			</HBox>
+			<HBox visible="false">
+				<CheckBox id="idCopyCostAssignment" text="Cost Assignment"
+					selected="true" />
+				<CheckBox id="idCopyAdvance" text="Advance" selected="true"
+					class="marginleft65px" />
+			</HBox>
+		</VBox>
+		<c:buttons>
+			<c:Button text="Next" press="onNextButtonClick" width="60px"
+				height="30px" />
+		</c:buttons>
+	</c:Dialog>
+</core:FragmentDefinition>

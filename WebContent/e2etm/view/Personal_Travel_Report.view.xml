@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.Personal_Travel_Report">
+	<Page title="Report" showHeader="true" enableScrolling="false">
+		<customHeader>
+			<Bar>
+				<!-- <contentRight> -->
+				<!-- <Button icon="sap-icon://full-screen" press="onChangeMode" /> -->
+				<!-- </contentRight> -->
+				<contentMiddle>
+
+					<Title text="Personal Travel Report " titleStyle="H3" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<Panel width="100%" height="100%" class="panelBorderTrSettle sapUiSizeCompact" >
+				<headerToolbar >
+					
+
+				</headerToolbar>
+				<content>
+				<VBox>
+					<HBox class="alignDateClass">
+						<Label text="Start :" class="margintop6Class"/>
+						<DatePicker id="idFromDateRangeS" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<Label text="To" class="margintop6Class"/>
+						<DatePicker id="idFromDateRange1S" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+					</HBox>
+					<HBox class="alignDateClass">
+						<Label text="End :" class="margintop6Class" width="37px"/>
+						<DatePicker id="idToDateRangeE" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						<Label text="To" class="margintop6Class"/>
+						<DatePicker id="idToDateRange1E" width="200px"  displayFormat="dd/MM/yyyy" valueFormat ="yyyyMMdd"/>
+						</HBox>
+					<HBox class="alignDateClass">
+						<Label text="Country" design="Bold" class="sapUiSmallMarginRight"/>
+						<ComboBox id="idCountry"  placeholder="Select Country" tooltip="Select Country"
+								  items="{reports>/}">
+						<core:Item key="{reports>MOLGA}" text="{reports>LTEXT}"/>
+						</ComboBox>
+						<Button text="Submit" press="getReport" type="Emphasized" class="margin_left_RepatritionClass"></Button>
+					</HBox>
+				</VBox>
+				  
+				    <Toolbar >
+						<Label id="lblCount" design="Bold"/>
+						<ToolbarSpacer />
+						<Button icon="sap-icon://action-settings" type="Emphasized"
+							press="onPersoButtonPressed" />
+						<Button id="idExcelDownload" text="Download" type="Emphasized" press="excelDownload" visible="false"/>
+
+					</Toolbar>
+				  
+					<ScrollContainer horizontal="true" vertical="true" height="500px" width="auto"
+						focusable="true">
+						<VBox>
+						<Table id="PersonalTripReport" inset="false" updateFinished="onUpdateFinished"
+							class="growingTitle tableclass table_ticket_admin sapUiSizeCompact" noDataText="No Data"
+							items="{reportsData>/}" fixedLayout="true">
+							<columns>
+								<Column id="TrNo" minScreenWidth="Tablet" demandPopin="true"
+									width="6em">
+									<Text text="Travel Request" />
+								</Column>
+								<Column id="EmpNo" minScreenWidth="Tablet" demandPopin="true"
+									width="11em">
+									<Text text="Employee Number" />
+								</Column>
+								<Column id="sDate" minScreenWidth="Tablet" demandPopin="true"
+									width="8em">
+									<Text text="Travel start date" />
+								</Column>
+								<Column id="eDate" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Travel end date" />
+								</Column>
+								<Column id="Dur" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Duration(Official Travel)" />
+								</Column>
+								<Column id="FmCty" minScreenWidth="Tablet" demandPopin="true"
+									width="5em">
+									<Text text="From Country" />
+								</Column>
+
+								<Column id="FmLoc" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="From Location" />
+								</Column>
+								<Column id="ToCty" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="To Country" />
+								</Column>
+								<Column id="ToLoc" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="To Location" />
+								</Column>
+								<Column id="Psdate" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Personal Trip Start" />
+								</Column>
+								<Column id="Pedate" minScreenWidth="Tablet" demandPopin="true"
+									width="7em">
+									<Text text="Personal Trip End " />
+								</Column>
+								<Column id="Pdur" minScreenWidth="Tablet" demandPopin="true"
+									width="10em">
+									<Text text="Personal Trip Duration" />
+								</Column>
+								</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{reportsData>TrvReq}" wrapping="false" tooltip="{reportsData>TrvReq}" />
+										<Text wrapping="false" text="{reportsData>EmpNo}" tooltip="{reportsData>EmpNo}" />		
+										<Text text="{ parts: [ {path: 'reportsData>TrvSDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{ parts: [ {path: 'reportsData>TrvEDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{reportsData>Durn}" tooltip="{reportsData>Durn}" wrapping="true" />
+										<Text text="{reportsData>FrmCntry}" tooltip="{reportsData>FrmCntry}" wrapping="true" />
+										<Text text="{reportsData>FrmLoc}" tooltip="{reportsData>FrmLoc}" wrapping="true" />
+										<Text text="{reportsData>ToCntry}" tooltip="{reportsData>FrmCntry}" wrapping="true" />
+										<Text text="{reportsData>ToLoc}" tooltip="{reportsData>FrmLoc}" wrapping="true" />
+										<Text text="{ parts: [ {path: 'reportsData>PerSDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{ parts: [ {path: 'reportsData>PerEDate'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateFormatForCargo' }" />
+										<Text text="{reportsData>PerDurn}" tooltip="{reportsData>Durn}" wrapping="true" />
+																				
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</VBox>
+					</ScrollContainer>
+				
+						<!-- <core:HTML id="html"/> -->
+				</content>
+			</Panel>
+
+		</content>
+	</Page>
+</core:View>

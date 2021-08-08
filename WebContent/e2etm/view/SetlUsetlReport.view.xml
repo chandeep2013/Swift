@@ -1,0 +1,392 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="sap.ui.project.e2etm.controller.SetlUsetlReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Report" showHeader="true" enableScrolling="false">
+		<customHeader>
+			<Bar>
+				<!-- <contentRight> -->
+				<!-- <Button icon="sap-icon://full-screen" press="onChangeMode" /> -->
+				<!-- </contentRight> -->
+				<contentMiddle>
+
+					<Title text="Settled/Unsettled Travel Report" titleStyle="H3" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<content>
+			<Panel width="100%" height="100%"
+				class="panelBorderTrSettle sapUiSizeCompact">
+				<content>
+					<VBox id="HideSection" class="settleUnsettleBorderClass">
+						<HBox class="settleUnsettleHBox">
+							<Label text="Start Date:" class="margintop6Class required" />
+							<DatePicker id="idFromDateRange_Settle" width="200px"
+								displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" />
+							<Label text="End Date :" class="margintop6Class required margin_left_30" />
+							<DatePicker id="idFromDateRange1_Settle" width="200px"
+								displayFormat="dd/MM/yyyy" valueFormat="yyyyMMdd" />
+							<CheckBox id="idIndirectreportees" text="Include Indirect reportees"
+								visible="false"></CheckBox>
+							<Button text="Search" press="onServiceCall" type="Accept"
+								class="settleUnsettleMarginleft" width="100px"></Button>
+						</HBox>
+						<!-- <HBox class="alignDateClass"> <Label text="End :" class="margintop6Class" 
+							width="37px"/> <DatePicker id="idToDateRange_Settle" width="200px" displayFormat="dd/MM/yyyy" 
+							valueFormat ="yyyyMMdd"/> <Label text="To" class="margintop6Class"/> <DatePicker 
+							id="idToDateRange1_Settle" width="200px" displayFormat="dd/MM/yyyy" valueFormat 
+							="yyyyMMdd"/> </HBox> -->
+					</VBox>
+
+					<!-- <Label id="lblCount" design="Bold"/> -->
+					<Toolbar>
+						<Label id="lblCount" text="Details(0)" design="Bold" />
+						<ToolbarSpacer/>
+						<Label text="Filter By:" />
+						<ComboBox change="onChange" selectedKey="A" width="19%">
+							<items>
+								<core:Item text="All" key="A" />
+								<core:Item text="Settled" key="S" />
+								<core:Item text="Unsettled" key="U" />
+								<core:Item text="In Process" key="I" />
+							</items>
+						</ComboBox>
+						<Button icon="sap-icon://action-settings" type="Emphasized"
+							press="onPersoButtonPressed" />
+						<Button text="Download" type="Emphasized" press="onExportCSV" width="100px" /><!--UCD1KOR 01/07/2021 onExport renamed to onExportCSV  -->
+					</Toolbar>
+					<ScrollContainer horizontal="true" vertical="true"
+						height="500px" width="auto" focusable="true">
+						<VBox>
+							<Table id="setlusetlrep" inset="false" updateFinished="onUpdateFinished"
+								class="growingTitle tableclass table_ticket_admin sapUiSizeCompact"
+								items="{report>/results}" sticky="ColumnHeaders">
+
+								<!-- -->
+								<columns>
+									<Column id="col5" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Employee No" />
+									</Column>
+
+									<Column id="col1" minScreenWidth="Tablet" demandPopin="true"
+										width="10em">
+										<Text text="Employee Name" />
+									</Column>
+									<!-- Columns addition by UEA6KOR_2.1.2019 -->
+									<Column id="bunit" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Business Unit" />
+									</Column>
+
+									<Column id="section" minScreenWidth="Tablet"
+										demandPopin="true" width="5em">
+										<Text text="Section" />
+									</Column>
+
+									<Column id="dept" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Department" />
+									</Column>
+									<!-- Columns addition by UEA6KOR_2.1.2019 -->
+									<Column id="col2" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Level" />
+									</Column>
+									<Column id="txtAwt" minScreenWidth="Tablet" demandPopin="true"
+										width="6em">
+										<Text text="Travel Plan" />
+									</Column>
+									<!-- <Column id="col4" minScreenWidth="Tablet" demandPopin="true" -->
+									<!-- width="50px"> -->
+									<!-- <Text text="Visa Type" /> -->
+									<!-- </Column> -->
+									<Column id="txtSur" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Destination" />
+									</Column>
+
+									<Column id="col6" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Country" />
+									</Column>
+									<!-- UCD1KOR 09 Jan 2020 hiding region column -->
+									<!-- <Column id="col7" minScreenWidth="Tablet" demandPopin="true" 
+										width="5em" visible="fasle"> <Text text="Region" /> </Column> -->
+									<Column id="col8" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Trip Type" />
+									</Column>
+									<Column id="reason" minScreenWidth="Tablet" demandPopin="true"
+										width="9em">
+										<Text text="Reason" />
+									</Column>
+									<!-- UCD1KOR 09 Jan 2020 hiding lock column -->
+									<!-- <Column id="lock" minScreenWidth="Tablet" demandPopin="true" 
+										width="5em" > <Text text="Lock" /> </Column> -->
+									<Column id="col11" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Status" />
+									</Column>
+									<!-- <Column id="col12" minScreenWidth="Tablet" demandPopin="true" 
+										width="5em"> <Text text="Settled" /> </Column> <Column id="col13" minScreenWidth="Tablet" 
+										demandPopin="true" width="5em"> <Text text="FI" /> </Column> -->
+									<Column id="ccode" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Company Code" />
+									</Column>
+									<Column id="bcode" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Budget Code" />
+									</Column>
+									<Column id="col14" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Cost Center" />
+									</Column>
+									<Column id="col15" minScreenWidth="Tablet" demandPopin="true"
+										width="8em">
+										<Text text="WBS Element" />
+									</Column>
+									<Column id="col16" minScreenWidth="Tablet" demandPopin="true"
+										width="7em">
+										<Text text="Fund Center " />
+									</Column>
+									<Column id="col17" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Fund" />
+									</Column>
+									<Column id="col18" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Duration" />
+									</Column>
+									<!-- column addition by uea6kor_2.1.2019 -->
+
+									<!-- <Column minScreenWidth="Tablet" demandPopin="true" width="5em"> 
+										<Text text="Last Action" /> </Column> <Column minScreenWidth="Tablet" demandPopin="true" 
+										width="5em"> <Text text="By Role" /> </Column> -->
+										<!-- column addition by ucd1kor_14.09.2021 -->
+									<Column id="idTravleSettlementStatus" minScreenWidth="Tablet"
+										demandPopin="true" width="14em">
+										<Text text="Travel Settlement Status" />
+									</Column>
+
+									<Column id="tptype" minScreenWidth="Tablet" demandPopin="true"
+										width="8em">
+										<Text text="Trip Type" />
+									</Column>
+
+									<Column id="recdt" minScreenWidth="Tablet" demandPopin="true"
+										width="6em">
+										<Text text="Recieved date" />
+
+
+									</Column>
+									<!-- -->
+
+									<Column id="Remarks" minScreenWidth="Tablet"
+										demandPopin="true" width="6em">
+										<Text text="Remarks" />
+									</Column>
+
+									<Column id="group" minScreenWidth="Tablet" demandPopin="true"
+										width="5em">
+										<Text text="Emp Group" />
+									</Column>
+
+
+									<!-- column addition by uea6kor_2.1.2019 -->
+									<Column id="txtDate1" minScreenWidth="Tablet"
+										demandPopin="true" width="6em">
+										<Text text="Begins On" />
+									</Column>
+									<Column id="txtDate2" minScreenWidth="Tablet"
+										demandPopin="true" width="6em">
+										<Text text="Ends On" />
+									</Column>
+									<Column id="col21" minScreenWidth="Tablet" demandPopin="true"
+										width="6em">
+										<Text text="Currency" />
+									</Column>
+									<Column id="txtReim" minScreenWidth="Tablet"
+										demandPopin="true" width="5em">
+										<Text text="Reimbursement" />
+									</Column>
+									<Column id="txtPacmp" minScreenWidth="Tablet"
+										demandPopin="true" width="6em">
+										<Text text="Paid by Company" />
+									</Column>
+									<Column id="txtCost" minScreenWidth="Tablet"
+										demandPopin="true" width="5em">
+										<Text text="Total Cost" />
+									</Column>
+									<!-- Columns addition by UEA6KOR_2.1.2019 -->
+									<!-- -->
+
+									<Column id="mail" minScreenWidth="Tablet" demandPopin="true"
+										width="17em">
+										<Text text="Email Id" />
+									</Column>
+
+									<Column id="year" minScreenWidth="Tablet" demandPopin="true"
+										width="7em">
+										<Text text="Year" />
+									</Column>
+
+									<!-- start added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+
+									<Column id="empStat" minScreenWidth="Tablet"
+										demandPopin="true" width="7em">
+										<Text text="Employee status" />
+									</Column>
+									<Column id="advc" minScreenWidth="Tablet" demandPopin="true"
+										width="7em">
+										<Text text="Advance" />
+									</Column>
+									<Column id="responsible" minScreenWidth="Tablet"
+										demandPopin="true" width="7em">
+										<Text text="Responsible" />
+									</Column>
+
+									<!-- end added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+									<!-- UCD1KOR 09 Jan 2020 hiding Trst Pending column -->
+									<!-- <Column id="trst" minScreenWidth="Tablet" demandPopin="true" 
+										width="5em" visible="false"> <Text text="Trst Pending" /> </Column> -->
+									<!-- UCD1KOR 09 Jan 2020 hiding slabs column -->
+									<!-- <Column id="slabs" minScreenWidth="Tablet" demandPopin="true" 
+										width="5em" visible="false"> <Text text="Slabs" /> </Column> -->
+									<!-- Columns addition by UEA6KOR_2.1.2019 -->
+
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{report>Pernr}" wrapping="false" tooltip="{report>Pernr}" />
+											<Text
+												text="{ parts: [ {path: 'report>Ename'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"
+												wrapping="true" tooltip="{report>Ename}" />
+
+											<Text text="{report>zbunit}" wrapping="false"
+												tooltip="{report>zbunit}" />
+											<Text text="{report>zsection}" wrapping="false"
+												tooltip="{report>zsection}" />
+											<Text text="{report>zdept}" wrapping="false"
+												tooltip="{report>zdept}" />
+
+											<Text wrapping="false" text="{path:'report>Zlevel'}" />
+											<Text wrapping="false" text="{path:'report>Reinr'}"
+												tooltip="{path:'report>Reinr'}" />
+											<Text text="{path:'report>Zort1'}" tooltip="{path:'report>Zort1'}"
+												wrapping="false" />
+											<Text text="{report>Zland}" tooltip="{report>Zland}"
+												wrapping="false" />
+											<!-- UCD1KOR 09 Jan 2020 region commented -->
+											<!-- <Text text="{Hrgio}" tooltip="{Hrgio}" wrapping="true" /> -->
+											<Text text="{path:'report>Trptyp'}" tooltip="{path:'report>Trptyp'}"
+												wrapping="false" />
+											<Text wrapping="false" text="{path:'report>Kunde'}"
+												tooltip="{path:'report>Kunde'}" />
+											<!--UCD1KOR 09 Jan 2020 lock column hiding -->
+											<!-- <Text wrapping="true" text="{path:'Tlock'}" tooltip="{path:'Tlock'}" 
+												/> -->
+											<!-- UCD1KOR 09 Jan 2020 status text changes -->
+											<Text
+												text="{ parts: [ {path: 'report>Status'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.ClosedOPenStatus' }"
+												tooltip="{report>Status}" wrapping="false" />
+											<!-- <Text text="{Abrec}" tooltip="{Abrec}" wrapping="true" /> 
+												<Text text="{Uebrf}" wrapping="true" /> -->
+											<Text text="{report>Addccod}" tooltip="{report>Addccod}"
+												wrapping="false" />
+											<Text text="{report>Addfipo}" tooltip="{report>Addfipo}"
+												wrapping="false" />
+											<Text text="{report>Addcost}" tooltip="{report>Advamt}"
+												wrapping="false" />
+											<!-- Text text="{report>Addpsid}" tooltip="{report>Addpsid}" wrapping="true" 
+												/ -->
+											<Text text="{report>ADDFIPOS}" tooltip="{report>Addpsid}"
+												wrapping="false" /> <!-- uik1kor 18.12.202 setl unsetl wbs element change -->
+											<Text text="{report>Addfctr}" tooltip="{report>Addfctr}"
+												wrapping="false" />
+											<Text text="{report>Addfund}" tooltip="{report>Addfund}"
+												wrapping="false" />
+											<Text text="{report>Tripdur}" tooltip="{report>Tripdur}"
+												wrapping="false" />
+											<Text
+												text="{ parts: [ {path: 'report>action'},{path: 'report>role'}  ], formatter: 'sap.ui.project.e2etm.util.Formatter.TravelSettlementStatus' }"
+												wrapping="false" />
+											<!-- <Text text="" tooltip="{report>Role}" wrapping="false" /> -->
+											<Text wrapping="false" text="{path:'report>Kunde'}"
+												tooltip="{path:'report>Kunde'}" />
+											<Text
+												text="{ parts: [ {path: 'report>recdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.RecDtSetlUnsetlReport' }"
+												tooltip="{report>recdt}" wrapping="true" />
+
+											<!-- start added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+
+											<Text text="{report>remarks}" tooltip="{report>remarks}"
+												wrapping="false" />
+											<!-- end added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+											<Text
+												text="{ parts: [ {path: 'report>persg'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.EmpGroupSetlUnsetlReport' }"
+												wrapping="false" />
+											<!-- <Text text="{ parts: [ {path: 'report>recdt'} ], formatter: 
+												'sap.ui.project.e2etm.util.Formatter.DateFormatForSetlUnsetlReport'}"/> <Text 
+												text="{path:'recdt',type: 'sap.ui.model.type.DateTime',formatOptions: { pattern:'dd.MM.yyyy' 
+												}}" tooltip="{Recieved Date}" /> <Text text="{path:'recdt',type: 'sap.ui.model.type.DateTime',formatOptions: 
+												{ pattern:'MM.yyyy' }}" tooltip="{Year}" /> <Text text="{path:'Trptyp'}" 
+												tooltip="{path:'Trptyp'}" wrapping="true" /> -->
+											<Text
+												text="{parts: [ {path: 'report>Datv1'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateTimeFormat'}"
+												wrapping="true" />
+											<Text
+												text="{parts: [ {path: 'report>Datb1'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.DateTimeFormat'}"
+												wrapping="true" />
+											<Text text="{report>Currency}" wrapping="false" />
+											<Text
+												text="{path:'report>SumReimbu',type: 'sap.ui.model.type.Float',
+                formatOptions: {
+				                maxFractionDigits: 2,
+				                groupingEnabled: true, 
+				                groupingSeparator: ','}}"
+												wrapping="false" />
+											<Text
+												text="{path:'report>SumPaidco',type: 'sap.ui.model.type.Float',
+                formatOptions: {
+				                maxFractionDigits: 2,
+				                groupingEnabled: true, 
+				                groupingSeparator: ','}}"
+												wrapping="false" />
+											<Text
+												text="{path:'report>TripTotal',type: 'sap.ui.model.type.Float',
+                formatOptions: {
+				                maxFractionDigits: 2,
+				                groupingEnabled: true, 
+				                groupingSeparator: ','}}"
+												wrapping="false" />
+											<!-- UCD1KOR 10 Jan 2020 added formatter (NameFormat) for below 
+												email -->
+											<Text
+												text="{ parts: [ {path: 'report>USRID_LONG'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.NameFormat' }"
+												tooltip="{report>USRID_LONG}" wrapping="false" />
+											<Text
+												text="{ parts: [ {path: 'report>recdt'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.RecDtSetlUnsetlReport' }"
+												wrapping="false" />
+											<!-- start added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+											<Text
+												text="{ parts: [ {path: 'report>EmpStatus'} ], formatter: 'sap.ui.project.e2etm.util.Formatter.EmpStatusSetlUnsetlReport' }"
+												tooltip="{report>Email}" wrapping="false" />
+											<Text text="{report>Advance}" wrapping="false" />
+											<Text text="{report>Responsible}" wrapping="false" />
+											<!-- end added by uml6kor 7/12/2020 RBEIITAPPPIPELINE-833_4 -->
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+					</ScrollContainer>
+
+					<core:HTML id="html" />
+				</content>
+			</Panel>
+
+		</content>
+	</Page>
+</core:View>
